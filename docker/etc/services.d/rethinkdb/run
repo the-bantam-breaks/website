@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv sh
+RETHINKDB_DIR="rethinkdb_data"
+
+echo "Checking if env var RETHINKDB_DIR is set: $RETHINKDB_DIR"
+[ -z "$RETHINKDB_DIR" ] && exit 0
+
+# Creates the data directory
+if ! [ -d $RETHINKDB_DIR ]; then
+    echo "Creating RethinkDB directory $RETHINKDB_DIR"
+    mkdir $RETHINKDB_DIR
+fi
+
+echo "Trying to start RethinkDB with data directory $RETHINKDB_DIR"
+
+# Starts service
+exec rethinkdb --directory $RETHINKDB_DIR --bind all
