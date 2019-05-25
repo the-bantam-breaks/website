@@ -16,6 +16,7 @@ RUN yarn
 
 # rethinkdb
 RUN \
+    mkdir -p /etc/yum.repos.d && \
     wget http://download.rethinkdb.com/centos/7/`uname -m`/rethinkdb.repo \
         -O /etc/yum.repos.d/rethinkdb.repo && \
     yum install -y rethinkdb && \
