@@ -13,9 +13,10 @@ script:
 
 after_success:
   - docker --version
+  - uname -m
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
-  - eval $(aws ecr get-login --region us-east-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
-  - docker build -t breaks-website .
+  - eval $(aws ecr get-login --region us-east-1 --no-include-email) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
+  - docker build -t breaks-website:latest .
   - docker tag breaks-website:latest 796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website:latest
   - docker push 796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website:latest
