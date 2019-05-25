@@ -15,19 +15,24 @@ COPY yarn.lock .
 RUN yarn
 
 # rethinkdb
-RUN \
-    mkdir -p /etc/yum.repos.d && \
-    wget http://download.rethinkdb.com/centos/7/`uname -m`/rethinkdb.repo \
-        -O /etc/yum.repos.d/rethinkdb.repo && \
-    yum install -y rethinkdb && \
-    yum install -y curl wget nc && \
-    yum clean all
+RUN apt-get update && \
+    apt-get install -qq -y lsb-release && \
+    echo "deb http://download.rethinkdb.com/apt $(lsb_release --codename --short) main" | \
+    tee /etc/apt/sources.list.d/rethinkdb.list && \
+    wget -qO- https://download.rethinkdb.com/apt/pubkey.gpg | apt-key add - && \
+    apt-get update && \
+    # https://github.com/rethinkdb/rethinkdb/issues/6228#issuecomment-331753821
+    wget -q http://mirrors.kernel.org/ubuntu/pool/main/p/protobuf/libprotobuf9v5_2.6.1-1.3_amd64.deb -O /tmp/libprotobuf9v5_2.6.1-1.3_amd64.deb && \
+    dpkg -i /tmp/libprotobuf9v5_2.6.1-1.3_amd64.deb && \
+    rm /tmp/libprotobuf9v5_2.6.1-1.3_amd64.deb && \
+    apt-get install -qq -y rethinkdb && \
+    apt-get clean
 
 # Setup RethinkDB to start
 COPY docker/etc /etc
 WORKDIR /app
 COPY docker/start.sh .
-COPY --from=0 /app/ .
+COPY /app/ .
 COPY package.json .
 COPY src ./src
 
