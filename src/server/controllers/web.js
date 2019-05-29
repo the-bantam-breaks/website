@@ -5,9 +5,9 @@ import {
     Layout,
     Page
 } from '../react';
-import {
-    show as showEntity
-} from '../../rethinkdb';
+// import {
+//     show as showEntity
+// } from '../../rethinkdb';
 
 const renderReactWithStyledComponents = (children) => {
     const sheet = new ServerStyleSheet();
@@ -22,7 +22,6 @@ const renderReactWithStyledComponents = (children) => {
 const renderReactApp = ({
     content
 } = {}) => {
-    console.log('HERERERERE');
     return renderReactWithStyledComponents(
         <Layout content={content}/>
     );
@@ -30,9 +29,10 @@ const renderReactApp = ({
 
 export const web = {
     index: () => async (ctx) => {
-        const showData = await showEntity.findUpcoming();
+        // const showData = await showEntity.findUpcoming();
 
         // ctx.body = showData;
-        ctx.body = renderReactApp();
+        ctx.body = renderReactApp({content: (<h1>Hello World</h1>)});
+        // ctx.body = 'I am here';
     }
 };

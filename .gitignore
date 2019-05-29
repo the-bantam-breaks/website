@@ -11,6 +11,9 @@ yarn-error.log*
 # Dependency directories
 node_modules/
 
+# build output dir
+.build/
+
 .cache
 
 # Optional eslint cache
