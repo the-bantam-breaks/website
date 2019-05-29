@@ -18,6 +18,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export const getConnection = async () => {
     try {
         if (conn) {
+            console.log('conn------>\n', conn);
             if (!conn.open) {
                 console.log('Trying to reconnecting to RethinkDB');
                 await conn.reconnect();

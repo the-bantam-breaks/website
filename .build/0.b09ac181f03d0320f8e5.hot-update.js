@@ -1,0 +1,1 @@
+exports.id=0,exports.modules={"./src/server/server.js":function(e,r,t){var n=new(t("koa"));n.use(regeneratorRuntime.mark(function e(){return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:this.body="Hello World";case 1:case"end":return e.stop()}},e,this)})),n.listen(3e3)}};

@@ -14,11 +14,17 @@
     "dev": "nodemon",
     "startup": "node ./build/main.bundle.js",
     "start-local-db": "docker run -d --rm -p 28015:28015 -p 8090:8080 -v \"$PWD/data:/data\" --name rethinkdb rethinkdb",
-    "stop-local-db": "docker stop rethinkdb"
+    "stop-local-db": "docker stop rethinkdb",
+    "start:server": "rm -rf ./build && webpack --config webpack.config.server.js"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "@hapi/boom": "^7.4.2",
+    "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.17.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
@@ -31,14 +37,16 @@
     "react-dom": "^16.8.6",
     "request": "2.79.0",
     "rethinkdb": "^2.3.3",
+    "start-server-webpack-plugin": "^2.2.5",
     "styled-components": "^4.2.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.0.6",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.17.2",
@@ -46,7 +54,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-standard": "^4.0.0",
-    "webpack": "^4.31.0",
+    "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"
   }

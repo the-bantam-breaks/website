@@ -18,16 +18,11 @@ export const routes = (app) => {
         route.get('/', web.index()),
 
         // Reports API
-        route.get('/api/shows', show.api.list()),
-        route.get('/api/shows/upcoming', show.api.latest()),
-        route.get('/api/shows/archive', show.api.completed()),
-        route.post('/api/shows/new', show.api.new()),
-        route.get('/api/shows/:showId', show.api.show()),
-
-        // Atlas HealthCheck endpoint
-        route.get('/health', async (ctx) => {
-            ctx.body = 'Ok';
-        })
+        // route.get('/api/shows', show.api.list()),
+        // route.get('/api/shows/upcoming', show.api.upcoming()),
+        // route.get('/api/shows/archive', show.api.archive()),
+        // route.post('/api/shows/new', show.api.new()),
+        // route.get('/api/shows/:showId', show.api.show()),
     ];
 
     routeList.forEach((route) => app.use(route));

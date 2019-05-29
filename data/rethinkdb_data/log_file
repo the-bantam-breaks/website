@@ -50,3 +50,17 @@
 2019-05-18T22:09:09.092250400 0.184002s notice: Listening on driver addresses: 127.0.0.1, 172.17.0.2
 2019-05-18T22:09:09.093107100 0.184858s notice: Listening on http addresses: 127.0.0.1, 172.17.0.2
 2019-05-18T22:09:09.093131300 0.184882s notice: Server ready, "a04eafd2b629_yq8" 940ced42-c622-4bde-a5bc-c5f5f398218b
+2019-05-29T02:38:37.063976400 0.077790s notice: Running rethinkdb 2.3.6~0jessie (GCC 4.9.2)...
+2019-05-29T02:38:37.076398600 0.090207s notice: Running on Linux 4.9.125-linuxkit x86_64
+2019-05-29T02:38:37.076878200 0.090684s notice: Loading data from directory /data/rethinkdb_data
+2019-05-29T02:38:37.106275400 0.120083s info: Automatically using cache size of 324 MB
+2019-05-29T02:38:37.110329400 0.124135s notice: Listening for intracluster connections on port 29015
+2019-05-29T02:38:37.115259300 0.129065s notice: Listening for client driver connections on port 28015
+2019-05-29T02:38:37.115657900 0.129465s notice: Listening for administrative HTTP connections on port 8080
+2019-05-29T02:38:37.117443500 0.131249s notice: Listening on cluster addresses: 127.0.0.1, 172.17.0.2
+2019-05-29T02:38:37.118626300 0.132432s notice: Listening on driver addresses: 127.0.0.1, 172.17.0.2
+2019-05-29T02:38:37.119642600 0.133448s notice: Listening on http addresses: 127.0.0.1, 172.17.0.2
+2019-05-29T02:38:37.119666800 0.133473s notice: Server ready, "a04eafd2b629_yq8" 940ced42-c622-4bde-a5bc-c5f5f398218b
+2019-05-29T02:38:42.204304400 5.218111s info: Table 9f520ed8-4b95-48e1-aefb-48d5741e1414: Added replica on this server.
+2019-05-29T02:38:42.210200700 5.224009s info: Table 9f520ed8-4b95-48e1-aefb-48d5741e1414: Starting a new Raft election for term 1.
+2019-05-29T02:38:42.212383100 5.226190s info: Table 9f520ed8-4b95-48e1-aefb-48d5741e1414: This server is Raft leader for term 1. Latest log index is 0.
