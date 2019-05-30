@@ -22,7 +22,7 @@ Page.propTypes = {
 
 Page.defaultProps = {
     className: undefined,
-    title: 'UserHash Consolidator'
+    title: 'The Bantam Breaks'
 };
 
 export default Page;

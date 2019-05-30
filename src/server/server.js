@@ -5,9 +5,7 @@ import { APP_PORT } from '../config';
 import { setup as setupRethinkDB } from '../rethinkdb';
 import { routes } from './routes';
 
-
-
-export const server = async () => {
+const server = async () => {
     const app = new Koa();
 
     await setupRethinkDB();
@@ -19,5 +17,10 @@ export const server = async () => {
     routes(app);
 
     app.listen(APP_PORT);
+
     console.info(`Started server on port ${APP_PORT}`);
+
+    return app;
 };
+
+export const app = server();
