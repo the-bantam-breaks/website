@@ -5,7 +5,7 @@ import {
 import { boomWrapper } from '../utils';
 import { createShow, getShow } from './show';
 
-export const reportApi = {
+export const showApi = {
     archive: () => async (ctx) => {
         ctx.body = await showEntity.findArchived();
     },
