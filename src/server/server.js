@@ -23,18 +23,4 @@ const server = async () => {
     return app;
 };
 
-// export default server;
-
 export const app = server();
-
-// // This is Koa 1
-// const Koa = require('koa');
-// export const app = new Koa();
-
-// app.use(async function(ctx) {
-//   ctx.body = 'Hello World';
-// });
-
-// if (!module.parent) app.listen(3000);
-
-// // export default app;
