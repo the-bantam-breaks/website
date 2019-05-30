@@ -40,7 +40,6 @@
     "rethinkdb": "^2.3.3",
     "start-server-webpack-plugin": "^2.2.5",
     "styled-components": "^4.2.0",
-    "typescript": "^3.4.5",
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
