@@ -4,7 +4,8 @@ import mount from 'koa-mount';
 import serve from 'koa-static';
 import { web, show } from './controllers';
 
-const staticRoute = path.resolve(__dirname, 'public');
+// const staticRoute = path.resolve(__dirname, '.build/');
+const staticRoute = path.join(process.cwd(), 'src', 'server', 'public');
 
 export const routes = (app) => {
     const routeList = [

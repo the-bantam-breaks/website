@@ -8,15 +8,13 @@ import { routes } from './routes';
 const server = async () => {
     const app = new Koa();
 
-    // await setupRethinkDB();
+    await setupRethinkDB();
 
     app.use(logger())
     app.use(bodyParser());
 
     // Setup routes
     routes(app);
-
-
 
     app.listen(APP_PORT);
 
