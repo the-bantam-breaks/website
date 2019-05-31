@@ -9,11 +9,6 @@ RUN \
     && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
     && rm yarn-v$YARN_VERSION.tar.gz
 
-WORKDIR /app
-COPY package.json .
-COPY yarn.lock .
-RUN yarn
-
 # rethinkdb
 RUN apt-get update && \
     apt-get install -qq -y lsb-release && \
@@ -26,14 +21,18 @@ RUN apt-get update && \
     dpkg -i /tmp/libprotobuf9v5_2.6.1-1.3_amd64.deb && \
     rm /tmp/libprotobuf9v5_2.6.1-1.3_amd64.deb && \
     apt-get install -qq -y rethinkdb && \
-    apt-get clean
+    apt-get clean && \
+    mkdir /app
 
 # Setup RethinkDB to start
-COPY docker/etc /etc
 WORKDIR /app
-COPY docker/start.sh .
-COPY /app/ .
 COPY package.json .
+COPY yarn.lock .
+RUN yarn
+
+COPY docker/etc /etc
+COPY docker/start.sh .
+#COPY /app/ .
 COPY src ./src
 
 # Used for healthcheck
