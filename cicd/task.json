@@ -1,0 +1,47 @@
+{
+    "taskDefinition": {
+        "containerDefinitions": [
+            {
+                "name": "breaks-website",
+                "image": "796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website:latest",
+                "cpu": 0,
+                "links": [],
+                "portMappings": [
+                    {
+                        "containerPort": 3000,
+                        "hostPort": 3000,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true,
+                "environment": [
+                    {
+                        "name": "RETHINKDB_HOST",
+                        "value": "rethinkdb.local"
+                    }
+                ],
+                "mountPoints": [],
+                "volumesFrom": [],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {
+                        "awslogs-group": "/ecs/website",
+                        "awslogs-region": "us-east-1",
+                        "awslogs-stream-prefix": "ecs"
+                    }
+                }
+            }
+        ],
+        "family": "website",
+        "taskRoleArn": "",
+        "executionRoleArn": "arn:aws:iam::796520576045:role/ecsTaskExecutionRole",
+        "networkMode": "awsvpc",
+        "volumes": [],
+        "placementConstraints": [],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+        "cpu": "256",
+        "memory": "512"
+    }
+}

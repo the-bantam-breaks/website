@@ -3,7 +3,7 @@ const { env } = process;
 export const APP_PORT = env.PORT || 3000;
 
 export const RETHINKDB = {
-    HOST: 'localhost',
+    HOST: env.RETHINKDB_HOST || 'rethinkdb',
     PORT: env.RETHINKDB_PORT || 28015,
     DATABASE: 'breaksWebsite'
 };
