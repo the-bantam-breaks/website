@@ -3,7 +3,7 @@
         "containerDefinitions": [
             {
                 "name": "breaks-website",
-                "image": "796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website:latest",
+                "image": "",
                 "cpu": 0,
                 "links": [],
                 "portMappings": [
