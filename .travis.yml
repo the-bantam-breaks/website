@@ -9,7 +9,6 @@ install:
   - docker --version
   - uname -m
   - pip install --user awscli
-  - git clone https://github.com/the-bantam-breaks/website-automation.git
   - docker network create bantam
   - docker run -d --rm -p 28015:28015 -p 8090:8080 --name rethinkdb --network bantam -v $(pwd -P):/data rethinkdb
 
