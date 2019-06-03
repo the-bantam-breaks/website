@@ -5,7 +5,7 @@ REPOSITORY=796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks
 IMAGE=${REPOSITORY}:${TAG}
 ECS_CLUSTER=bantam-breaks
 ECS_SERVICE=website
-DIR=“$( cd “$( dirname “${BASH_SOURCE[0]}” )” >/dev/null 2>&1 && pwd )”
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 TASK_JSON_TEMPLATE=${DIR}/task.json
 
 TASK_JSON=$(cat $TASK_JSON_TEMPLATE | \
