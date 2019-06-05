@@ -38,7 +38,9 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             "process.env": {
-                "BUILD_TARGET": JSON.stringify('server')
+                "BUILD_TARGET": JSON.stringify('server'),
+                "RETHINKDB_HOST": JSON.stringify(process.env.RETHINKDB_HOST),
+                "RETHINKDB_PORT": JSON.stringify(process.env.RETHINKDB_PORT)
             }
         }),
     ]
