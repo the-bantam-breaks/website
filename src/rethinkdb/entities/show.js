@@ -1,7 +1,8 @@
 import r from 'rethinkdb';
-import moment from 'moment';
 import { getConnection } from '../get-connection';
+import { TABLES } from '../constants';
 import { getDB } from '../get-db';
+
 
 export const SHOW_FIELDS = {
     ID: 'id',
@@ -18,6 +19,8 @@ export const SHOW_FIELDS = {
     VENUE_NAME: 'venueName',
     VENUE_URL: 'venueUrl'
 };
+
+const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
 const DEFAULT_FIELDS = [
     SHOW_FIELDS.ID,
@@ -38,19 +41,16 @@ const DEFAULT_FIELDS = [
 export const show = {
     findUpcoming: async ({
         fields = DEFAULT_FIELDS,
-        limit = 10,
-        table
-    }) => getDB()
+        limit = 100,
+        table = TABLES.SHOWS
+    } = {}) => getDB()
         .table(table)
-        .filter(({ [SHOW_FIELDS.DATE]: date }) => {
-            console.log(date);
-            const showDateMoment = moment(new Date(date));
-            const yesterdayMoment = moment().startOf('day').subtract(1, 'day');
-            return showDateMoment.isAfter(yesterdayMoment);
+        .pluck(...fields)
+        .filter(function (show) {
+            return show(SHOW_FIELDS.DATE).gt(r.now().sub(ONE_DAY_IN_SECONDS));
         })
         .orderBy(r.desc(SHOW_FIELDS.CREATED_DATE_TIME))
         .limit(Number(limit))
-        .pluck(fields)
         .run(await getConnection()),
 
     list: async ({
