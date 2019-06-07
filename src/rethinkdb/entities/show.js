@@ -1,5 +1,4 @@
 import r from 'rethinkdb';
-import moment from 'moment';
 import { getConnection } from '../get-connection';
 import { TABLES } from '../constants';
 import { getDB } from '../get-db';
