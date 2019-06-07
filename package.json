@@ -13,8 +13,8 @@
     "start": "webpack-dev-server --open --mode development --content-base build",
     "dev": "nodemon",
     "startup": "node ./build/server.js",
-    "start-local-db": "docker run -d --rm -p 28015:28015 -p 8090:8080 -v \"$PWD/data:/data\" --name rethinkdb rethinkdb",
-    "stop-local-db": "docker stop rethinkdb",
+    "start-local-db": "docker run -d --rm -p 28015:28015 -p 8090:8080 -v \"$PWD/data:/data\" --name bantam_rethinkdb rethinkdb",
+    "stop-local-db": "docker stop bantam_rethinkdb",
     "start:server": "rm -rf ./build && webpack --config webpack.config.server.js",
     "debugkoa": "DEBUG=koa-send* node .build/server.js"
   },
@@ -32,7 +32,6 @@
     "koa-mount": "^4.0.0",
     "koa-route": "^3.2.0",
     "koa-static": "^5.0.0",
-    "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
