@@ -16,6 +16,7 @@ module.exports = {
     },
     watch: true,
     target: 'node',
+    devtool: 'source-map',
     externals: [nodeExternals({
         whitelist: ['webpack/hot/poll?1000']
     })],
