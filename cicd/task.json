@@ -20,6 +20,16 @@
                         "value": "rethinkdb.local"
                     }
                 ],
+                "secrets": [
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-insta-user-id-Q9kEc8",
+                        "name": "ENV_INSTAGRAM_USER_ID"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-insta-token-neWA83",
+                        "name": "ENV_INSTAGRAM_TOKEN"
+                    }
+                ],
                 "mountPoints": [],
                 "volumesFrom": [],
                 "logConfiguration": {

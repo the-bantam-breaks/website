@@ -14,7 +14,15 @@ script:
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
   - eval $(aws ecr get-login --region us-east-1 --no-include-email) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
   - docker build -t breaks-website:latest .
-  - docker run -d --rm --network bantam --name website -e RETHINKDB_HOST=rethinkdb -p 3000:3000 breaks-website:latest
+  - >
+    docker run -d --rm
+      --network bantam
+      --name website
+      -e RETHINKDB_HOST=rethinkdb
+      -e ENV_INSTAGRAM_USER_ID=${ENV_INSTAGRAM_USER_ID}
+      -e ENV_INSTAGRAM_TOKEN=${ENV_INSTAGRAM_TOKEN}
+      -p 3000:3000
+      breaks-website:latest
   - sleep 10
   - |
     STATUSCODE=$(curl -s -o /dev/null --write-out "%{http_code}" localhost:3000)
@@ -32,4 +40,5 @@ after_success:
   - echo "Build Successful!"
   - docker logs website
   - docker kill rethinkdb website
-  - ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER
+  - [[ $TRAVIS_BRANCH = "master" ]] &&
+    ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER
