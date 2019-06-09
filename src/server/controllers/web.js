@@ -8,6 +8,7 @@ import {
 import {
     show as showEntity
 } from '../../rethinkdb';
+import { instagram } from './instagram';
 
 const renderReactWithStyledComponents = (children) => {
     const sheet = new ServerStyleSheet();
@@ -30,6 +31,7 @@ const renderReactApp = ({
 export const web = {
     index: () => async (ctx) => {
         const showData = await showEntity.findUpcoming();
+        const instagramData = await instagram.feed();
         ctx.body = renderReactApp({content: (
             <Fragment>
                 <h1>
@@ -37,6 +39,9 @@ export const web = {
                 </h1>
                 <pre>
                     {`${JSON.stringify(showData, null, 2)}`}
+                </pre>
+                <pre>
+                    {`${JSON.stringify(instagramData, null, 2)}`}
                 </pre>
             </Fragment>
         )});
