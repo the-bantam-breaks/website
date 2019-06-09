@@ -3,7 +3,6 @@ import { getConnection } from '../get-connection';
 import { TABLES } from '../constants';
 import { getDB } from '../get-db';
 
-
 export const SHOW_FIELDS = {
     ID: 'id',
     CITY: 'city',

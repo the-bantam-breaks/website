@@ -24,6 +24,8 @@ module.exports = {
     ],
     'rules': {
         'no-tabs': ENABLED,
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
         indent: [
             ENABLED, 4,
             {

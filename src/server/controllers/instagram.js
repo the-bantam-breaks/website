@@ -1,8 +1,8 @@
 import got from 'got';
 
-// TODO - Garrett set TOKEN in env vars
-const ENV_INSTA_TOKEN = '';
+/* eslint-disable no-undef */
 const INSTAGRAM_API_URL = `https://api.instagram.com/v1/users/${ENV_INSTAGRAM_USER_ID}/media/recent/?access_token=${ENV_INSTAGRAM_TOKEN}`;
+/* eslint-enable no-undef */
 
 export const instagram = {
     feed: async () => {
@@ -18,7 +18,6 @@ export const instagram = {
             console.log('instagram fetch failed', e);
         }
 
-        console.log('feed------>\n', JSON.stringify( feed, null, 2));
         try {
             return typeof feed === 'string' ? JSON.parse(feed) : feed;
         } catch (e) {
