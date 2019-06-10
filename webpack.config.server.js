@@ -1,10 +1,11 @@
+const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack')
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const StartServerPlugin = require('start-server-webpack-plugin')
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: [
         '@babel/polyfill',
         'webpack/hot/poll?1000',
@@ -28,6 +29,9 @@ module.exports = {
         }]
     },
     plugins: [
+        new Dotenv({
+            path: './.env'
+        }),
         new StartServerPlugin({
             name: 'server.js',
             // nodeArgs: ['--inspect'], // allow debugging

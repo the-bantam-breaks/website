@@ -1,7 +1,7 @@
 import got from 'got';
 
 /* eslint-disable no-undef */
-const INSTAGRAM_API_URL = `https://api.instagram.com/v1/users/${ENV_INSTAGRAM_USER_ID}/media/recent/?access_token=${ENV_INSTAGRAM_TOKEN}`;
+const INSTAGRAM_API_URL = `https://api.instagram.com/v1/users/${process.env.ENV_INSTAGRAM_USER_ID}/media/recent/?access_token=${process.env.ENV_INSTAGRAM_TOKEN}`;
 /* eslint-enable no-undef */
 
 export const instagram = {
