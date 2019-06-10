@@ -40,5 +40,4 @@ after_success:
   - echo "Build Successful!"
   - docker logs website
   - docker kill rethinkdb website
-  - [[ $TRAVIS_BRANCH = "master" ]] &&
-    ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER
+  - test $TRAVIS_BRANCH = "master" && ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER
