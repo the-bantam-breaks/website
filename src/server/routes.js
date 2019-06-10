@@ -2,7 +2,7 @@ import path from 'path';
 import route from 'koa-route';
 import mount from 'koa-mount';
 import serve from 'koa-static';
-import { web, show } from './controllers';
+import { web } from './controllers';
 
 // const staticRoute = path.resolve(__dirname, '.build/');
 const staticRoute = path.join(process.cwd(), 'src', 'server', 'public');
@@ -16,7 +16,7 @@ export const routes = (app) => {
         mount('/js', serve(path.join(staticRoute, 'js/'))),
 
         // Reports Web
-        route.get('/', web.index()),
+        route.get('/', web.index())
 
         // Reports API
         // route.get('/api/shows', show.api.list()),
