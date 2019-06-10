@@ -2,8 +2,7 @@ import React, { Fragment } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import {
-    Layout,
-    Page
+    Layout
 } from '../react';
 import {
     show as showEntity
@@ -32,18 +31,20 @@ export const web = {
     index: () => async (ctx) => {
         const showData = await showEntity.findUpcoming();
         const instagramData = await instagram.feed();
-        ctx.body = renderReactApp({content: (
-            <Fragment>
-                <h1>
-                    Hello World
-                </h1>
-                <pre>
-                    {`${JSON.stringify(showData, null, 2)}`}
-                </pre>
-                <pre>
-                    {`${JSON.stringify(instagramData, null, 2)}`}
-                </pre>
-            </Fragment>
-        )});
+        ctx.body = renderReactApp({
+            content: (
+                <Fragment>
+                    <h1>
+                        Hello World
+                    </h1>
+                    <pre>
+                        {`${JSON.stringify(showData, null, 2)}`}
+                    </pre>
+                    <pre>
+                        {`${JSON.stringify(instagramData, null, 2)}`}
+                    </pre>
+                </Fragment>
+            )
+        });
     }
 };

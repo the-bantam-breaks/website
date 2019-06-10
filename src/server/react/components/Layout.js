@@ -21,8 +21,7 @@ const Content = styled.div`
 const Layout = (props) => {
     const {
         content,
-        title,
-        subtitle
+        title
     } = props;
 
     return (
