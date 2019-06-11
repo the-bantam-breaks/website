@@ -4,7 +4,6 @@ ADD . /usr/src/app
 WORKDIR /usr/src/app
 COPY docker/start.sh start.sh
 RUN yarn install && \
-    yarn add --dev webpack webpack-cli && \
     apt-get update -y -qq && \
     apt-get -y -qq install netcat && \
     apt-get clean
