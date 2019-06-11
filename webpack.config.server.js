@@ -45,7 +45,9 @@ module.exports = {
             "process.env": {
                 "BUILD_TARGET": JSON.stringify('server'),
                 "RETHINKDB_HOST": JSON.stringify(process.env.RETHINKDB_HOST),
-                "RETHINKDB_PORT": JSON.stringify(process.env.RETHINKDB_PORT)
+                "RETHINKDB_PORT": JSON.stringify(process.env.RETHINKDB_PORT),
+                "ENV_INSTAGRAM_USER_ID": JSON.stringify(process.env.ENV_INSTAGRAM_USER_ID),
+                "ENV_INSTAGRAM_TOKEN": JSON.stringify(process.env.ENV_INSTAGRAM_TOKEN)
             }
         }),
     ]
