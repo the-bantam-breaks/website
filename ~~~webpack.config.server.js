@@ -49,6 +49,6 @@ module.exports = {
                 "ENV_INSTAGRAM_USER_ID": JSON.stringify(process.env.ENV_INSTAGRAM_USER_ID),
                 "ENV_INSTAGRAM_TOKEN": JSON.stringify(process.env.ENV_INSTAGRAM_TOKEN)
             }
-        })
+        }),
     ]
 }

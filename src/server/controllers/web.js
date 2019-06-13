@@ -1,50 +1,61 @@
-import React, { Fragment } from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { ServerStyleSheet } from 'styled-components';
-import {
-    Layout
-} from '../react';
-import {
-    show as showEntity
-} from '../../rethinkdb';
+import React from 'react';
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
+import styled, { ServerStyleSheet } from 'styled-components';
+import { App, Layout } from '../../shared/react';
+import { AppDataProvider } from '../../shared/react/context/'
+import { show as showEntity } from '../../rethinkdb';
 import { instagram } from './instagram';
 
-const renderReactWithStyledComponents = (children) => {
+const getStyleTags = (children) => {
     const sheet = new ServerStyleSheet();
-    const html = ReactDOMServer.renderToStaticMarkup(
+    renderToStaticMarkup(
         sheet.collectStyles(children)
     );
-    const styleTags = sheet.getStyleTags();
-
-    return html.replace('</body>', `${styleTags}</body>`);
+    return sheet.getStyleTags();
 };
 
-const renderReactApp = ({
-    content
-} = {}) => {
-    return renderReactWithStyledComponents(
-        <Layout content={content}/>
+const Heading = styled.h1`
+    color: #ff3300;
+`;
+
+const getAppMarkup = (ctx) => (
+    <StaticRouter location={ctx.request.url}>
+        <App />
+    </StaticRouter>
+);
+
+const getLayoutMarkup = ({
+    appData,
+    ctx,
+    styleTags
+}) => {
+    return (
+        <AppDataProvider {...appData}>
+            <Layout title={'The Bantam Breaks'} styleTags={styleTags}>
+                <Heading>Hello World</Heading>
+                {styleTags && getAppMarkup(ctx)}
+            </Layout>
+        </AppDataProvider>
     );
 };
 
 export const web = {
     index: () => async (ctx) => {
-        const showData = await showEntity.findUpcoming();
-        const instagramData = await instagram.feed();
-        ctx.body = renderReactApp({
-            content: (
-                <Fragment>
-                    <h1>
-                        Hello World
-                    </h1>
-                    <pre>
-                        {`${JSON.stringify(showData, null, 2)}`}
-                    </pre>
-                    <pre>
-                        {`${JSON.stringify(instagramData, null, 2)}`}
-                    </pre>
-                </Fragment>
-            )
-        });
+        const appData = {
+            instagramData: await instagram.feed(),
+            showData: await showEntity.findUpcoming()
+        };
+        const styleTags = getStyleTags(getLayoutMarkup({
+            appData,
+            ctx
+        }));
+        ctx.body = renderToString(
+            getLayoutMarkup({
+                appData,
+                ctx,
+                styleTags
+            })
+        );
     }
 };
