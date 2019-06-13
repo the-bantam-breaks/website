@@ -36,7 +36,7 @@ const Layout = (props) => {
                     </Content>
                 </Main>
                 <script src="/bundle.js"/>
-                <div dangerouslySetInnerHTML={{__html: styleTags}}/>
+                <div dangerouslySetInnerHTML={{ __html: styleTags }}/>
             </body>
         </html>
     );
