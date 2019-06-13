@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Page from './Page';
 
 const Main = styled.main`
     display: block;
@@ -20,28 +19,40 @@ const Content = styled.div`
 
 const Layout = (props) => {
     const {
-        content,
+        children,
+        className,
+        styleTags,
         title
     } = props;
-
     return (
-        <Page title={title}>
-            <Main>
-                <Content>
-                    {content}
-                </Content>
-            </Main>
-        </Page>
+        <html lang="en">
+            <head>
+                <title>{title}</title>
+            </head>
+            <body className={className}>
+                <Main>
+                    <Content>
+                        {children}
+                    </Content>
+                </Main>
+                <script src="/bundle.js"/>
+                <div dangerouslySetInnerHTML={{__html: styleTags}}/>
+            </body>
+        </html>
     );
 };
 
 Layout.propTypes = {
-    content: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
+    className: PropTypes.string,
+    styleTags: PropTypes.node,
     subtitle: PropTypes.string,
     title: PropTypes.string
 };
 
 Layout.defaultProps = {
+    className: '',
+    styleTags: undefined,
     subtitle: undefined,
     title: undefined
 };

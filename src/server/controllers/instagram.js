@@ -1,4 +1,4 @@
-import got from 'got';
+import fetch from 'isomorphic-fetch'
 
 /* eslint-disable no-undef */
 const INSTAGRAM_API_URL = `https://api.instagram.com/v1/users/${process.env.ENV_INSTAGRAM_USER_ID}/media/recent/?access_token=${process.env.ENV_INSTAGRAM_TOKEN}`;
@@ -6,22 +6,22 @@ const INSTAGRAM_API_URL = `https://api.instagram.com/v1/users/${process.env.ENV_
 
 export const instagram = {
     feed: async () => {
-        let feed;
+        let instaResponse;
         try {
-            ({ body: feed } = await got(
+            instaResponse = await fetch(
                 INSTAGRAM_API_URL,
                 {
                     method: 'get'
                 }
-            ));
+            );
         } catch (e) {
             console.log('instagram fetch failed', e);
         }
 
         try {
-            return typeof feed === 'string' ? JSON.parse(feed) : feed;
+            return await instaResponse.json();
         } catch (e) {
-            throw new Error('Could not parse instagram response', e);
+            throw new Error('There was a problem with the instagram photo feed response', e);
         }
     }
 };
