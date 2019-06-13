@@ -21,7 +21,7 @@ const Heading = styled.h1`
 
 const getAppMarkup = (ctx) => (
     <StaticRouter location={ctx.request.url}>
-        <App id="app" />
+        <App />
     </StaticRouter>
 );
 
@@ -34,7 +34,7 @@ const getLayoutMarkup = ({
         <AppDataProvider {...appData}>
             <Layout title={'The Bantam Breaks'} styleTags={styleTags}>
                 <Heading>Hello World</Heading>
-                {getAppMarkup(ctx)}
+                {styleTags && getAppMarkup(ctx)}
             </Layout>
         </AppDataProvider>
     );

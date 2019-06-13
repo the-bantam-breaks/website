@@ -6,6 +6,7 @@ const nodeExternals = require('webpack-node-externals')
 const browserConfig = {
   mode: 'development',
   entry: './src/browser/index.js',
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',

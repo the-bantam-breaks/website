@@ -17,6 +17,12 @@ const Content = styled.div`
     padding: 1rem 1rem;
 `;
 
+const StylesDiv = styled.div`
+    position: absolute;
+    left: -9999px;
+    height: 0;
+`;
+
 const Layout = (props) => {
     const {
         children,
@@ -30,13 +36,13 @@ const Layout = (props) => {
                 <title>{title}</title>
             </head>
             <body className={className}>
+                <StylesDiv dangerouslySetInnerHTML={{ __html: styleTags }}/>
                 <Main>
                     <Content>
                         {children}
                     </Content>
                 </Main>
                 <script src="/bundle.js"/>
-                <div dangerouslySetInnerHTML={{ __html: styleTags }}/>
             </body>
         </html>
     );

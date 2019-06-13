@@ -18,7 +18,7 @@ export const routes = (app) => {
         mount('/js', serve(path.join(staticRoute, 'js/'))),
 
         // Reports Web
-        route.get('/', web.index())
+        route.get('*', web.index())
 
         // Reports API
         // route.get('/api/shows', show.api.list()),
