@@ -19,6 +19,10 @@ node_modules/
 .build/
 .build/**
 
+# public ouput dir for browser js file
+public/
+public/**
+
 .cache
 
 # Optional eslint cache
