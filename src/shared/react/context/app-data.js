@@ -1,31 +1,41 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-const Context = React.createContext({});
+const AppDataContext = React.createContext({});
 
 export const AppDataProvider = ({
+    appImages,
     instagramData,
     showData,
     children
 }) => {
     return (
-        <Context.Provider
+        <AppDataContext.Provider
+            appImages={appImages}
             instagramData={instagramData}
             showData={showData}
         >
             {children}
-        </Context.Provider>
+        </AppDataContext.Provider>
     );
 };
 
 AppDataProvider.propTypes = {
+    appImages: PropTypes.object,
     instagramData: PropTypes.object,
     showData: PropTypes.arrayOf(PropTypes.object),
     children: PropTypes.node.isRequired
 };
 
 AppDataProvider.defaultProps = {
+    appImages: {
+        hero: undefined,
+        band: {},
+        logo: {}
+    },
     instagramData: {},
     showData: {}
 };
 
-export const useAppDataContext = () => useContext(Context);
+export const AppDataConsumer = AppDataContext.Consumer;
+export const useAppDataContext = () => useContext(AppDataContext);
+export const useAppData = (key) => (useContext(AppDataContext) || {})[key];
