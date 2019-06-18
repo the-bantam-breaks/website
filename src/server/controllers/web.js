@@ -6,6 +6,7 @@ import { App, Layout } from '../../shared/react';
 import { AppDataProvider } from '../../shared/react/context/'
 import { show as showEntity } from '../../rethinkdb';
 import { instagram } from './instagram';
+import { appImages } from './app-images';
 
 const getStyleTags = (children) => {
     const sheet = new ServerStyleSheet();
@@ -33,7 +34,6 @@ const getLayoutMarkup = ({
     return (
         <AppDataProvider {...appData}>
             <Layout title={'The Bantam Breaks'} styleTags={styleTags}>
-                <Heading>Hello World</Heading>
                 {styleTags && getAppMarkup(ctx)}
             </Layout>
         </AppDataProvider>
@@ -43,6 +43,7 @@ const getLayoutMarkup = ({
 export const web = {
     index: () => async (ctx) => {
         const appData = {
+            appImages: appImages(),
             instagramData: await instagram.feed(),
             showData: await showEntity.findUpcoming()
         };
