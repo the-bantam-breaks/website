@@ -21,7 +21,8 @@ node_modules/
 
 # public ouput dir for browser js file
 public/
-public/**
+# we do want shared public
+!src/shared/public/
 
 .cache
 
