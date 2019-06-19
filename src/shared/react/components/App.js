@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import MeetTheBand from './MeetTheBand';
 import NoMatch from './NoMatch';
@@ -26,8 +26,6 @@ class App extends Component {
                     ))}
                     <Route render={(props) => <NoMatch {...props} /> } />
                 </Switch>
-
-                <Link to={'/band'}>Band</Link>
             </div>
         )
     }

@@ -16,6 +16,7 @@ export const routes = (app) => {
         mount('/css', serve(path.join(staticRoute, 'css/'))),
         mount('/img', serve(path.join(staticRoute, 'img/'))),
         mount('/js', serve(path.join(staticRoute, 'js/'))),
+        mount('/fonts', serve(path.join(staticRoute, 'fonts/'))),
 
         // Reports Web
         route.get('*', web.index())
