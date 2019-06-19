@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 
 const browserConfig = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/browser/index.js',
   devtool: 'source-map',
   output: {
@@ -25,7 +25,7 @@ const browserConfig = {
 }
 
 const serverConfig = {
-  mode: 'development',
+  mode: 'production',
   entry: [
       '@babel/polyfill',
       './src/server/index.js'
@@ -33,9 +33,11 @@ const serverConfig = {
   target: 'node',
   externals: [nodeExternals()],
   output: {
-    path: __dirname,
-    filename: 'server.js',
-    publicPath: '/'
+    // path: __dirname,
+    // filename: 'server.js',
+    path: path.join(__dirname, '.build'),
+    filename: 'server.js'
+    // publicPath: '/'
   },
   module: {
     rules: [
@@ -53,7 +55,9 @@ const serverConfig = {
         "process.env": {
             "BUILD_TARGET": JSON.stringify('server'),
             "RETHINKDB_HOST": JSON.stringify(process.env.RETHINKDB_HOST),
-            "RETHINKDB_PORT": JSON.stringify(process.env.RETHINKDB_PORT)
+            "RETHINKDB_PORT": JSON.stringify(process.env.RETHINKDB_PORT),
+            "ENV_INSTAGRAM_USER_ID": JSON.stringify(process.env.ENV_INSTAGRAM_USER_ID),
+            "ENV_INSTAGRAM_TOKEN": JSON.stringify(process.env.ENV_INSTAGRAM_TOKEN)
         }
     })
   ]

@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"APP_PORT\", function() { return APP_PORT; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"RETHINKDB\", function() { return RETHINKDB; });\nvar _process = process,\n    env = Object({\"BUILD_TARGET\":\"server\",\"RETHINKDB_HOST\":undefined,\"RETHINKDB_PORT\":undefined});\nvar APP_PORT = env.PORT || 3000;\nvar RETHINKDB = {\n  HOST: env.RETHINKDB_HOST || 'localhost',\n  PORT: env.RETHINKDB_PORT || 28015,\n  DATABASE: 'breaksWebsite'\n};\n\n//# sourceURL=webpack:///./src/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"APP_PORT\", function() { return APP_PORT; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"RETHINKDB\", function() { return RETHINKDB; });\nvar _process = process,\n    env = Object({\"BUILD_TARGET\":\"server\",\"RETHINKDB_HOST\":undefined,\"RETHINKDB_PORT\":undefined,\"ENV_INSTAGRAM_USER_ID\":undefined,\"ENV_INSTAGRAM_TOKEN\":undefined});\nvar APP_PORT = env.PORT || 3000;\nvar RETHINKDB = {\n  HOST: env.RETHINKDB_HOST || 'localhost',\n  PORT: env.RETHINKDB_PORT || 28015,\n  DATABASE: 'breaksWebsite'\n};\n\n//# sourceURL=webpack:///./src/config.js?");
 
 /***/ }),
 
