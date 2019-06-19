@@ -11,21 +11,18 @@
     "build": "webpack --mode production",
     "lint": "eslint ./src",
     "start": "webpack -w & nodemon server.js",
-    "dev": "nodemon",
-    "startup": "node ./build/server.js",
     "start-local-db": "docker run -d --rm -p 28015:28015 -p 8090:8080 -v \"$PWD/data:/data\" --name bantam_rethinkdb rethinkdb",
-    "stop-local-db": "docker stop bantam_rethinkdb",
-    "start:server": "rm -rf ./build && webpack --config webpack.config.server.js",
-    "debugkoa": "DEBUG=koa-send* node .build/server.js"
+    "stop-local-db": "docker stop bantam_rethinkdb"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@hapi/boom": "^7.4.2",
+    "@koa/cors": "^3.0.0",
     "babel-core": "^6.26.3",
+    "babel-plugin-styled-components": "^1.10.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "isomorphic-fetch": "^2.2.1",
     "koa": "^2.7.0",
@@ -42,7 +39,7 @@
     "react-sticky": "^6.0.3",
     "request": "2.88.0",
     "rethinkdb": "^2.3.3",
-    "start-server-webpack-plugin": "^2.2.5",
+    "serialize-javascript": "^1.7.0",
     "styled-components": "^4.3.1",
     "webpack-node-externals": "^1.7.2"
   },
@@ -60,7 +57,6 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-standard": "^4.0.0",
     "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.7.0"
+    "webpack-cli": "^3.3.2"
   }
 }
