@@ -22,12 +22,13 @@ script:
       -e ENV_INSTAGRAM_TOKEN=${ENV_INSTAGRAM_TOKEN}
       -p 3000:3000
       breaks-website:latest
-  - sleep 10
+  - sleep $SLEEP_TIME
   - |
     STATUSCODE=$(curl -s -o /dev/null --write-out "%{http_code}" localhost:3000)
     echo "build $TRAVIS_BUILD_NUMBER returned HTTP $STATUSCODE"
     if [[ "$STATUSCODE" != 200 ]]; then
-      echo "Test HTTP request to website container failed!"
+      echo "Test HTTP request to website container failed!  Returned $STATUSCODE"
+      docker logs website
       exit 1
     fi
   - docker tag breaks-website:latest 796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website:latest
@@ -37,6 +38,5 @@ script:
 
 after_success:
   - echo "Build Successful!"
-  - docker logs website
   - docker kill rethinkdb website
   - test $TRAVIS_BRANCH = "master" && ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER
