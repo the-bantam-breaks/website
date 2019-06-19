@@ -22,7 +22,7 @@ script:
       -e ENV_INSTAGRAM_TOKEN=${ENV_INSTAGRAM_TOKEN}
       -p 3000:3000
       breaks-website:latest
-  - sleep 15
+  - sleep $SLEEP_TIME
   - |
     STATUSCODE=$(curl -s -o /dev/null --write-out "%{http_code}" localhost:3000)
     echo "build $TRAVIS_BUILD_NUMBER returned HTTP $STATUSCODE"
