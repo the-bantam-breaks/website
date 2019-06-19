@@ -18,5 +18,4 @@ ENV NPM_CONFIG_LOGLEVEL info
 # Expose the port on which this app listens
 EXPOSE 3000
 EXPOSE 8080
-#CMD [ "sh", "-", "./start.sh" ]
-CMD [ "yarn", "start:server" ]
+CMD [ "yarn", "start" ]
