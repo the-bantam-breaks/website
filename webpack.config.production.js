@@ -33,11 +33,9 @@ const serverConfig = {
   target: 'node',
   externals: [nodeExternals()],
   output: {
-    // path: __dirname,
-    // filename: 'server.js',
-    path: path.join(__dirname, '.build'),
-    filename: 'server.js'
-    // publicPath: '/'
+    path: __dirname,
+    filename: 'server.js',
+    publicPath: '/'
   },
   module: {
     rules: [
