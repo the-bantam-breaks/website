@@ -13,10 +13,10 @@ export const routes = (app) => {
         // add static file paths
         serve(generatedStaticRoute), // for client facing react bundle
         serve(staticRoute), // for favicon
-        mount('/css', serve(path.join(staticRoute, 'css/'))),
-        mount('/img', serve(path.join(staticRoute, 'img/'))),
-        mount('/js', serve(path.join(staticRoute, 'js/'))),
-        mount('/fonts', serve(path.join(staticRoute, 'fonts/'))),
+        mount('/css/**/*', serve(path.join(staticRoute, 'css/'))),
+        mount('/img/**/*', serve(path.join(staticRoute, 'img/'))),
+        mount('/js/**/*', serve(path.join(staticRoute, 'js/'))),
+        mount('/fonts/**/*', serve(path.join(staticRoute, 'fonts/'))),
 
         // Reports Web
         route.get('*', web.index())
