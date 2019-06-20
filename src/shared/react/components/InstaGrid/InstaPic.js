@@ -35,11 +35,6 @@ const InstaFront = styled.div`
     height: 15vw;
 `;
 
-const LikeComment = styled.span`
-    margin: 0 .5rem;
-    vertical-align: middle;
-`;
-
 const LikeCommentCounts = styled.div`
     position: absolute;
     top: 0;
@@ -138,7 +133,6 @@ class InstaPic extends Component {
                             {this.renderLikesComments()}
                         </LikeCommentCounts>
                     </InstaFront>
-
 
                     <DetailCard key='back' onClick={this.flipper}>
                         <div>{caption}</div>
