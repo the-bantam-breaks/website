@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { StickyContainer } from 'react-sticky';
 import { AppDataProvider } from '../context/';
 import { NavBar } from './NavBar';
 import { Hero } from './Hero';
@@ -31,11 +30,9 @@ class Home extends Component {
         }
         return (
             <AppDataProvider value={appData}>
-                <StickyContainer>
-                    <Hero />
-                    <NavBar />
-                    <InstaGrid />
-                </StickyContainer>
+                <Hero />
+                <NavBar />
+                <InstaGrid />
             </AppDataProvider>
         );
     }

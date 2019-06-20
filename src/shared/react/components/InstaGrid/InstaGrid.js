@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { ExternalLink, SectionHeading } from '../Atoms';
@@ -36,13 +35,15 @@ export const InstaGrid = (props) => {
         likes: { count: likeCount },
         images: {
             standard_resolution: { url: src }
-        },
+        }
     }, index) => {
         return (
             <InstaPic key={`feed_pic_${index}`}
+                      caption={caption}
+                      commentCount={commentCount}
+                      likeCount={likeCount}
                       link={link}
                       src={src}
-                      title={caption}
             />
         );
     });
@@ -53,9 +54,9 @@ export const InstaGrid = (props) => {
               <SectionHeading>Photos</SectionHeading>
               Follow us on Instagram at<br />
               <ExternalLink
-                  alt='Follow The Bantam Breaks on Instagram'
                   href='https://www.instagram.com/thebantambreaks/'
                   text={'@theBantamBreaks'}
+                  title='Follow The Bantam Breaks on Instagram'
               />
           </CenteredDiv>
           <PhotoGrid>

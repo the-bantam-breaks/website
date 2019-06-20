@@ -14,6 +14,7 @@ const Nav = styled.nav`
     min-height: 40px;
     width: 100vw;
     padding: .5rem 1rem;
+    z-index: 3;
 `;
 
 const NavLogo = styled(Logo)`
@@ -23,7 +24,7 @@ const NavLogo = styled(Logo)`
 `;
 
 class NavBar extends Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.navRef = React.createRef();
         this.updatePosition = this.updatePosition.bind(this);
@@ -36,15 +37,15 @@ class NavBar extends Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount () {
         window.addEventListener('scroll', this.updatePositionListener, false);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         window.removeEventListener('scroll', this.updatePositionListener, false);
     }
 
-    updatePosition() {
+    updatePosition () {
         this.setState((prevState) => ({
             defaultOffset: prevState.defaultOffset
                 ? prevState.defaultOffset

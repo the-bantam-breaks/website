@@ -14,15 +14,21 @@ const StyledA = styled.a`
 `;
 
 const ExternalLink = (props) => {
-    const { className, href, alt, text, type } = props;
+    const { className, href, text, title, type } = props;
 
     return (
-        <StyledA alt={alt} className={className} href="href" type={type}>{text}</StyledA>
+        <StyledA
+            className={className}
+            title={title}
+            href={href}
+            type={type}>
+            {text}
+        </StyledA>
     );
 };
 
 ExternalLink.propTypes = {
-    alt: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     className: PropTypes.string,
     href: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
