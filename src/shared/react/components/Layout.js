@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import styled from 'styled-components';
-import { StickyContainer } from 'react-sticky';
 import { GlobalStyles } from './GlobalStyles';
 
 const Main = styled.main`
@@ -78,9 +77,7 @@ const Layout = (props) => {
                 <StylesDiv dangerouslySetInnerHTML={{ __html: styleTags }}/>
                 <Main>
                     <div id='preload' />
-                    <StickyContainer>
                     {children}
-                    </StickyContainer>
                 </Main>
                 <script src="/bundle.js" />
             </StyledBody>
