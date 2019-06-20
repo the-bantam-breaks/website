@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint ./src",
-    "start:server": "webpack --config webpack.config.production.js & nodemon server.js",
+    "start:server": "webpack --config webpack.config.production.js && nodemon server.js",
     "start": "webpack -w --config webpack.config.development.js & nodemon server.js",
     "start-local-db": "docker run -d --rm -p 28015:28015 -p 8090:8080 -v \"$PWD/data:/data\" --name bantam_rethinkdb rethinkdb",
     "stop-local-db": "docker stop bantam_rethinkdb"
