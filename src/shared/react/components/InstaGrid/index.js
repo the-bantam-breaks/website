@@ -1,0 +1,1 @@
+export { InstaGrid } from './InstaGrid';

@@ -3,6 +3,7 @@ import { StickyContainer } from 'react-sticky';
 import { AppDataProvider } from '../context/';
 import { NavBar } from './NavBar';
 import { Hero } from './Hero';
+import { InstaGrid } from './InstaGrid';
 
 class Home extends Component {
     constructor (props) {
@@ -33,6 +34,7 @@ class Home extends Component {
                 <StickyContainer>
                     <Hero />
                     <NavBar />
+                    <InstaGrid />
                 </StickyContainer>
             </AppDataProvider>
         );
