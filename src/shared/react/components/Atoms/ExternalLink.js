@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { SITE_COLORS } from './constants';
+import { COLORS } from './constants';
 
 const StyledA = styled.a`
     margin: 0 .25rem;
-    color: ${({ type }) => SITE_COLORS.ACTIONS[type]};
+    color: ${({ type }) => COLORS.ACTIONS[type]};
     text-decoration: none;
 
     &:hover {
