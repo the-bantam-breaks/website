@@ -12,6 +12,10 @@ config_notes.txt
 .DS_Store
 **/.DS_Store
 
+# ignore generated server, keep src for server
+server.js
+!src/server/server.js
+
 # Dependency directories
 node_modules/
 
