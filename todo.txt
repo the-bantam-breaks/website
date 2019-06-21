@@ -1,2 +1,2 @@
 - Do we want twitter API,  get creds and figure out API handler if so
-- why doesn't react-helmet work
+- sizing for mobile on insta and headings

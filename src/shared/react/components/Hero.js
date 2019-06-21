@@ -1,17 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAppData } from '../context/';
-import { Logo } from './Atoms';
+import { BREAKPOINTS, Logo } from './Atoms';
 
 const AlbumH = styled.h1`
     font-size: 7vh;
     margin-bottom: 1vh;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        font-size: 3.5vh;
+        margin-bottom: .5rem;
+    }
 `;
 
 const AlbumSubH = styled.h4`
     font-size: 2.5vh;
     margin: 0;
-`
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        font-size: 1.75vh;
+        margin-bottom: .5rem;
+    }
+`;
 
 const HeroText = styled.div`
     position: relative;

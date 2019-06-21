@@ -2,13 +2,15 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import styled from 'styled-components';
-import { Emoji, ExternalLink, SITE_COLORS, Right } from '../Atoms';
+import { BREAKPOINTS, COLORS, Emoji, ExternalLink, Right } from '../Atoms';
 
 const BOX_SHADOW = '1px 1px 3px rgba(0,0,0,0.75)';
+const CARD_SIDE = '15vw';
+const CARD_SIDE_MOBILE = '40vw';
 
 const DetailCard = styled.div`
-    height: 15vw;
-    width: 15vw;
+    height: ${CARD_SIDE};
+    width: ${CARD_SIDE};
     padding: .5vw;
     font-size: 13px;
     font-style: italic;
@@ -17,10 +19,12 @@ const DetailCard = styled.div`
     box-sizing: border-box;
     overflow-x: hidden;
     overflow: auto;
-    color: ${SITE_COLORS.TEXT.TERTIARY}
+    color: ${COLORS.TEXT.TERTIARY}
 
-    @media (max-width: 700px) {
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
         font-size: 11px;
+        height: ${CARD_SIDE_MOBILE};
+        width: ${CARD_SIDE_MOBILE};
     }
 
     > div {
@@ -31,16 +35,23 @@ const DetailCard = styled.div`
 
 const InstaFront = styled.div`
     position: relative;
-    width: 15vw;
-    height: 15vw;
+    width: ${CARD_SIDE};
+    height: ${CARD_SIDE};
+    display: flex;
+    background-color: ${COLORS.IMG.AUTOFILL};
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        height: ${CARD_SIDE_MOBILE};
+        width: ${CARD_SIDE_MOBILE};
+    }
 `;
 
 const LikeCommentCounts = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 15vw;
-    height: 15vw;
+    width: ${CARD_SIDE};
+    height: ${CARD_SIDE};
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -52,22 +63,38 @@ const LikeCommentCounts = styled.div`
     &:hover {
         opacity: .5;
     }
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        height: ${CARD_SIDE_MOBILE};
+        width: ${CARD_SIDE_MOBILE};
+    }
 `;
 
 const GridBox = styled.div`
     position: relative;
     margin: 1vw;
-    max-width: 15vw;
-    max-height: 15vw;
+    max-width: ${CARD_SIDE};
+    max-height: ${CARD_SIDE};
     overflow: hidden;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        margin: 2.5vw;
+        max-height: ${CARD_SIDE_MOBILE};
+        max-width: ${CARD_SIDE_MOBILE};
+    }
 `;
 
 const InstaImg = styled.img`
     display: block;
-    width: 15vw;
-    max-height: 15vw;
     margin: auto 0;
+    width: ${CARD_SIDE};
+    max-height: ${CARD_SIDE};
     box-shadow: ${BOX_SHADOW};
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        width: ${CARD_SIDE_MOBILE};
+        max-height: ${CARD_SIDE_MOBILE};
+    }
 `;
 
 const ReactCardFlipStyled = styled(ReactCardFlip)`
