@@ -3,34 +3,39 @@ import styled from 'styled-components';
 import { useAppData } from '../context/';
 import { BREAKPOINTS, Logo } from './Atoms';
 
-const AlbumH = styled.h1`
-    font-size: 7vh;
-    margin-bottom: 1vh;
+const OffscreenH = styled.h1`
+    position: absolute;
+    top: 0;
+    left: -9999px;
+`;
+
+const AlbumH = styled.h2`
+    font-size: 3rem;
+    margin-bottom: 1rem;
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        font-size: 3.5vh;
+        font-size: 1.75rem;
         margin-bottom: .5rem;
     }
 `;
 
 const AlbumSubH = styled.h4`
-    font-size: 2.5vh;
+    font-size: 1.75rem;
     margin: 0;
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        font-size: 1.75vh;
-        margin-bottom: .5rem;
+        font-size: 1rem;
+        margin-bottom: .25rem;
     }
 `;
 
 const HeroText = styled.div`
     position: relative;
     display: block;
-    width: 70vw;
-    height: 50vh;
+    width: 100%;
     text-align: center;
     color: #ffffff;
-    margin: 15vh auto 0;
+    margin: auto auto;
 `;
 
 const HeroBackdrop = styled.section`
@@ -57,6 +62,7 @@ const HeroBackdrop = styled.section`
         left: 0;
         width: 100%;
         height: 100%;
+        display: flex;
     }
 `;
 
@@ -73,11 +79,12 @@ export const Hero = (props) => {
                src={hero} />
           <div className="overlay backdrop" />
           <div className="overlay">
-              <HeroText>
-                  <Logo width={'30vw'} color='light' />
-                  <AlbumH>{'The Red EP'}</AlbumH>
-                  <AlbumSubH>{'Coming September 2019'}</AlbumSubH>
-              </HeroText>
+          <HeroText>
+              <OffscreenH>{'The Bantam Breaks'}</OffscreenH>
+              <Logo width={'30vw'} color='light' />
+              <AlbumH>{'The Red EP'}</AlbumH>
+              <AlbumSubH>{'Coming September 2019'}</AlbumSubH>
+          </HeroText>
           </div>
       </HeroBackdrop>
     );

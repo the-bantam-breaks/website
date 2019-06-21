@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { AppDataProvider } from '../context/';
-import { NavBar } from './NavBar';
 import { Hero } from './Hero';
+import { Footer } from './Footer';
 import { InstaGrid } from './InstaGrid';
+import { NavBar } from './NavBar';
 
 class Home extends Component {
     constructor (props) {
@@ -33,6 +34,7 @@ class Home extends Component {
                 <Hero />
                 <NavBar />
                 <InstaGrid />
+                <Footer />
             </AppDataProvider>
         );
     }
