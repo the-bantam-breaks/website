@@ -10,22 +10,21 @@ const OffscreenH = styled.h1`
 `;
 
 const AlbumH = styled.h2`
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin: 2rem 0 .5rem;
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        font-size: 1.75rem;
-        margin-bottom: .5rem;
+        font-size: 1.2rem;
+        margin: .75rem 0 .25rem;
     }
 `;
 
 const AlbumSubH = styled.h4`
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     margin: 0;
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        font-size: 1rem;
-        margin-bottom: .25rem;
+        font-size: .7rem;
     }
 `;
 
