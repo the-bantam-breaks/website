@@ -4,6 +4,12 @@ import { ExternalLink, SectionHeading } from '../Atoms';
 import InstaPic from './InstaPic';
 import { useAppDataContext } from '../../context/';
 
+const ScrollTo = styled.div`
+    content: ' ';
+    display: block;
+    padding-top: 60px;
+`;
+
 const CenteredDiv = styled.div`
     text-align: center;
     margin-bottom: 2vw;
@@ -51,6 +57,7 @@ export const InstaGrid = (props) => {
     return (
         <section>
           <CenteredDiv>
+              <ScrollTo id={'photos'}>{' '}</ScrollTo>
               <SectionHeading>Photos</SectionHeading>
               Follow us on Instagram at<br />
               <ExternalLink

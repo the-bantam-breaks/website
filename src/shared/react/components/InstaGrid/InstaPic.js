@@ -1,3 +1,4 @@
+import Autolinker from 'autolinker';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ReactCardFlip from 'react-card-flip';
@@ -8,11 +9,31 @@ const BOX_SHADOW = '1px 1px 3px rgba(0,0,0,0.75)';
 const CARD_SIDE = '15vw';
 const CARD_SIDE_MOBILE = '40vw';
 
+const instaLinker = new Autolinker({
+    urls: {
+        schemeMatches: true,
+        wwwMatches: true,
+        tldMatches: true
+    },
+    email: true,
+    phone: true,
+    mention: 'instagram',
+    hashtag: 'instagram',
+    stripPrefix: true,
+    stripTrailingSlash: true,
+    newWindow: true,
+    truncate: {
+        length: 0,
+        location: 'end'
+    },
+    className: ''
+});
+
 const DetailCard = styled.div`
     height: ${CARD_SIDE};
     width: ${CARD_SIDE};
     padding: .5vw;
-    font-size: 13px;
+    font-size: .9rem;
     font-style: italic;
     cursor: pointer;
     box-shadow: ${BOX_SHADOW};
@@ -22,7 +43,7 @@ const DetailCard = styled.div`
     color: ${COLORS.TEXT.TERTIARY}
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        font-size: 11px;
+        font-size: .75rem;
         height: ${CARD_SIDE_MOBILE};
         width: ${CARD_SIDE_MOBILE};
     }
@@ -75,7 +96,6 @@ const GridBox = styled.div`
     margin: 1vw;
     max-width: ${CARD_SIDE};
     max-height: ${CARD_SIDE};
-    overflow: hidden;
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
         margin: 2.5vw;
@@ -162,7 +182,9 @@ class InstaPic extends Component {
                     </InstaFront>
 
                     <DetailCard key='back' onClick={this.flipper}>
-                        <div>{caption}</div>
+                        <div dangerouslySetInnerHTML={{
+                            __html: instaLinker.link(caption)
+                        }} />
                         <Right>
                             <ExternalLink
                                 href={link}
