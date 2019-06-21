@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import styled from 'styled-components';
-import { BREAKPOINTS, Emoji, ExternalLink, SITE_COLORS, Right } from '../Atoms';
+import { BREAKPOINTS, COLORS, Emoji, ExternalLink, Right } from '../Atoms';
 
 const BOX_SHADOW = '1px 1px 3px rgba(0,0,0,0.75)';
 const CARD_SIDE = '15vw';
@@ -19,7 +19,7 @@ const DetailCard = styled.div`
     box-sizing: border-box;
     overflow-x: hidden;
     overflow: auto;
-    color: ${SITE_COLORS.TEXT.TERTIARY}
+    color: ${COLORS.TEXT.TERTIARY}
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
         font-size: 11px;
@@ -37,6 +37,8 @@ const InstaFront = styled.div`
     position: relative;
     width: ${CARD_SIDE};
     height: ${CARD_SIDE};
+    display: flex;
+    background-color: ${COLORS.IMG.AUTOFILL};
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
         height: ${CARD_SIDE_MOBILE};
