@@ -4,10 +4,13 @@ import styled from 'styled-components';
 import { Logo } from '../Atoms';
 
 const Nav = styled.nav`
-    ${({ fixed }) => fixed
+    ${({ fixed, clientHeight }) => fixed
     ? `
     position: fixed;
-    top: 0;`
+    top: 0;
+    + section {
+        margin-top: ${clientHeight}px;
+    }`
     : ''}
     background-color: #fff;
     max-height: 100px;
@@ -33,7 +36,8 @@ class NavBar extends Component {
 
         this.state = {
             defaultOffset: undefined,
-            fixed: false
+            fixed: false,
+            height: '40'
         };
     }
 
@@ -46,20 +50,22 @@ class NavBar extends Component {
     }
 
     updatePosition () {
+        const navHeight = this.navRef.current.clientHeight;
         this.setState((prevState) => ({
             defaultOffset: prevState.defaultOffset
                 ? prevState.defaultOffset
                 : this.navRef.current.offsetTop - 10,
-            fixed: this.state.defaultOffset < window.pageYOffset
+            fixed: this.state.defaultOffset < window.pageYOffset,
+            height: navHeight
         }));
     }
 
     render () {
-        const { fixed } = this.state;
+        const { fixed, height } = this.state;
         return (
-            <Nav fixed={fixed} ref={this.navRef}>
-                <NavLogo width="8vw" />
-                {'Navigation Yay!'}
+            <Nav fixed={fixed} clientHeight={height} ref={this.navRef}>
+                <a href='/'><NavLogo width="8vw" /></a>
+                <a href={'#photos'}>Photos</a>
             </Nav>
         );
     }
