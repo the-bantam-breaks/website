@@ -6,3 +6,7 @@ export const SITE_COLORS = {
         TERTIARY: '#808080'
     }
 };
+
+export const BREAKPOINTS = {
+    MOBILE: '768px'
+};

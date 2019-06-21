@@ -28,4 +28,7 @@ export const GlobalStyles = createGlobalStyle`
     body {
         font-family: 'Open Sans', 'sans-serif';
     }
+    #app {
+        overflow-x: hidden;
+    }
  `;
