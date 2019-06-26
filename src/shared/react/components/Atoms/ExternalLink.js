@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { COLORS } from './constants';
 
 const StyledA = styled.a`
+    display: inline-block;
     margin: 0 .25rem;
     color: ${({ type }) => COLORS.ACTIONS[type]};
     text-decoration: none;
@@ -31,7 +32,7 @@ ExternalLink.propTypes = {
     title: PropTypes.string.isRequired,
     className: PropTypes.string,
     href: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    text: PropTypes.node.isRequired,
     type: PropTypes.oneOf(['PRIMARY', 'SECONDARY', 'TERTIARY'])
 };
 

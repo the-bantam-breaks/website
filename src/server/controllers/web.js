@@ -5,6 +5,7 @@ import { ServerStyleSheet } from 'styled-components';
 import { App, Layout } from '../../shared/react';
 import { show as showEntity } from '../../rethinkdb';
 import { instagram } from './instagram';
+import { albums } from './albums';
 import { appImages } from './app-images';
 
 const getStyleTags = (children) => {
@@ -36,6 +37,7 @@ const getLayoutMarkup = ({
 export const web = {
     index: () => async (ctx) => {
         const appData = {
+            albums: albums(),
             appImages: appImages(),
             instagramData: await instagram.feed(),
             showData: await showEntity.findUpcoming()
@@ -44,12 +46,15 @@ export const web = {
             appData,
             ctx
         }));
-        ctx.body = renderToString(
+        ctx.body = `
+        <!DOCTYPE html>
+        ${renderToString(
             getLayoutMarkup({
                 appData,
                 ctx,
                 styleTags
             })
-        );
+        )}`
+        ;
     }
 };

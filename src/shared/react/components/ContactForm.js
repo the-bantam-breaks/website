@@ -1,14 +1,14 @@
 import React from 'react';
 import { CenteredDiv, SectionHeading } from './Atoms';
 
-const ShowTable = () => {
+const ContactForm = () => {
     return (
         <section>
             <CenteredDiv>
-                <SectionHeading>Live Shows</SectionHeading>
+                <SectionHeading>Contact Form</SectionHeading>
             </CenteredDiv>
         </section>
     );
 };
 
-export default ShowTable;
+export default ContactForm;
