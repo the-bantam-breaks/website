@@ -35,7 +35,7 @@
     "nodemon": "1.19.1",
     "prop-types": "15.7.2",
     "react": "16.8.6",
-    "react-card-flip": "0.7.1",
+    "react-card-flip": "0.8.0",
     "react-dom": "16.8.6",
     "react-router-dom": "5.0.1",
     "react-sticky": "6.0.3",
