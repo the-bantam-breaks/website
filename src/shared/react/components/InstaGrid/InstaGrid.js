@@ -1,29 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import { ExternalLink, SectionHeading } from '../Atoms';
+import { CenteredDiv, ExternalLink, FlexRowGrid, ScrollTo, SectionHeading } from '../Atoms';
 import InstaPic from './InstaPic';
 import { useAppDataContext } from '../../context/';
-
-const ScrollTo = styled.div`
-    content: ' ';
-    display: block;
-    padding-top: 60px;
-`;
-
-const CenteredDiv = styled.div`
-    text-align: center;
-    margin-bottom: 2vw;
-`;
-
-const PhotoGrid = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: row;
-    max-height: 100vh;
-    padding: 0 2vw;
-`;
 
 export const InstaGrid = (props) => {
     const { instagramData } = useAppDataContext() || {};
@@ -66,9 +44,9 @@ export const InstaGrid = (props) => {
                   title='Follow The Bantam Breaks on Instagram'
               />
           </CenteredDiv>
-          <PhotoGrid>
+          <FlexRowGrid>
               {images}
-          </PhotoGrid>
+          </FlexRowGrid>
         </section>
     );
 };

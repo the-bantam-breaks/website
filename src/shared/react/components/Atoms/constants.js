@@ -15,6 +15,10 @@ export const COLORS = {
     },
     IMG: {
         AUTOFILL: '#ABABAB'
+    },
+    BACKGROUNDS: {
+        DEFAULT: '#FFFFFF',
+        ALTERNATING_SECTION: '#F0F0F0'
     }
 };
 

@@ -10,8 +10,10 @@ const Nav = styled.nav`
     top: 0;
     + section {
         margin-top: ${clientHeight}px;
-    }`
+    }
+    box-shadow: 0 1px 3px rgba(0,0,0,0.75);`
     : ''}
+    box-sizing: border-box;
     background-color: #fff;
     max-height: 100px;
     min-height: 40px;
@@ -51,11 +53,13 @@ class NavBar extends Component {
 
     updatePosition () {
         const navHeight = this.navRef.current.clientHeight;
+        const scrollPos = Number.isFinite(window.pageYOffset) ? window.pageYOffset : window.scrollY;
+
         this.setState((prevState) => ({
             defaultOffset: prevState.defaultOffset
                 ? prevState.defaultOffset
                 : this.navRef.current.offsetTop - 10,
-            fixed: this.state.defaultOffset < window.pageYOffset,
+            fixed: this.state.defaultOffset < scrollPos,
             height: navHeight
         }));
     }

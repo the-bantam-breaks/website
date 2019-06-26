@@ -9,11 +9,7 @@ import { routes } from './routes';
 const server = async () => {
     const app = new Koa();
 
-    try {
-        await setupRethinkDB();
-    } catch (e) {
-        console.error('db setup failed');
-    }
+    await setupRethinkDB();
 
     app.use(logger());
     app.use(cors());

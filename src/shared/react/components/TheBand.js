@@ -1,14 +1,14 @@
 import React from 'react';
 import { CenteredDiv, SectionHeading } from './Atoms';
 
-const ShowTable = () => {
+const TheBand = () => {
     return (
         <section>
             <CenteredDiv>
-                <SectionHeading>Live Shows</SectionHeading>
+                <SectionHeading>The Band</SectionHeading>
             </CenteredDiv>
         </section>
     );
 };
 
-export default ShowTable;
+export default TheBand;
