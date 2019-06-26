@@ -48,13 +48,13 @@ const BAND_SCOTLAND_IMAGES = [
 const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 export const appImages = () => ({
-    hero: `${HERO_DIR}${getRandom(HERO_IMAGES)}`,
     band: {
         eric: `${BAND_IMAGE_DIR}${getRandom(BAND_ERIC_IMAGES)}`,
         garrett: `${BAND_IMAGE_DIR}${getRandom(BAND_GARRETT_IMAGES)}`,
         josh: `${BAND_IMAGE_DIR}${getRandom(BAND_JOSH_IMAGES)}`,
         scotland: `${BAND_IMAGE_DIR}${getRandom(BAND_SCOTLAND_IMAGES)}`
     },
+    hero: `${HERO_DIR}${getRandom(HERO_IMAGES)}`,
     logo: {
         clear_chicken: `${LOGO_DIR}${LOGOS.clear_chicken}`,
         text_logo_dark: `${LOGO_DIR}${LOGOS.text_logo_dark}`,

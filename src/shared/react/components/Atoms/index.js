@@ -1,9 +1,12 @@
 export { default as Button } from './Button';
 export * from './constants';
 export * from './Aligners';
+export { CenteredDiv } from './CenteredDiv';
 export { Content } from './Content';
 export { default as Emoji } from './Emoji';
 export { default as ExternalLink } from './ExternalLink';
+export { FlexRowGrid } from './FlexRowGrid';
 export { default as Logo } from './Logo';
+export { ScrollTo } from './ScrollTo';
 export { SectionHeading } from './SectionHeading';
 export { default as SocialMediaLink } from './SocialMediaLink';

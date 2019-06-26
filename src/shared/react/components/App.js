@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
-import MeetTheBand from './MeetTheBand';
 import NoMatch from './NoMatch';
+import TheBand from './TheBand';
 
 const routes = [
     {
@@ -12,7 +12,7 @@ const routes = [
     },
     {
         path: '/band',
-        component: MeetTheBand
+        component: TheBand
     }
 ]
 

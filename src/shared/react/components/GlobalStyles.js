@@ -49,4 +49,17 @@ export const GlobalStyles = createGlobalStyle`
     a:visited {
         color: ${COLORS.LINKS.VISITED};
     }
+
+    section {
+        position: relative;
+        display: block;
+        clear: both;
+        box-sizing: border-box;
+        padding: .5rem 0;
+        margin: 1rem 0;
+    }
+
+    section:nth-child(even) {
+        background-color: ${COLORS.BACKGROUNDS.ALTERNATING_SECTION};
+    }
  `;
