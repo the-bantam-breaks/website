@@ -4,13 +4,19 @@ import styled from 'styled-components';
 import { BREAKPOINTS, Center } from '../Atoms';
 
 const BOX_SHADOW = '1px 1px 3px rgba(0,0,0,0.75)';
-const IMG_SIDE = '15vw';
+const IMG_SIDE = '14vw';
+const MOBILE_IMG_SIDE = '40vw';
 
 const BandMemberWrap = styled.div`
     position: relative;
     width: ${IMG_SIDE};
     height: ${IMG_SIDE};
     display: flex;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        width: ${MOBILE_IMG_SIDE};
+        height: ${MOBILE_IMG_SIDE};
+    }
 `;
 
 const BandMemberImg = styled.img`
@@ -24,7 +30,7 @@ const BandMemberImg = styled.img`
 
 const GridBox = styled.div`
     position: relative;
-    margin: 5vw;
+    margin: 0 4vw;
     max-width: ${IMG_SIDE};
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
@@ -35,11 +41,19 @@ const GridBox = styled.div`
 const MemberName = styled.h4`
     margin: 1rem 0 .25rem;
     font-size: 1.25rem;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        font-size: .9rem;
+    }
 `;
 
 const MemberInstruments = styled.p`
     margin: 0;
     font-size: .8rem;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        font-size: .65rem;
+    }
 `;
 
 class BandMember extends Component {
