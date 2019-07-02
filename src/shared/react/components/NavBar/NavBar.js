@@ -81,6 +81,7 @@ class NavBar extends Component {
                 <NavAnchor href={'#albums'}>Albums</NavAnchor>
                 <NavAnchor href={'#photos'}>Photos</NavAnchor>
                 <NavAnchor href={'#the_band'}>The Band</NavAnchor>
+                <NavAnchor href={'#videos'}>Videos</NavAnchor>
             </Nav>
         );
     }

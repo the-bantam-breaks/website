@@ -8,6 +8,7 @@ import { instagram } from './instagram';
 import { albums } from './albums';
 import { bandMembers } from './band-members';
 import { appImages } from './app-images';
+import { youtubeEmbeddedVideo } from './youtube-embedded-video';
 
 const getStyleTags = (children) => {
     const sheet = new ServerStyleSheet();
@@ -42,7 +43,8 @@ export const web = {
             appImages: appImages(),
             bandMembers: bandMembers(),
             instagramData: await instagram.feed(),
-            showData: await showEntity.findUpcoming()
+            showData: await showEntity.findUpcoming(),
+            youtubeEmbeddedVideo: youtubeEmbeddedVideo()
         };
         const styleTags = getStyleTags(getLayoutMarkup({
             appData,
