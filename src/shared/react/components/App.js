@@ -2,17 +2,12 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import NoMatch from './NoMatch';
-import TheBand from './TheBand';
 
 const routes = [
     {
         path: '/',
         exact: true,
         component: Home
-    },
-    {
-        path: '/band',
-        component: TheBand
     }
 ]
 
