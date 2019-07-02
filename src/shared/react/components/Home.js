@@ -7,7 +7,7 @@ import { Footer } from './Footer';
 import { InstaGrid } from './InstaGrid';
 import { NavBar } from './NavBar';
 import ShowTable from './ShowTable';
-import TheBand from './TheBand';
+import { BandGrid } from './BandGrid';
 import VideoSection from './VideoSection';
 
 class Home extends Component {
@@ -42,7 +42,7 @@ class Home extends Component {
                 <ShowTable />
                 <InstaGrid />
                 <VideoSection />
-                <TheBand />
+                <BandGrid />
                 <ContactForm />
                 <Footer />
             </AppDataProvider>

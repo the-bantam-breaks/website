@@ -22,6 +22,15 @@ const Nav = styled.nav`
     z-index: 3;
 `;
 
+const NavAnchor = styled.a`
+    display: inline-block;
+    margin: 0 .5rem;
+    height: 100%;
+    vertical-align: center;
+    font-size: 1.15rem;
+    font-weight: 500;
+`;
+
 const NavLogo = styled(Logo)`
     float: left;
     margin-right: 1rem;
@@ -68,8 +77,11 @@ class NavBar extends Component {
         const { fixed, height } = this.state;
         return (
             <Nav fixed={fixed} clientHeight={height} ref={this.navRef}>
-                <a href='/'><NavLogo width="8vw" /></a>
-                <a href={'#photos'}>Photos</a>
+                <NavAnchor href='/'><NavLogo width="8vw" /></NavAnchor>
+                <NavAnchor href={'#albums'}>Albums</NavAnchor>
+                <NavAnchor href={'#photos'}>Photos</NavAnchor>
+                <NavAnchor href={'#the_band'}>The Band</NavAnchor>
+                <NavAnchor href={'#videos'}>Videos</NavAnchor>
             </Nav>
         );
     }

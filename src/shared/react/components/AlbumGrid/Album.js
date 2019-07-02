@@ -36,7 +36,7 @@ const AlbumTitle = styled.h4`
 `;
 
 const AlbumYear = styled.p`
-    margin: 0
+    margin: 0;
 `;
 
 const FlexRowGridAlbums = styled(FlexRowGrid)`
