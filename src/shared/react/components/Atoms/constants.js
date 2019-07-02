@@ -5,7 +5,7 @@ export const COLORS = {
     LINKS: {
         ACTIVE: '#000',
         A: PRIMARY_LINK,
-        VISITED: '#66CCCC'
+        VISITED: '#F07171'
     },
     ACTIONS: {
         PRIMARY: PRIMARY_LINK
