@@ -14,12 +14,6 @@
                     }
                 ],
                 "essential": true,
-                "environment": [
-                    {
-                        "name": "RETHINKDB_HOST",
-                        "value": "rethinkdb.local"
-                    }
-                ],
                 "secrets": [
                     {
                         "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-insta-user-id-Q9kEc8",
