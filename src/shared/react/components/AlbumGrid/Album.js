@@ -5,6 +5,7 @@ import { BREAKPOINTS, COLORS, Center, ExternalLink, FlexRowGrid } from '../Atoms
 
 const BOX_SHADOW = '1px 1px 3px rgba(0,0,0,0.75)';
 const CARD_SIDE = '30vw';
+const MOBILE_CARD_SIDE = '45vw';
 
 const AlbumCover = styled.div`
     position: relative;
@@ -12,6 +13,11 @@ const AlbumCover = styled.div`
     height: ${CARD_SIDE};
     display: flex;
     background-color: ${COLORS.IMG.AUTOFILL};
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        width: ${MOBILE_CARD_SIDE};
+        height: ${MOBILE_CARD_SIDE};
+    }
 `;
 
 const AlbumImg = styled.img`
@@ -20,6 +26,11 @@ const AlbumImg = styled.img`
     width: ${CARD_SIDE};
     max-height: ${CARD_SIDE};
     box-shadow: ${BOX_SHADOW};
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        width: ${MOBILE_CARD_SIDE};
+        max-height: ${MOBILE_CARD_SIDE};
+    }
 `;
 
 const AlbumLinksWrap = styled.div`
@@ -33,10 +44,18 @@ const AlbumLinksWrap = styled.div`
 
 const AlbumTitle = styled.h4`
     margin: 1rem 0 .25rem;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        font-size: .85rem;
+    }
 `;
 
 const AlbumYear = styled.p`
     margin: 0;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        font-size: .75rem;
+    }
 `;
 
 const FlexRowGridAlbums = styled(FlexRowGrid)`
@@ -49,7 +68,8 @@ const GridBox = styled.div`
     max-width: ${CARD_SIDE};
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        margin: 2.5vw;
+        margin: 1.25vw;
+        max-width: ${MOBILE_CARD_SIDE};
     }
 `;
 

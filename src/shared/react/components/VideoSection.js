@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAppDataContext } from '../context/';
-import { BREAKPOINTS, CenteredDiv, ScrollTo } from './Atoms';
+import { BREAKPOINTS, CenteredDiv, ScrollTo, SectionHeading } from './Atoms';
 
 const VideoFrame = styled.iframe`
     width: 100vw;
@@ -14,7 +14,7 @@ const VideoFrame = styled.iframe`
 `;
 
 const VideoWrap = styled.section`
-    padding-bottom: 2.75rem;
+    padding-bottom: 0;
 `;
 
 const VideoSection = () => {
@@ -24,6 +24,7 @@ const VideoSection = () => {
         <VideoWrap>
             <CenteredDiv>
                 <ScrollTo id={'videos'}>{' '}</ScrollTo>
+                <SectionHeading>Videos</SectionHeading>
                 <VideoFrame
                     src={youtubeEmbeddedVideo.embedUrl}
                     frameborder="0"
