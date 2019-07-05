@@ -62,4 +62,8 @@ export const GlobalStyles = createGlobalStyle`
     section:nth-child(even) {
         background-color: ${COLORS.BACKGROUNDS.ALTERNATING_SECTION};
     }
+
+    section:last-child {
+        margin-bottom: 30vh;
+    }
  `;

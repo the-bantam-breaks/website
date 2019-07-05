@@ -3,6 +3,7 @@ import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components';
 import { App, Layout } from '../../shared/react';
+import { getShowsArchive, getUpcomingShows } from './show';
 import { instagram } from './instagram';
 import { albums } from './albums';
 import { bandMembers } from './band-members';
@@ -37,11 +38,16 @@ const getLayoutMarkup = ({
 
 export const web = {
     index: () => async (ctx) => {
+        // let shows = getUpcomingShows();
+
         const appData = {
             albums: albums(),
             appImages: appImages(),
+            archivedShows: getShowsArchive(),
             bandMembers: bandMembers(),
             instagramData: await instagram.feed(),
+            // showData: await showEntity.findUpcoming(),
+            upcomingShows: getUpcomingShows(),
             youtubeEmbeddedVideo: youtubeEmbeddedVideo()
         };
         const styleTags = getStyleTags(getLayoutMarkup({

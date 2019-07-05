@@ -5,7 +5,6 @@ import { COLORS } from './constants';
 
 const StyledA = styled.a`
     display: inline-block;
-    margin: 0 .25rem;
     color: ${({ type }) => COLORS.ACTIONS[type]};
     text-decoration: none;
 
