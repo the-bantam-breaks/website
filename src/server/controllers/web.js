@@ -3,7 +3,6 @@ import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components';
 import { App, Layout } from '../../shared/react';
-import { show as showEntity } from '../../rethinkdb';
 import { instagram } from './instagram';
 import { albums } from './albums';
 import { bandMembers } from './band-members';
@@ -43,7 +42,6 @@ export const web = {
             appImages: appImages(),
             bandMembers: bandMembers(),
             instagramData: await instagram.feed(),
-            showData: await showEntity.findUpcoming(),
             youtubeEmbeddedVideo: youtubeEmbeddedVideo()
         };
         const styleTags = getStyleTags(getLayoutMarkup({
