@@ -8,5 +8,9 @@ export const FlexRowGrid = styled.div`
     align-items: flex-start;
     flex-direction: row;
     width: 100%;
-    padding: 0 2vw;
+    padding: 0;
+`;
+
+export const FlexRowLeft = styled(FlexRowGrid)`
+    justify-content: left;
 `;

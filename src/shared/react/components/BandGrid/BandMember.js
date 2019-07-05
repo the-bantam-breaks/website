@@ -5,7 +5,7 @@ import { BREAKPOINTS, Center } from '../Atoms';
 
 const BOX_SHADOW = '1px 1px 3px rgba(0,0,0,0.75)';
 const IMG_SIDE = '14vw';
-const MOBILE_IMG_SIDE = '40vw';
+const MOBILE_IMG_SIDE = '45vw';
 
 const BandMemberWrap = styled.div`
     position: relative;
@@ -26,6 +26,11 @@ const BandMemberImg = styled.img`
     max-height: ${IMG_SIDE};
     box-shadow: ${BOX_SHADOW};
     border-radius: 50%;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        width: ${MOBILE_IMG_SIDE};
+        max-height: ${MOBILE_IMG_SIDE};
+    }
 `;
 
 const GridBox = styled.div`
@@ -34,7 +39,8 @@ const GridBox = styled.div`
     max-width: ${IMG_SIDE};
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        margin: 2.5vw;
+        margin: 1.25vw;
+        max-width: ${MOBILE_IMG_SIDE};
     }
 `;
 
