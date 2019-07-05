@@ -8,7 +8,6 @@ install:
   - uname -m
   - pip install --user awscli
   - docker network create bantam
-  - docker run -d --rm -p 28015:28015 -p 8090:8080 --name rethinkdb --network bantam -v $(pwd -P):/data rethinkdb
 
 script:
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
@@ -21,7 +20,6 @@ script:
   - docker run -d
       --network bantam
       --name website
-      -e RETHINKDB_HOST=rethinkdb
       -e ENV_INSTAGRAM_USER_ID=${ENV_INSTAGRAM_USER_ID}
       -e ENV_INSTAGRAM_TOKEN=${ENV_INSTAGRAM_TOKEN}
       -p 3000:3000
@@ -42,5 +40,4 @@ script:
 
 after_success:
   - echo "Build Successful!"
-  - docker kill rethinkdb website
   - test $TRAVIS_BRANCH = "master" && ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER
