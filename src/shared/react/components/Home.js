@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { AppDataProvider } from '../context/';
+import { AppDataProvider } from '../context';
 import { AlbumGrid } from './AlbumGrid';
 import ContactForm from './ContactForm';
 import { Hero } from './Hero';
 import { Footer } from './Footer';
 import { InstaGrid } from './InstaGrid';
 import { NavBar } from './NavBar';
-import ShowTable from './ShowTable';
+import { LiveShows } from './LiveShows';
 import { BandGrid } from './BandGrid';
 import VideoSection from './VideoSection';
 
@@ -39,7 +39,7 @@ class Home extends Component {
                 <Hero />
                 <NavBar />
                 <AlbumGrid />
-                <ShowTable />
+                <LiveShows />
                 <InstaGrid />
                 <VideoSection />
                 <BandGrid />

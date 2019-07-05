@@ -1,0 +1,244 @@
+import moment from 'moment';
+
+const SHOW_DATA = [{
+    'date': '2015-10-22T21:00:00-05:00',
+    'venueName': 'Iron Factory',
+    'venueUrl': 'http://ironfactoryinc.com/',
+    'city': 'Athens',
+    'state': 'GA'
+},
+{
+    'date': '2016-04-15T21:00:00-05:00',
+    'venueName': "Smith's Olde Bar",
+    'venueUrl': 'http://www.smithsoldebar.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://www.smithsoldebar.com/events-calendar/'
+},
+{
+    'date': '2016-06-24T21:00:00-05:00',
+    'venueName': "Smith's Olde Bar",
+    'venueUrl': 'http://www.smithsoldebar.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://www.smithsoldebar.com/events-calendar/'
+},
+{
+    'date': '2016-08-04T21:00:00-05:00',
+    'venueName': 'The Caledonia Lounge',
+    'venueUrl': 'http://caledonialounge.com/',
+    'city': 'Athens',
+    'state': 'GA'
+},
+{
+    'date': '2016-09-22T21:00:00-05:00',
+    'venueName': "Smith's Olde Bar",
+    'venueUrl': 'http://www.smithsoldebar.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://www.smithsoldebar.com/events-calendar/'
+},
+{
+    'date': '2016-10-15T16:00:00-05:00',
+    'venueName': 'Madlife',
+    'venueUrl': 'http://madlifestageandstudios.com/',
+    'city': 'Woodstock',
+    'state': 'GA',
+    'ticketUrl': 'http://madlifestageandstudios.ticketfly.com/'
+},
+{
+    'date': '2016-11-05T20:00:00-05:00',
+    'venueName': 'Amici',
+    'venueUrl': 'http://amici-cafe.com/milledgeville.html',
+    'city': 'Milledgeville',
+    'state': 'GA'
+},
+{
+    'date': '2017-01-28T13:00:00-05:00',
+    'venueName': 'Break Fest',
+    'venueUrl': 'https://www.facebook.com/events/1128587860573661/',
+    'city': 'Avondale Estates',
+    'state': 'GA'
+},
+{
+    'date': '2017-03-04T20:00:00-05:00',
+    'venueName': 'Amici',
+    'venueUrl': 'http://amici-cafe.com/milledgeville.html',
+    'city': 'Milledgeville',
+    'state': 'GA'
+},
+{
+    'date': '2017-03-26T14:00:00-05:00',
+    'venueName': 'Nophest',
+    'venueUrl': 'https://www.facebook.com/events/665740543599415/',
+    'city': 'Avondale Estates',
+    'state': 'GA',
+    'ticketUrl': 'https://www.gofundme.com/nophest-2017-earlybird-specials'
+},
+{
+    'date': '2017-04-08T21:00:00-05:00',
+    'venueName': "Smith's Olde Bar",
+    'venueUrl': 'http://www.smithsoldebar.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://www.smithsoldebar.com/events-calendar/'
+},
+{
+    'date': '2017-04-21T20:00:00-05:00',
+    'venueName': "Venkman's - 500 Songs for Kids Benefit",
+    'venueUrl': 'http://venkmans.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://venkmans.com/event/500-songs-for-kids-xi-3/'
+},
+{
+    'date': '2017-06-08T19:00:00-05:00',
+    'venueName': "Smith's Olde Bar",
+    'venueUrl': 'http://www.smithsoldebar.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://www.smithsoldebar.com/events-calendar/'
+}, {
+    'date': '2017-11-25T19:30:00-05:00',
+    'venueName': "Smith's Olde Bar",
+    'venueUrl': 'http://www.smithsoldebar.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://www.smithsoldebar.com/events-calendar/'
+}, {
+    'date': '2018-01-18T20:30:00-05:00',
+    'venueName': 'The Earl',
+    'venueUrl': 'http://www.badearl.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://www.badearl.com/schedule'
+},
+{
+    'date': '2018-02-10T20:00:00-05:00',
+    'venueName': 'Amici',
+    'venueUrl': 'http://amici-cafe.com/milledgeville.html',
+    'city': 'Milledgeville',
+    'state': 'GA'
+},
+{
+    'date': '2018-03-23T20:00:00-05:00',
+    'venueName': 'Tin Roof Cantina',
+    'venueUrl': 'http://tinroofcantina.com/',
+    'city': 'Atlanta',
+    'state': 'GA'
+},
+{
+    'date': '2018-04-20T19:00:00-05:00',
+    'venueName': 'Vinyl - 500 Songs for Kids Benefit',
+    'venueUrl': 'http://www.centerstage-atlanta.com/shows/vinyl/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'http://www.centerstage-atlanta.com/show/?id=2960&artist=500+SONGS+FOR+KIDS+XII'
+},
+{
+    'date': '2018-05-02T19:30:00-05:00',
+    'venueName': 'Madlife - Battle of the Bands',
+    'venueUrl': 'http://madlifestageandstudios.com/',
+    'city': 'Woodstock',
+    'state': 'GA',
+    'ticketUrl': 'http://madlifestageandstudios.ticketfly.com/'
+},
+{
+    'date': '2018-05-19T18:00:00-05:00',
+    'venueName': "Eddie's Attic",
+    'venueUrl': 'http://eddiesattic.com/',
+    'city': 'Decatur',
+    'state': 'GA',
+    'ticketUrl': 'https://www.ticketfly.com/purchase/event/1652996'
+},
+{
+    'date': '2018-06-08T18:30:00-05:00',
+    'venueName': "Eddie's Attic - Amplify presents - Tom Petty vs. David Bowie (charity event)",
+    'venueUrl': 'http://eddiesattic.com/',
+    'city': 'Decatur',
+    'state': 'GA',
+    'ticketUrl': 'https://www.ticketfly.com/event/1690596?utm_medium=api'
+},
+{
+    'date': '2018-10-06T20:30:00-05:00',
+    'venueName': 'The Alamo (w/ the Bitteroots)',
+    'venueUrl': 'http://thealamonewnan.com/',
+    'city': 'Newnan',
+    'state': 'GA',
+    'ticketUrl': 'https://www.facebook.com/events/414747959023743/'
+},
+{
+    'date': '2018-11-02T19:00:00-05:00',
+    'venueName': "Smith's Olde Bar",
+    'venueUrl': 'http://www.smithsoldebar.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'https://www.eventbrite.com/e/the-bitteroots-tickets-48103105684'
+}, {
+    'date': '2019-04-14T19:00:00-05:00',
+    'venueName': "Eddie's Attic - Amplify presents - Nirvana vs. Pearl Jam (charity event)",
+    'venueUrl': 'http://eddiesattic.com/',
+    'city': 'Decatur',
+    'state': 'GA',
+    'ticketUrl': 'https://www.ticketfly.com/purchase/event/1816881?utm_medium=api'
+}, {
+    'date': '2019-05-18T20:30:00-05:00',
+    'venueName': "Eddie's Attic (w/ The Bitteroots and friends 11th Anniversary",
+    'venueUrl': 'http://eddiesattic.com/',
+    'city': 'Decatur',
+    'state': 'GA',
+    'ticketUrl': 'https://www.ticketfly.com/purchase/event/1804906?utm_medium=api'
+},
+{
+    'date': '2019-06-09T19:00:00-05:00',
+    'venueName': "Smith's Olde Bar - with Sub Radio & The Hipps",
+    'venueUrl': 'http://www.smithsoldebar.com/',
+    'city': 'Atlanta',
+    'state': 'GA',
+    'ticketUrl': 'https://www.eventbrite.com/e/sub-radio-tickets-59343188073'
+},
+{
+    'date': '2019-06-22T14:00:00-05:00',
+    'venueName': 'Ridgefest at Little Tree',
+    'venueUrl': 'https://littletreeartstudios.com/music-studios/',
+    'city': 'Avondale Estates',
+    'state': 'GA'
+}];
+
+const decoratedShowData = () => {
+    return SHOW_DATA.map((show) => {
+        const { date, ...restOfShow } = show;
+        const isArchived = moment().isAfter(moment(date));
+        const momentDate = moment(date);
+        return {
+            isArchived,
+            day: momentDate.format('Do'),
+            month: momentDate.format('MMM'),
+            year: momentDate.format('YYYY'),
+            weekday: momentDate.format('ddd'),
+            time: momentDate.format('ha'),
+            ...restOfShow
+        }
+    });
+};
+
+const dateSortAscending = (show1, show2) => {
+    const date1 = moment(show1.date);
+    const date2 = moment(show2.date);
+
+    if (date1 > date2) return 1;
+    if (date1 < date2) return -1;
+    return 0;
+};
+
+export const getShowsArchive = () => {
+    return decoratedShowData().sort(dateSortAscending).reverse();
+};
+
+export const getUpcomingShows = () => {
+    const yesterdayMoment = moment().startOf('day').subtract(1, 'day');
+    return decoratedShowData().filter((s) => {
+        const showDateMoment = moment(new Date(s.date));
+        return showDateMoment.isAfter(yesterdayMoment);
+    }).sort(dateSortAscending);
+};

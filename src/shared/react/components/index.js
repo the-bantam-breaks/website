@@ -4,5 +4,4 @@ export { default as Home } from './Home';
 export { default as Layout } from './Layout';
 export { default as NavBar } from './NoMatch';
 export { default as NoMatch } from './NoMatch';
-export { default as ShowTable } from './ShowTable';
 export { default as VideoSection } from './VideoSection';

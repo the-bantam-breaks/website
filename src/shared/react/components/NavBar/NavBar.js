@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { throttle } from 'throttle-debounce';
 import styled from 'styled-components';
-import { Logo } from '../Atoms';
+import { ActionLink, BREAKPOINTS, Logo } from '../Atoms';
 
-const Nav = styled.nav`
+const BreaksNav = styled.nav`
     ${({ fixed, clientHeight }) => fixed
     ? `
     position: fixed;
@@ -20,15 +21,22 @@ const Nav = styled.nav`
     width: 100vw;
     padding: .5rem 1rem;
     z-index: 3;
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        padding: .2rem .5rem;
+    }
 `;
 
 const NavAnchor = styled.a`
     display: inline-block;
     margin: 0 .5rem;
     height: 100%;
-    vertical-align: center;
+    vertical-align: middle;
     font-size: 1.15rem;
     font-weight: 500;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        font-size: .70rem;
+    }
 `;
 
 const NavLogo = styled(Logo)`
@@ -37,7 +45,7 @@ const NavLogo = styled(Logo)`
     max-height: 100px;
 `;
 
-class NavBar extends Component {
+class Nav extends Component {
     constructor (props) {
         super(props);
         this.navRef = React.createRef();
@@ -60,6 +68,18 @@ class NavBar extends Component {
         window.removeEventListener('scroll', this.updatePositionListener, false);
     }
 
+    secondaryOrPrimary (linkHash) {
+        const {
+            location: {
+                hash = ''
+            } = {}
+        } = this.props;
+
+        return hash === linkHash
+            ? 'DISABLED'
+            : 'SECONDARY';
+    }
+
     updatePosition () {
         const navHeight = this.navRef.current.clientHeight;
         const scrollPos = Number.isFinite(window.pageYOffset) ? window.pageYOffset : window.scrollY;
@@ -75,16 +95,53 @@ class NavBar extends Component {
 
     render () {
         const { fixed, height } = this.state;
+
         return (
-            <Nav fixed={fixed} clientHeight={height} ref={this.navRef}>
-                <NavAnchor href='/'><NavLogo width="8vw" /></NavAnchor>
-                <NavAnchor href={'#albums'}>Albums</NavAnchor>
-                <NavAnchor href={'#photos'}>Photos</NavAnchor>
-                <NavAnchor href={'#the_band'}>The Band</NavAnchor>
-                <NavAnchor href={'#videos'}>Videos</NavAnchor>
-            </Nav>
+            <BreaksNav fixed={fixed} clientHeight={height} ref={this.navRef}>
+                <NavAnchor>
+                    <NavLogo width="8vw" />
+                </NavAnchor>
+                <ActionLink
+                    href={'#albums'}
+                    title="Albums"
+                    type={this.secondaryOrPrimary('#albums')}>
+                    Albums
+                </ActionLink>
+                <ActionLink
+                    href={'#photos'}
+                    title="Photos"
+                    type={this.secondaryOrPrimary('#photos')}>
+                    Photos
+                </ActionLink>
+                <ActionLink
+                    href={'#the_band'}
+                    title="The Band"
+                    type={this.secondaryOrPrimary('#the_band')}>
+                    The Band
+                </ActionLink>
+                <ActionLink
+                    href="https://thebantambreaks.bandcamp.com/merch"
+                    target="_blank"
+                    title="Store"
+                    type="PRIMARY">
+                        Store
+                </ActionLink>
+                <ActionLink
+                    href={'#shows'}
+                    title="Shows"
+                    type={this.secondaryOrPrimary('#shows')}>
+                    Shows
+                </ActionLink>
+                <ActionLink
+                    href={'#videos'}
+                    title="Videos"
+                    type={this.secondaryOrPrimary('#videos')}>
+                    Videos
+                </ActionLink>
+            </BreaksNav>
         );
     }
 };
 
+const NavBar = withRouter(Nav);
 export default NavBar;

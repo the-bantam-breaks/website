@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './Home';
+import { routes } from '../routes';
 import NoMatch from './NoMatch';
-
-const routes = [
-    {
-        path: '/',
-        exact: true,
-        component: Home
-    }
-]
 
 class App extends Component {
     render () {
