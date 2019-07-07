@@ -22,13 +22,13 @@ const BreaksNav = styled.nav`
     padding: .5rem 1rem;
     z-index: 3;
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        padding: .2rem .5rem;
+        padding: .2rem 0;
     }
 `;
 
 const NavAnchor = styled.a`
     display: inline-block;
-    margin: 0 .5rem;
+    margin: 0 .35rem;
     height: 100%;
     vertical-align: middle;
     font-size: 1.15rem;
@@ -43,6 +43,34 @@ const NavLogo = styled(Logo)`
     float: left;
     margin-right: 1rem;
     max-height: 100px;
+`;
+
+const SocialBadge = styled.img`
+    max-width: 30px;
+    max-height: 30px;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        max-width: 20px;
+        max-height: 20px;
+    }
+`;
+
+const SiteLinks = styled.div`
+    display: inline;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: row;
+        margin: .5rem 0;
+    }
+`;
+
+const SocialBadges = styled.div`
+    float: right;
+    margin-top: .25rem;
 `;
 
 class Nav extends Component {
@@ -99,45 +127,80 @@ class Nav extends Component {
         return (
             <BreaksNav fixed={fixed} clientHeight={height} ref={this.navRef}>
                 <NavAnchor>
-                    <NavLogo width="8vw" />
+                    <a href="/">
+                        <NavLogo width="8vw" />
+                    </a>
                 </NavAnchor>
-                <ActionLink
-                    href={'#albums'}
-                    title="Albums"
-                    type={this.secondaryOrPrimary('#albums')}>
-                    Albums
-                </ActionLink>
-                <ActionLink
-                    href={'#photos'}
-                    title="Photos"
-                    type={this.secondaryOrPrimary('#photos')}>
-                    Photos
-                </ActionLink>
-                <ActionLink
-                    href={'#the_band'}
-                    title="The Band"
-                    type={this.secondaryOrPrimary('#the_band')}>
-                    The Band
-                </ActionLink>
-                <ActionLink
-                    href="https://thebantambreaks.bandcamp.com/merch"
-                    target="_blank"
-                    title="Store"
-                    type="PRIMARY">
+
+                <SocialBadges>
+                    <NavAnchor target="_blank"
+                        title="The Bantam Breaks on Facebook"
+                        href="https://www.facebook.com/thebantambreaks">
+                      <SocialBadge width="30px" src="img/social-badges/facebook.png" alt="The Bantam Breaks on Facebook" />
+                    </NavAnchor>
+                    <NavAnchor target="_blank"
+                        title="The Bantam Breaks on Twitter"
+                        href="https://twitter.com/thebantambreaks">
+                      <SocialBadge width="30px" src="img/social-badges/twitter.png" alt="The Bantam Breaks on Twitter" />
+                    </NavAnchor>
+                    <NavAnchor target="_blank"
+                        title="The Bantam Breaks on Instagram"
+                        href="https://www.instagram.com/thebantambreaks">
+                      <SocialBadge width="30px" src="img/social-badges/instagram.png" alt="The Bantam Breaks on Instagram" />
+                    </NavAnchor>
+                    <NavAnchor target="_blank"
+                        title="The Bantam Breaks on Youtube"
+                        href="https://www.youtube.com/c/thebantambreaks">
+                      <SocialBadge width="30px" src="img/social-badges/youtube.png" alt="The Bantam Breaks on Youtube" />
+                    </NavAnchor>
+                </SocialBadges>
+
+                <SiteLinks>
+                    <ActionLink
+                        href={'#albums'}
+                        title="Albums"
+                        type={this.secondaryOrPrimary('#albums')}>
+                        Albums
+                    </ActionLink>
+                    <ActionLink
+                        href={'#photos'}
+                        title="Photos"
+                        type={this.secondaryOrPrimary('#photos')}>
+                        Photos
+                    </ActionLink>
+                    <ActionLink
+                        href={'#the_band'}
+                        title="The Band"
+                        type={this.secondaryOrPrimary('#the_band')}>
+                        Band
+                    </ActionLink>
+                    <ActionLink
+                        href="https://thebantambreaks.bandcamp.com/merch"
+                        target="_blank"
+                        title="Store"
+                        type="PRIMARY">
                         Store
-                </ActionLink>
-                <ActionLink
-                    href={'#shows'}
-                    title="Shows"
-                    type={this.secondaryOrPrimary('#shows')}>
-                    Shows
-                </ActionLink>
-                <ActionLink
-                    href={'#videos'}
-                    title="Videos"
-                    type={this.secondaryOrPrimary('#videos')}>
-                    Videos
-                </ActionLink>
+                    </ActionLink>
+                    <ActionLink
+                        href={'#shows'}
+                        title="Shows"
+                        type={this.secondaryOrPrimary('#shows')}>
+                        Shows
+                    </ActionLink>
+                    <ActionLink
+                        href={'#videos'}
+                        title="Videos"
+                        type={this.secondaryOrPrimary('#videos')}>
+                        Videos
+                    </ActionLink>
+                    <ActionLink
+                        href="/epk"
+                        title="Electronic Press Kit"
+                        type="SECONDARY">
+                            EPK
+                    </ActionLink>
+                </SiteLinks>
+
             </BreaksNav>
         );
     }
