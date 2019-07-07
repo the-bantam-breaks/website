@@ -58,6 +58,13 @@ export const EpkBio = () => {
                     thebantambreaks@gmail.com<br />
                     <a href="tel:404-907-3161">{`(404)-907-3161`}</a>
                 </div>
+                <br />
+                <a
+                    download="BantamBreaks_Stage_Plot.pdf"
+                    title="The Bantam Breaks Stage Plot Diagram"
+                    href="images/bantam_breaks_stage_plot.pdf">
+                  {'Stage Plot (PDF Download)'}
+                </a>
             </Center>
         </BioSection>
     );
