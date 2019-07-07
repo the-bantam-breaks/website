@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useAppData } from '../context/';
 import { BREAKPOINTS, Logo } from './Atoms';
@@ -9,7 +10,7 @@ const OffscreenH = styled.h1`
     left: -9999px;
 `;
 
-const AlbumH = styled.h2`
+const HeroH = styled.h2`
     font-size: 3.5rem;
     margin: 2rem 0 .5rem;
 
@@ -19,7 +20,7 @@ const AlbumH = styled.h2`
     }
 `;
 
-const AlbumSubH = styled.h4`
+const HeroSubH = styled.h4`
     font-size: 1.5rem;
     margin: 0;
 
@@ -67,12 +68,13 @@ const HeroBackdrop = styled.section`
 
 export const Hero = (props) => {
     const { hero } = useAppData('appImages') || {};
+    const { className, heading, subHeading } = props;
     if (!hero) {
         return null;
     }
 
     return (
-      <HeroBackdrop className={props.className}>
+      <HeroBackdrop className={className}>
           <img className="hero"
                alt={'The Bantam Breaks'}
                src={hero} />
@@ -81,10 +83,21 @@ export const Hero = (props) => {
           <HeroText>
               <OffscreenH>{'The Bantam Breaks'}</OffscreenH>
               <Logo width={'30vw'} color='light' />
-              <AlbumH>{'The Red EP'}</AlbumH>
-              <AlbumSubH>{'Coming September 2019'}</AlbumSubH>
+              <HeroH>{heading}</HeroH>
+              <HeroSubH>{subHeading}</HeroSubH>
           </HeroText>
           </div>
       </HeroBackdrop>
     );
+};
+
+Hero.propTypes = {
+    className: PropTypes.string,
+    heading: PropTypes.string,
+    subHeading: PropTypes.string
+};
+
+Hero.defaultProps = {
+    heading: 'The Red EP',
+    subHeading: 'Coming September 1st, 2019'
 };
