@@ -63,6 +63,11 @@ export const GlobalStyles = createGlobalStyle`
         background-color: ${COLORS.BACKGROUNDS.ALTERNATING_SECTION};
     }
 
+    section:first-child {
+        margin: 0;
+        padding: 0;
+    }
+
     section:last-child {
         margin-bottom: 30vh;
     }
