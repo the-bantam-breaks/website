@@ -38,15 +38,12 @@ const getLayoutMarkup = ({
 
 export const web = {
     index: () => async (ctx) => {
-        // let shows = getUpcomingShows();
-
         const appData = {
             albums: albums(),
             appImages: appImages(),
             archivedShows: getShowsArchive(),
             bandMembers: bandMembers(),
             instagramData: await instagram.feed(),
-            // showData: await showEntity.findUpcoming(),
             upcomingShows: getUpcomingShows(),
             youtubeEmbeddedVideo: youtubeEmbeddedVideo()
         };

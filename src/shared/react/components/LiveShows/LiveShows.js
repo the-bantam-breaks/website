@@ -1,34 +1,59 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import styled from 'styled-components';
+import queryString from 'query-string'
+import { withRouter } from 'react-router-dom';
 import { useAppDataContext } from '../../context/';
-import { CenteredDiv, ScrollTo, SectionHeading, Subtext, Title } from '../Atoms';
+import { BREAKPOINTS, CenteredDiv, ScrollTo, SectionHeading, Subtext, Title } from '../Atoms';
 import { ShowList } from './ShowList';
+
+const NoShowWrap = styled.div`
+    margin-bottom: 60px;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        margin-bottom: 20px;
+    }
+`;
 
 export const NoShowContent = () => {
     return (
-        <Fragment>
-            <Title>{'No scheduled Breaks shows'}</Title>
+        <NoShowWrap>
+            <Title>{'There are no scheduled Breaks shows'}</Title>
             <Subtext>{'please check back soon'}</Subtext>
-        </Fragment>
+        </NoShowWrap>
     );
 };
 
-export const LiveShows = () => {
+const LiveShowsSection = (props) => {
     const {
-        archivedShows = []// ,
-        // upcomingShows = []
+        location: {
+            search = ''
+        }
+    } = props;
+
+    const { showArchive } = queryString.parse(search);
+
+    const {
+        archivedShows = [],
+        upcomingShows = []
     } = useAppDataContext() || {};
 
-    // const showListings = upcomingShows.length > 0
-    //     ? (<ShowList shows={archivedShows} />)
-    //     : NoShowContent();
+    const showsToList = showArchive
+        ? [...upcomingShows, ...archivedShows]
+        : upcomingShows;
+
+    const showListings = showsToList.length > 0
+        ? (<ShowList shows={showsToList} />)
+        : NoShowContent();
 
     return (
         <section>
             <CenteredDiv>
                 <ScrollTo id={'shows'}>{' '}</ScrollTo>
                 <SectionHeading>Live Shows</SectionHeading>
-                <ShowList shows={archivedShows} />
+                {showListings}
             </CenteredDiv>
         </section>
     );
 };
+
+export const LiveShows = withRouter(LiveShowsSection);
