@@ -44,7 +44,7 @@ class Home extends Component {
                 <VideoSection />
                 <BandGrid />
                 <ContactForm />
-                <Footer />
+                <Footer showDesignCredit={true} />
             </AppDataProvider>
         );
     }
