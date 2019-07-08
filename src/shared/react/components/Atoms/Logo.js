@@ -11,10 +11,6 @@ const Logo = (props) => {
     const { color, className, width } = props;
     const { logo = {} } = useAppData('appImages') || {};
 
-    if (!logo.text_logo_light || !logo.text_logo_dark) {
-        return null;
-    }
-
     const logoUrl = color === 'light'
         ? logo.text_logo_light
         : logo.text_logo_dark;
@@ -22,7 +18,7 @@ const Logo = (props) => {
     return (
       <WidthedImage alt={'The Bantam Breaks Logo'}
                     className={className}
-                    src={logoUrl}
+                    src={logoUrl || props.defaultLogo}
                     width={width} />
     );
 };
@@ -34,6 +30,7 @@ Logo.propTypes = {
 };
 
 Logo.defaultProps = {
+    defaultLogo: 'img/bantam_breaks_tertiary_logo_light_414_184.png',
     color: 'dark',
     className: null,
     width: '414px'

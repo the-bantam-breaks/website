@@ -69,9 +69,6 @@ const HeroBackdrop = styled.section`
 export const Hero = (props) => {
     const { hero } = useAppData('appImages') || {};
     const { className, heading, subHeading } = props;
-    if (!hero) {
-        return null;
-    }
 
     return (
       <HeroBackdrop className={className}>

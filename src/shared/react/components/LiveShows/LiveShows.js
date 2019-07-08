@@ -27,7 +27,7 @@ const LiveShowsSection = (props) => {
     const {
         location: {
             search = ''
-        }
+        } = {}
     } = props;
 
     const { showArchive } = queryString.parse(search);
@@ -56,4 +56,5 @@ const LiveShowsSection = (props) => {
     );
 };
 
+export { LiveShowsSection as LiveShowsStyles };
 export const LiveShows = withRouter(LiveShowsSection);

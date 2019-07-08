@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components';
-import { App, Layout } from '../../shared/react';
+import {
+    // Pre-render all components to get styled-component stylesheets
+    AlbumGrid,
+    App,
+    BandGrid,
+    ContactForm,
+    Footer,
+    GlobalStyles,
+    Hero,
+    InstaGrid,
+    Layout,
+    LiveShowsStyles,
+    NavStyles,
+    VideoSection
+} from '../../shared/react';
 import { getShowsArchive, getUpcomingShows } from './show';
 import { instagram } from './instagram';
 import { albums } from './albums';
@@ -13,9 +27,24 @@ import { youtubeEmbeddedVideo } from './youtube-embedded-video';
 const getStyleTags = (children) => {
     const sheet = new ServerStyleSheet();
     renderToStaticMarkup(
-        sheet.collectStyles(children)
+        sheet.collectStyles((
+            <Fragment>
+                {children}
+                <Hero />
+                <NavStyles />
+                <AlbumGrid />
+                <LiveShowsStyles />
+                <InstaGrid />
+                <VideoSection />
+                <BandGrid />
+                <ContactForm />
+                <Footer showDesignCredit={true} />
+            </Fragment>
+        ))
     );
-    return sheet.getStyleTags();
+    // build all styles from style-components on Home page as well
+    // as global styles for server-side no-js render (for SEO)
+    return `<style>${GlobalStyles}</style>${sheet.getStyleTags()}`;
 };
 
 const getAppMarkup = (ctx) => (
