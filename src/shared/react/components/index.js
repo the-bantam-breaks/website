@@ -1,7 +1,14 @@
+export * from './AlbumGrid';
 export { default as App } from './App';
+export * from './BandGrid';
 export { default as ContactForm } from './ContactForm';
+export { Footer } from './Footer';
+export { GlobalStyles } from './GlobalStyles';
+export { Hero } from './Hero';
 export { default as Home } from './Home';
+export * from './InstaGrid';
 export { default as Layout } from './Layout';
-export { default as NavBar } from './NoMatch';
+export * from './LiveShows';
+export * from './NavBar';
 export { default as NoMatch } from './NoMatch';
 export { default as VideoSection } from './VideoSection';

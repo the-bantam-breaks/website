@@ -1,7 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
 import { COLORS } from './Atoms';
 
-export const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = `
     @font-face {
         font-family: 'Open Sans';
         font-style: normal;
