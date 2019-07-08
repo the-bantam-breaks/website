@@ -12,12 +12,6 @@ const Main = styled.main`
     padding: 0;
 `;
 
-const StylesDiv = styled.div`
-    position: absolute;
-    left: -9999px;
-    height: 0;
-`;
-
 const StyledBody = styled.body`
     margin: 0;
     padding: 0;
@@ -71,10 +65,14 @@ const Layout = (props) => {
                         }
                     `
                 }}/>
+                <style dangerouslySetInnerHTML={{
+                    __html: GlobalStyles
+                }}/>
+                <style dangerouslySetInnerHTML={{
+                    __html: styleTags
+                }}/>
             </head>
             <StyledBody className={className}>
-                <GlobalStyles />
-                <StylesDiv dangerouslySetInnerHTML={{ __html: styleTags }}/>
                 <Main>
                     <div id='preload' />
                     {children}

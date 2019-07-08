@@ -207,4 +207,5 @@ class Nav extends Component {
 };
 
 const NavBar = withRouter(Nav);
+export { Nav as NavStyles };
 export default NavBar;

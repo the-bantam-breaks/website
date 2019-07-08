@@ -1,1 +1,1 @@
-export { LiveShows } from './LiveShows';
+export { LiveShows, LiveShowsStyles } from './LiveShows';
