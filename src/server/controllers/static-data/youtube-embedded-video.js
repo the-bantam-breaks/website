@@ -1,4 +1,4 @@
-import { getRandom } from './util';
+import { getRandom } from '../util';
 
 const YOUTUBE_EMBEDDED_VIDEOS = [{
     embedUrl: 'https://www.youtube.com/embed/7VwMmzRoRXo',

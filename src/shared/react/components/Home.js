@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppDataProvider } from '../context';
 import { AlbumGrid } from './AlbumGrid';
-import ContactForm from './ContactForm';
+import { BookingForm } from './BookingForm';
 import { Hero } from './Hero';
 import { Footer } from './Footer';
 import { InstaGrid } from './InstaGrid';
@@ -43,7 +43,7 @@ class Home extends Component {
                 <InstaGrid />
                 <VideoSection />
                 <BandGrid />
-                <ContactForm />
+                <BookingForm />
                 <Footer showDesignCredit={true} />
             </AppDataProvider>
         );

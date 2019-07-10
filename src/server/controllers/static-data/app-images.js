@@ -1,4 +1,4 @@
-import { getRandom } from './util';
+import { getRandom } from '../util';
 
 const LOGO_DIR = 'img/';
 
