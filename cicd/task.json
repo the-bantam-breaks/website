@@ -22,6 +22,18 @@
                     {
                         "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-insta-token-neWA83",
                         "name": "ENV_INSTAGRAM_TOKEN"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-slack-webhook-url-vHEVcV",
+                        "name": "ENV_BOOOKING_SLACK_WEBHOOK_URL"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-booking-email-account-hyOoLh",
+                        "name": "ENV_BOOOKING_MAIL_ACCOUNT"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-booking-mail-password-gpYKud",
+                        "name": "ENV_BOOOKING_MAIL_PASSWORD"
                     }
                 ],
                 "mountPoints": [],
