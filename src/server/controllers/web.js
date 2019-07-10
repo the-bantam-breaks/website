@@ -4,25 +4,19 @@ import { StaticRouter } from 'react-router-dom';
 import { ServerStyleSheet } from 'styled-components';
 import {
     // Pre-render all components to get styled-component stylesheets
-    AlbumGrid,
+    AllStyledComponentsForCssPreRender,
     App,
-    BandGrid,
-    ContactForm,
-    Footer,
-    GlobalStyles,
-    Hero,
-    InstaGrid,
-    Layout,
-    LiveShowsStyles,
-    NavStyles,
-    VideoSection
+    Layout
 } from '../../shared/react';
-import { getShowsArchive, getUpcomingShows } from './show';
+import {
+    albums,
+    appImages,
+    bandMembers,
+    getShowsArchive,
+    getUpcomingShows,
+    youtubeEmbeddedVideo
+} from './static-data';
 import { instagram } from './instagram';
-import { albums } from './albums';
-import { bandMembers } from './band-members';
-import { appImages } from './app-images';
-import { youtubeEmbeddedVideo } from './youtube-embedded-video';
 
 const getStyleTags = (children) => {
     const sheet = new ServerStyleSheet();
@@ -30,21 +24,13 @@ const getStyleTags = (children) => {
         sheet.collectStyles((
             <Fragment>
                 {children}
-                <Hero />
-                <NavStyles />
-                <AlbumGrid />
-                <LiveShowsStyles />
-                <InstaGrid />
-                <VideoSection />
-                <BandGrid />
-                <ContactForm />
-                <Footer showDesignCredit={true} />
+                <AllStyledComponentsForCssPreRender />
             </Fragment>
         ))
     );
     // build all styles from style-components on Home page as well
     // as global styles for server-side no-js render (for SEO)
-    return `<style>${GlobalStyles}</style>${sheet.getStyleTags()}`;
+    return `${sheet.getStyleTags()}`;
 };
 
 const getAppMarkup = (ctx) => (

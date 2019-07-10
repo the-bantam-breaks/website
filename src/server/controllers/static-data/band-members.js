@@ -1,4 +1,4 @@
-import { getRandom } from './util';
+import { getRandom } from '../util';
 
 const BAND_IMAGE_DIR = 'img/band/';
 

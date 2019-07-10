@@ -1,20 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
+import { buttonish } from './buttonish';
 import { BREAKPOINTS, COLORS } from './constants';
 
 const ButtonishA = styled.a`
-    display: inline-block;
-    margin: 0 .25rem;
-    border: 1px solid ${({ type }) => COLORS.ACTIONS[`${type}_BORDER`]};
-    background-color: ${({ type }) => COLORS.ACTIONS[`${type}`]};
-    font-size: .9rem;
-    color: ${({ type }) => COLORS.ACTIONS[`${type}_TEXT`]};
-    text-decoration: none;
-    padding: .2rem .75rem;
-    border-radius: 25px;
-    text-decoration: none;
-    text-align: center;
+    ${buttonish}
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
         font-size: .65rem;
@@ -27,26 +18,26 @@ const ButtonishA = styled.a`
     }
 
     &:active {
-        color: ${({ type }) => COLORS.ACTIONS[`${type}_TEXT`]};
+        color: ${({ look }) => COLORS.ACTIONS[`${look}_TEXT`]};
         text-decoration: none;
     }
 
     &:visited {
-        color: ${({ type }) => COLORS.ACTIONS[`${type}_TEXT`]};
+        color: ${({ look }) => COLORS.ACTIONS[`${look}_TEXT`]};
     }
 `;
 
 const ActionLink = (props) => {
-    const { children, className, href, target, text, title, type } = props;
+    const { children, className, href, look, target, text, title } = props;
 
     return (
         <ButtonishA
-            disabled={type === 'DISABLED'}
+            disabled={look === 'DISABLED'}
             className={className}
             target={target}
             title={title}
             href={href}
-            type={type}>
+            look={look}>
             {text}
             {children}
         </ButtonishA>
@@ -60,7 +51,7 @@ ActionLink.propTypes = {
     href: PropTypes.string.isRequired,
     target: PropTypes.oneOf(['_blank']),
     text: PropTypes.node,
-    type: PropTypes.oneOf(['DISABLED', 'PRIMARY', 'SECONDARY'])
+    look: PropTypes.oneOf(['DISABLED', 'PRIMARY', 'SECONDARY'])
 };
 
 ActionLink.defaultProps = {
@@ -68,7 +59,7 @@ ActionLink.defaultProps = {
     className: undefined,
     target: undefined,
     text: undefined,
-    type: 'PRIMARY'
+    look: 'PRIMARY'
 };
 
 export default ActionLink;
