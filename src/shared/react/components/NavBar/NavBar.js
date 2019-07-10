@@ -126,10 +126,8 @@ class Nav extends Component {
 
         return (
             <BreaksNav fixed={fixed} clientHeight={height} ref={this.navRef}>
-                <NavAnchor>
-                    <a href="/">
-                        <NavLogo width="8vw" />
-                    </a>
+                <NavAnchor href='/'>
+                    <NavLogo width="8vw" />
                 </NavAnchor>
 
                 <SocialBadges>
@@ -159,44 +157,44 @@ class Nav extends Component {
                     <ActionLink
                         href={'#albums'}
                         title="Albums"
-                        type={this.secondaryOrPrimary('#albums')}>
+                        look={this.secondaryOrPrimary('#albums')}>
                         Albums
                     </ActionLink>
                     <ActionLink
                         href={'#photos'}
                         title="Photos"
-                        type={this.secondaryOrPrimary('#photos')}>
+                        look={this.secondaryOrPrimary('#photos')}>
                         Photos
                     </ActionLink>
                     <ActionLink
                         href={'#the_band'}
                         title="The Band"
-                        type={this.secondaryOrPrimary('#the_band')}>
+                        look={this.secondaryOrPrimary('#the_band')}>
                         Band
                     </ActionLink>
                     <ActionLink
                         href="https://thebantambreaks.bandcamp.com/merch"
                         target="_blank"
                         title="Store"
-                        type="PRIMARY">
+                        look="PRIMARY">
                         Store
                     </ActionLink>
                     <ActionLink
                         href={'#shows'}
                         title="Shows"
-                        type={this.secondaryOrPrimary('#shows')}>
+                        look={this.secondaryOrPrimary('#shows')}>
                         Shows
                     </ActionLink>
                     <ActionLink
                         href={'#videos'}
                         title="Videos"
-                        type={this.secondaryOrPrimary('#videos')}>
+                        look={this.secondaryOrPrimary('#videos')}>
                         Videos
                     </ActionLink>
                     <ActionLink
                         href="/epk"
                         title="Electronic Press Kit"
-                        type="SECONDARY">
+                        look="SECONDARY">
                             EPK
                     </ActionLink>
                 </SiteLinks>

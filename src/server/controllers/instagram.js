@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 
 /* eslint-disable no-undef */
 const INSTAGRAM_API_URL = `https://api.instagram.com/v1/users/${process.env.ENV_INSTAGRAM_USER_ID}/media/recent/?access_token=${process.env.ENV_INSTAGRAM_TOKEN}`;

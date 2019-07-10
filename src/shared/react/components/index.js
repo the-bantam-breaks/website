@@ -1,7 +1,8 @@
+export { AllStyledComponentsForCssPreRender } from './AllStyledComponentsForCssPreRender';
 export * from './AlbumGrid';
 export { default as App } from './App';
 export * from './BandGrid';
-export { default as ContactForm } from './ContactForm';
+export { BookingForm } from './BookingForm';
 export { Footer } from './Footer';
 export { GlobalStyles } from './GlobalStyles';
 export { Hero } from './Hero';

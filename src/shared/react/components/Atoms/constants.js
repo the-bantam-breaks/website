@@ -29,6 +29,13 @@ export const COLORS = {
         DEFAULT: '#FFFFFF',
         ALTERNATING_SECTION: '#F0F0F0'
     },
+    FORM: {
+        BORDER: '#333333',
+        FOCUS_BORDER: '#000000',
+        ERROR_TEXT: '#FF0000',
+        ERROR_BACKGROUND: '#FFF8F5',
+        ERROR_BORDER: '#ff0000'
+    },
     PAGE: {
         BORDER: '#e5e5e5'
     }

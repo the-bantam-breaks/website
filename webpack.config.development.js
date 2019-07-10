@@ -53,7 +53,10 @@ const serverConfig = {
         "process.env": {
             "BUILD_TARGET": JSON.stringify('server'),
             "ENV_INSTAGRAM_USER_ID": JSON.stringify(process.env.ENV_INSTAGRAM_USER_ID),
-            "ENV_INSTAGRAM_TOKEN": JSON.stringify(process.env.ENV_INSTAGRAM_TOKEN)
+            "ENV_INSTAGRAM_TOKEN": JSON.stringify(process.env.ENV_INSTAGRAM_TOKEN),
+            "ENV_BOOOKING_SLACK_WEBHOOK_URL": JSON.stringify(process.env.ENV_BOOOKING_SLACK_WEBHOOK_URL),
+            "ENV_BOOOKING_MAIL_ACCOUNT": JSON.stringify(process.env.ENV_BOOOKING_MAIL_ACCOUNT),
+            "ENV_BOOOKING_MAIL_PASSWORD": JSON.stringify(process.env.ENV_BOOOKING_MAIL_PASWORD)
         }
     })
   ]
