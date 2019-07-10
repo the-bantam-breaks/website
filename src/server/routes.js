@@ -3,6 +3,7 @@ import route from 'koa-route';
 import mount from 'koa-mount';
 import serve from 'koa-static';
 import { web } from './controllers';
+import { bookingInquiry, subscriptions } from './controllers/api';
 
 // const staticRoute = path.resolve(__dirname, '.build/');
 const generatedStaticRoute = path.join(process.cwd(), 'public');
@@ -18,15 +19,13 @@ export const routes = (app) => {
         mount('/js', serve(path.join(staticRoute, 'js/'))),
         mount('/fonts', serve(path.join(staticRoute, 'fonts/'))),
 
-        // Reports Web
-        route.get('*', web.index())
+        // API
+        route.post('/api/subscriptions', subscriptions.api.new()),
+        route.delete('/api/subscriptions', subscriptions.api.delete()),
+        route.post('/api/booking_inquiry', bookingInquiry.api.new()),
 
-        // Reports API
-        // route.get('/api/shows', show.api.list()),
-        // route.get('/api/shows/upcoming', show.api.upcoming()),
-        // route.get('/api/shows/archive', show.api.archive()),
-        // route.post('/api/shows/new', show.api.new()),
-        // route.get('/api/shows/:showId', show.api.show()),
+        // Web
+        route.get('*', web.index())
     ];
 
     routeList.forEach((route) => app.use(route));
