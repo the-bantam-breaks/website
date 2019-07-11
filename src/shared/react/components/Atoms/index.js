@@ -1,6 +1,5 @@
 export { default as ActionButton } from './ActionButton';
 export { default as ActionLink } from './ActionLink';
-export * from './buttonish';
 export * from './constants';
 export * from './Aligners';
 export { CenteredDiv } from './CenteredDiv';
