@@ -2,6 +2,8 @@ const PRIMARY_LINK = '#D52526';
 const DISABLED_LINK = '#E5E5E5';
 const TERTIARY_TEXT_COLOR = '#808080';
 
+export const NOOP = () => {};
+
 export const COLORS = {
     LINKS: {
         ACTIVE: '#000',
