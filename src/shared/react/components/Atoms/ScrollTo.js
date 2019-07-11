@@ -7,6 +7,6 @@ export const ScrollTo = styled.div`
     padding-top: 60px;
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
-        padding-top: 10px;
+        padding-top: 60px;
     }
 `;
