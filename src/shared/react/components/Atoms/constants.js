@@ -36,7 +36,10 @@ export const COLORS = {
         FOCUS_BORDER: '#000000',
         ERROR_TEXT: '#FF0000',
         ERROR_BACKGROUND: '#FFF8F5',
-        ERROR_BORDER: '#ff0000'
+        ERROR_BORDER: '#ff0000',
+        SUCCESS_BACKGROUND: '#DDFFDD',
+        SUCCESS_BORDER: '#CCCCCC',
+        SUCCESS_TEXT: '#000000'
     },
     PAGE: {
         BORDER: '#e5e5e5'
