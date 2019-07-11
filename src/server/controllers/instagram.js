@@ -21,7 +21,8 @@ export const instagram = {
         try {
             return await instaResponse.json();
         } catch (e) {
-            throw new Error('There was a problem with the instagram photo feed response', e);
+            console.log('There was a problem with the instagram photo feed response', e);
+            return {};
         }
     }
 };
