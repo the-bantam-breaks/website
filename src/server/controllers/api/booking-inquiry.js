@@ -59,7 +59,7 @@ export const bookingInquiry = {
             sendEmailMessage({ email, message, name });
 
             ctx.body = {
-                message: `Booking inquiry received.  The Breaks Booking team will respond ASAP`
+                message: `Booking inquiry received.`
             };
         }
     }
