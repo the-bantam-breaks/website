@@ -73,6 +73,15 @@ const SocialBadges = styled.div`
     margin-top: .25rem;
 `;
 
+const StoreActionLink = styled(ActionLink)`
+    padding: .33rem .75rem;
+    vertical-align: top;
+
+    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+        padding: .2rem .4rem;
+    }
+`;
+
 class Nav extends Component {
     constructor (props) {
         super(props);
@@ -151,6 +160,13 @@ class Nav extends Component {
                         href="https://www.youtube.com/c/thebantambreaks">
                       <SocialBadge width="30px" src="img/social-badges/youtube.png" alt="The Bantam Breaks on Youtube" />
                     </NavAnchor>
+                    <StoreActionLink
+                        href="https://thebantambreaks.bandcamp.com/merch"
+                        target="_blank"
+                        title="Store"
+                        look="PRIMARY">
+                        Store
+                    </StoreActionLink>
                 </SocialBadges>
 
                 <SiteLinks>
@@ -173,13 +189,6 @@ class Nav extends Component {
                         Band
                     </ActionLink>
                     <ActionLink
-                        href="https://thebantambreaks.bandcamp.com/merch"
-                        target="_blank"
-                        title="Store"
-                        look="PRIMARY">
-                        Store
-                    </ActionLink>
-                    <ActionLink
                         href={'#shows'}
                         title="Shows"
                         look={this.secondaryOrPrimary('#shows')}>
@@ -196,6 +205,12 @@ class Nav extends Component {
                         title="Electronic Press Kit"
                         look="SECONDARY">
                             EPK
+                    </ActionLink>
+                    <ActionLink
+                        href={'#contact'}
+                        title="Contact"
+                        look={this.secondaryOrPrimary('#contact')}>
+                        Contact
                     </ActionLink>
                 </SiteLinks>
 
