@@ -12,7 +12,7 @@ const FLOAT_FORM_STYLES = `
     z-index: 2;
 
     &:not(:placeholder-shown) + label {
-        top: -.7rem;
+        top: -.65rem;
         left: 0;
         opacity: .7;
     }
@@ -67,6 +67,7 @@ const FloatLabel = styled.label`
     left: .5rem;
     transition: all .3s ease;
     z-index: 1;
+    font-size: .8rem;
 `;
 
 class FloatLabelInput extends Component {
