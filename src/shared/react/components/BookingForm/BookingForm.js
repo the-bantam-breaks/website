@@ -1,19 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import 'whatwg-fetch';
-import { ActionButton, BREAKPOINTS, COLORS, FlexRowGrid } from '../Atoms';
+import { ActionButton, BREAKPOINTS, FlexRowGrid, FloatLabelInput } from '../Atoms';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const BookingInput = styled.input`
+const BookingInput = styled(FloatLabelInput)`
     width: 49%;
-    margin: .5rem 0;
-    padding: .5rem;
-    box-sizing: border-box;
-    border: 1px solid ${({ invalid }) => invalid === false
-        ? `${COLORS.FORM.BORDER}`
-        : `${COLORS.FORM.ERROR_BORDER}`
-    };
 
     &:nth-child(odd) {
         margin-right: 1%;
@@ -25,7 +18,7 @@ const BookingInput = styled.input`
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
         width: 100%;
-        margin: .5rem 0;
+        margin: 0 0 .25rem;
 
         &:nth-child(odd) {
             margin-right: 0;
@@ -37,32 +30,9 @@ const BookingInput = styled.input`
     }
 `;
 
-const BookingTextarea = styled.textarea`
-    width: 100%;
-    margin: .5rem 0;
-    padding: .5rem;
-    box-sizing: border-box;
-    border: 1px solid ${({ invalid }) => invalid === false
-        ? `${COLORS.FORM.BORDER}`
-        : `${COLORS.FORM.ERROR_BORDER}`
-    };
-`;
-
-const ErrorDiv = styled.div`
-    width: 100%;
-    padding: .25rem 0;
-    background-color: ${COLORS.FORM.ERROR_BACKGROUND};
-    color: ${COLORS.FORM.ERROR_TEXT};
-    border: 1px solid ${COLORS.FORM.ERROR_BORDER};
-
-    > ul {
-        margin: 0;
-    }
-`;
-
 const FormWrap = styled.div`
     width: 60vw;
-    margin: 0 20vw;
+    margin: 0 20vw 1rem;
     box-sizing: border-box;
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
@@ -94,7 +64,6 @@ class BookingForm extends React.Component {
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangeMessage = this.handleChangeMessage.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
-        this.renderErrorMessages = this.renderErrorMessages.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.validateRequiredFields = this.validateRequiredFields.bind(this);
     }
@@ -157,7 +126,6 @@ class BookingForm extends React.Component {
                 'Content-Type': 'application/json'
             }
         }).then(function (response) {
-            console.log('response------>\n', response);
             this.setState({
                 successMessage: response
             });
@@ -173,7 +141,9 @@ class BookingForm extends React.Component {
         const emailValid = email.value.length > 0
             ? EMAIL_REGEX.test(email.value)
             : undefined;
-        const messageValid = message.value.length > 2;
+        const messageValid = message.value.length > 0
+            ? message.value.length > 2
+            : undefined;
 
         this.setState({
             name,
@@ -189,39 +159,11 @@ class BookingForm extends React.Component {
         });
     }
 
-    renderErrorMessages () {
-        const {
-            email: { value: email, isValid: emailValid },
-            message: { value: message, isValid: messageValid },
-            isInvalidated,
-            isValid
-        } = this.state;
-
-        const showEmail = isInvalidated && (email.length > 0) && !emailValid;
-        const showMessage = isInvalidated && (message.length > 0) && !messageValid;
-
-        if (!isInvalidated || isValid === true) {
-            return null;
-        }
-
-        return (
-            <FlexRowGrid>
-                <ErrorDiv>
-                    <ul>
-                    {showEmail && (<li>Email is not valid</li>)}
-                    {showMessage && (<li>Message is required</li>)}
-                    </ul>
-                </ErrorDiv>
-            </FlexRowGrid>
-        )
-    }
-
     render () {
         const {
             email: { value: email, isValid: isEmailValid },
             message: { value: message, isValid: isMessageValid },
-            name: { value: name },
-            isValid
+            name: { value: name }
         } = this.state;
 
         return (
@@ -229,42 +171,42 @@ class BookingForm extends React.Component {
                 <FormWrap>
                     <FlexRowGrid>
                         <BookingInput
-                            id='formName'
                             name='name'
-                            placeholder={'name'}
+                            label='name'
+                            placeholder='name'
                             type='text'
                             onChange={this.handleChangeName}
                             onBlur={this.validateRequiredFields}
                             value={name}
-                            invalid={false}
+                            valid={true}
                         />
                         <BookingInput
-                            id='email'
+                            error="Email address is not valid"
                             name='email'
                             type='email'
-                            placeholder={'email'}
+                            label='email'
+                            placeholder='email'
                             required
                             onChange={this.handleChangeEmail}
                             onBlur={this.validateRequiredFields}
                             value={email}
-                            invalid={isEmailValid === false}
+                            valid={isEmailValid}
                         />
                     </FlexRowGrid>
 
                     <FlexRowGrid>
-                        <BookingTextarea
-                            id='message'
+                        <FloatLabelInput
+                            error='Message is required'
+                            inputElement='textarea'
+                            label='message'
                             name='message'
                             placeholder={'message'}
                             required
                             onChange={this.handleChangeMessage}
                             onBlur={this.validateRequiredFields}
                             value={message}
-                            invalid={isMessageValid === false}>
-                        </BookingTextarea>
+                            valid={isMessageValid} />
                     </FlexRowGrid>
-
-                    {!isValid && this.renderErrorMessages()}
 
                     <FlexRowGrid>
                         <ActionButton

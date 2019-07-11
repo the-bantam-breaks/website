@@ -7,6 +7,7 @@ export { Content } from './Content';
 export { default as Emoji } from './Emoji';
 export { default as ExternalLink } from './ExternalLink';
 export * from './FlexRowGrid';
+export * from './Forms';
 export { default as Logo } from './Logo';
 export { ScrollTo } from './ScrollTo';
 export { SectionHeading } from './SectionHeading';
