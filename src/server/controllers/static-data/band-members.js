@@ -29,7 +29,7 @@ const BAND_SCOTLAND_IMAGES = [
 
 export const bandMembers = () => ({
     eric: {
-        name: 'Eric Morton',
+        name: 'Eric Williams',
         instruments: ['Guitar', 'Vocals'],
         imgUrl: `${BAND_IMAGE_DIR}${getRandom(BAND_ERIC_IMAGES)}`
     },

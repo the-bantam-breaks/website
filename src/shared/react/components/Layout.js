@@ -50,7 +50,7 @@ const Layout = (props) => {
                 <meta name='keywords' content={'Bantam Breaks, Bantam, Breaks, Atlanta Rock Music, \
                       Americana, www.thebantambreaks.com, bantambreaks, bantam breaks music, \
                       bantam breaks band, thebantambreaks.com, Atlanta Band, Joshua Broughton, \
-                      Scotland Stephenson, Michael Garret, Eric Morton, Kenneth Williams'} />
+                      Scotland Stephenson, Michael Garret, Eric Williams'} />
                 <script dangerouslySetInnerHTML={{
                     __html: `window.__INITIAL_DATA__ = ${serialize(appData)}`
                 }}/>
