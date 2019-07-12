@@ -14,6 +14,12 @@
                     }
                 ],
                 "essential": true,
+                "environment": [
+                    {
+                        "value": "us-east-1",
+                        "name": "ENV_AWS_REGION"
+                    }
+                ],
                 "secrets": [
                     {
                         "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-insta-user-id-Q9kEc8",
@@ -32,8 +38,12 @@
                         "name": "ENV_BOOOKING_MAIL_ACCOUNT"
                     },
                     {
-                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-booking-mail-password-gpYKud",
-                        "name": "ENV_BOOOKING_MAIL_PASSWORD"
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-aws-access-key-ExnZ74",
+                        "name": "ENV_AWS_ACCESS_KEY_ID"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-aws-secret-access-key-YfRshV",
+                        "name": "ENV_AWS_SECRET_ACCESS_KEY"
                     }
                 ],
                 "mountPoints": [],
