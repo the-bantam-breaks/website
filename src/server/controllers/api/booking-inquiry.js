@@ -1,46 +1,54 @@
-import { IncomingWebhook } from '@slack/webhook';
-import nodemailer from 'nodemailer';
-import stripIndent from 'strip-indent';
+import {
+    sendToGmail,
+    sendSesMail,
+    sendSlackBookingMessage
+} from '../util';
 
+const BREAKS_GMAIL_ADDRESS = process.env.ENV_BOOOKING_MAIL_ACCOUNT;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const BOOOKING_SLACK_WEBHOOK_URL = process.env.ENV_BOOOKING_SLACK_WEBHOOK_URL;
-const SLACK_WEBHOOK = new IncomingWebhook(BOOOKING_SLACK_WEBHOOK_URL);
-const GMAIL_ADDRESS = process.env.ENV_BOOOKING_MAIL_ACCOUNT;
 
-const TRANSPORTER = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: GMAIL_ADDRESS,
-        pass: process.env.ENV_BOOOKING_MAIL_PASSWORD
-    },
-    debug: true
-});
+const htmlMailMessage = ({ name, email, message }) =>
+    `<p>From: ${name}</p><p>Email: ${email}</p><div>${message}</div>`;
 
-const sendEmailMessage = ({ name, email, message }) => {
-    const mailOptions = {
-        from: GMAIL_ADDRESS,
-        to: GMAIL_ADDRESS,
-        subject: `Web Form Booking inquiry from ${name} / ${email}`, // Subject line
-        html: `<p>From: ${name}</p><p>Email: ${email}</p><div>${message}</div>`
+const mailSubject = ({ name, email }) =>
+    `Web Form Booking inquiry from ${name} / ${email}`;
+
+const textMailMessage = ({ name, email, message }) =>
+    `From: ${name}\nEmail: ${email}\n\n${message}`;
+
+const sendEmailMessageWithAmazon = async ({ name, email, message }) => {
+    const amazonMailOptions = {
+        from: BREAKS_GMAIL_ADDRESS,
+        to: BREAKS_GMAIL_ADDRESS,
+        subject: mailSubject({ email, name }),
+        html: htmlMailMessage({ name, email, message }),
+        text: textMailMessage({ name, email, message }),
+        ses: {}
     };
 
-    TRANSPORTER.sendMail(mailOptions, (err, info) => {
+    return sendSesMail(amazonMailOptions, (err, info) => {
+        if (err) {
+            console.log('Amazon SES send errror', err);
+        } else {
+            console.log('Amazon SES sent', info);
+        }
+    });
+};
+
+const sendEmailMessageWithGmail = async ({ name, email, message }) => {
+    const gmailOptions = {
+        from: BREAKS_GMAIL_ADDRESS,
+        to: BREAKS_GMAIL_ADDRESS,
+        subject: mailSubject({ email, name }), // Subject line
+        html: htmlMailMessage({ name, email, message })
+    };
+
+    return sendToGmail(gmailOptions, (err, info) => {
         if (err) {
             console.log('Gmail send errror', err);
         } else {
             console.log('gmail sent', info);
         }
-    });
-};
-
-const sendSlackMessage = async ({ name, email, message }) => {
-    const slackMessage = stripIndent(`Booking Inquiry from thebantambreaks.com web form\n
-        \tFrom: *${name}*
-        \tEmail: *${email}*\n
-        ${['```', message, '```'].join('\n')}`);
-
-    await SLACK_WEBHOOK.send({
-        text: slackMessage
     });
 };
 
@@ -55,8 +63,10 @@ export const bookingInquiry = {
                 return;
             }
 
-            await sendSlackMessage({ email, message, name });
-            sendEmailMessage({ email, message, name });
+            await sendSlackBookingMessage({ email, message, name });
+            process.env.NODE_ENV === 'production'
+                ? sendEmailMessageWithAmazon({ email, message, name })
+                : sendEmailMessageWithGmail({ email, message, name });
 
             ctx.body = {
                 message: `Booking inquiry received.`
