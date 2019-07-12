@@ -52,6 +52,9 @@ const serverConfig = {
     new webpack.DefinePlugin({
         "process.env": {
             "BUILD_TARGET": JSON.stringify('server'),
+            "ENV_AWS_REGION": JSON.stringify(process.env.ENV_AWS_REGION),
+            "ENV_AWS_ACCESS_KEY_ID": JSON.stringify(process.env.ENV_AWS_ACCESS_KEY_ID),
+            "ENV_AWS_SECRET_ACCESS_KEY": JSON.stringify(process.env.ENV_AWS_SECRET_ACCESS_KEY),
             "ENV_INSTAGRAM_USER_ID": JSON.stringify(process.env.ENV_INSTAGRAM_USER_ID),
             "ENV_INSTAGRAM_TOKEN": JSON.stringify(process.env.ENV_INSTAGRAM_TOKEN),
             "ENV_BOOOKING_SLACK_WEBHOOK_URL": JSON.stringify(process.env.ENV_BOOOKING_SLACK_WEBHOOK_URL),
