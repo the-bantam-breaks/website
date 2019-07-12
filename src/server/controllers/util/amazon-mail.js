@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 // configure AWS SDK
 AWS.config.update({
-    region: process.env.ENV_AWS_REGION,
+    region: process.env.ENV_AWS_REGION || 'us-east-1',
     accessKeyId: process.env.ENV_AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.ENV_AWS_SECRET_ACCESS_KEY
 });
@@ -15,6 +15,6 @@ const AMAZON_SES_TRANSPORTER = nodemailer.createTransport({
     })
 });
 
-export const sendSesMail = async (mailOptions = {}, callback) => {
+export const sendSesMail = (mailOptions = {}, callback) => {
     return AMAZON_SES_TRANSPORTER.sendMail(mailOptions, callback);
 };
