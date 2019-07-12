@@ -11,6 +11,13 @@ const FLOAT_FORM_STYLES = `
     transition: position .3s linear;
     z-index: 2;
 
+    &:required {
+        box-shadow: none;
+    }
+    &:invalid {
+        box-shadow: none;
+    }
+
     &:not(:placeholder-shown) + label {
         top: -.65rem;
         left: 0;
