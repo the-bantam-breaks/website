@@ -53,4 +53,6 @@ after_success:
       elif [[ "$TRAVIS_BRANCH" = "develop" ]]; then
         ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER staging-website
       fi
+    else
+      echo "Not deploying from $TRAVIS_BRANCH, we only deploy from develop or master"
     fi
