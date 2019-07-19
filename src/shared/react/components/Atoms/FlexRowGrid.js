@@ -11,6 +11,17 @@ export const FlexRowGrid = styled.div`
     padding: 0;
 `;
 
+export const FlexRowGridRight = styled.div`
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    padding: 0;
+`;
+
 export const FlexRowLeft = styled(FlexRowGrid)`
     justify-content: left;
 `;

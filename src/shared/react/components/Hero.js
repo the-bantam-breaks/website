@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useAppData } from '../context/';
+import { SubscriptionForm } from './SubscriptionForm';
 import { BREAKPOINTS, Logo } from './Atoms';
+
+const HERO_ASPECT_RATIO = 1080 / 1920;
 
 const OffscreenH = styled.h1`
     position: absolute;
@@ -41,11 +44,12 @@ const HeroText = styled.div`
 const HeroBackdrop = styled.section`
     position: relative;
     width: 100vw;
-    min-height: 100px;
+    height: calc((100vw * ${HERO_ASPECT_RATIO}));
     background-color: #f30;
     overflow: hidden;
     background-color: #000;
     background-opacity: .5;
+    border-bottom: 1px solid #FFFFFF;
 
     img.hero {
         width: 100%;
@@ -72,6 +76,7 @@ export const Hero = (props) => {
 
     return (
       <HeroBackdrop className={className}>
+          <SubscriptionForm />
           <img className="hero"
                alt={'The Bantam Breaks'}
                src={hero} />
