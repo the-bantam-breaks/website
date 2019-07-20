@@ -35,7 +35,7 @@
     "prop-types": "15.7.2",
     "query-string": "6.8.1",
     "react": "16.8.6",
-    "react-card-flip": "0.8.0",
+    "react-card-flip": "0.8.1",
     "react-dom": "16.8.6",
     "react-router-dom": "5.0.1",
     "react-sticky": "6.0.3",
