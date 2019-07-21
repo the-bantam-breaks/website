@@ -53,5 +53,6 @@ export const COLORS = {
 };
 
 export const BREAKPOINTS = {
-    MOBILE: '768px'
+    MOBILE: '768px',
+    NAV: '950px'
 };

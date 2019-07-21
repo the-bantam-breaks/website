@@ -244,7 +244,7 @@ class SubscriptionForm extends React.Component {
             this.setState({
                 successMessage: (
                     <SuccessSpan>
-                        {'Thank You for subscribing to The Bantam Breaks\' Updates!'}
+                        {'Thank You for subscribing to updates from The Bantam Breaks\'!'}
                     </SuccessSpan>
                 )
             });
@@ -306,7 +306,7 @@ class SubscriptionForm extends React.Component {
                                     name='phone'
                                     label='sms #'
                                     placeholder='phone (sms)'
-                                    type='text'
+                                    type='tel'
                                     onChange={this.handleChangePhone}
                                     onBlur={this.validateRequiredFields}
                                     value={phone}
