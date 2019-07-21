@@ -43,3 +43,4 @@ public/
 .env
 
 pgsetup.txt
+.pgpass
