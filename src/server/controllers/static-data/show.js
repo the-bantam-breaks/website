@@ -203,10 +203,18 @@ const SHOW_DATA = [{
     venueUrl: 'https://littletreeartstudios.com/music-studios/',
     city: 'Avondale Estates',
     state: 'GA'
+},
+{
+    date: '2019-10-12T12:00:00-05:00',
+    venueName: 'Oakhurst Porchfest (details T.B.D.)',
+    venueUrl: 'https://www.oakhurstporchfest.org',
+    city: 'Decatur',
+    cover: 'free',
+    state: 'GA'
 }];
 
-const decoratedShowData = () => {
-    return SHOW_DATA.map((show) => {
+const decoratedShowData = (shows = []) => {
+    return shows.map((show) => {
         const { date, ...restOfShow } = show;
         const isArchived = moment().isAfter(moment(date));
         const momentDate = moment(date);
@@ -232,13 +240,15 @@ const dateSortAscending = (show1, show2) => {
 };
 
 export const getShowsArchive = () => {
-    return decoratedShowData().sort(dateSortAscending).reverse();
+    return decoratedShowData(SHOW_DATA).sort(dateSortAscending).reverse();
 };
 
 export const getUpcomingShows = () => {
     const yesterdayMoment = moment().startOf('day').subtract(1, 'day');
-    return decoratedShowData().filter((s) => {
+    const upcomingShows = SHOW_DATA.filter((s) => {
         const showDateMoment = moment(new Date(s.date));
         return showDateMoment.isAfter(yesterdayMoment);
     }).sort(dateSortAscending);
+
+    return decoratedShowData(upcomingShows);
 };
