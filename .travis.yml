@@ -46,4 +46,13 @@ script:
 
 after_success:
   - echo "Build Successful!"
-  - test $TRAVIS_BRANCH = "master" && ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER
+  - |
+    if [[ "$TRAVIS_PULL_REQUEST" ]]; then
+      if [[ "$TRAVIS_BRANCH" = "master" ]]; then
+        ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER website
+      elif [[ "$TRAVIS_BRANCH" = "develop" ]]; then
+        ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER staging-website
+      fi
+    else
+      echo "Not deploying from $TRAVIS_BRANCH, we only deploy from develop or master"
+    fi
