@@ -1,4 +1,5 @@
 export * from './amazon-mail';
+export * from './email-templates';
 export * from './generate-token';
 export { getRandom } from './get-random';
 export * from './gmail-mail';

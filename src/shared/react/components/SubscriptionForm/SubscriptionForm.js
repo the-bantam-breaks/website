@@ -98,6 +98,14 @@ const SubscriptionInput = styled(FloatLabelInput)`
         width: 100%;
         padding: .5rem;
         margin: 0;
+        font-weight: bold;
+        font-size: 1.1rem;
+
+        &::placeholder {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #C0C0C0;
+        }
 
         @media (max-width: ${BREAKPOINTS.MOBILE}) {
             padding: .25rem;

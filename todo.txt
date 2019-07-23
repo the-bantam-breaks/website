@@ -1,18 +1,17 @@
-- Do we want twitter API,  get creds and figure out API handler if so
-- sizing for mobile on insta and headings
+EMAIL conf flow:
 
+1 - Find with email and token to activate.
+2 - Thank you screen
+3 - Sorry Screen for unsubscribers
 
-SES_TRANSPORTER idle/send example:
-let transporter = nodemailer.createTransport({
-    SES: new aws.SES({
-        apiVersion: '2010-12-01'
-    }),
-    sendingRate: 1 // max 1 messages/second
-});
+https://mherman.org/blog/building-a-restful-api-with-koa-and-postgres/
+https://tylermcginnis.com/react-router-server-rendering/
+https://github.com/tylermcginnis/rrssr
+https://github.com/jsprodotcom/telephones-js
 
-// Push next messages to Nodemailer
-transporter.on('idle', () => {
-    while (transporter.isIdle()) {
-        transporter.sendMail(...);
-    }
-});
+//
+https://hashrocket.com/blog/posts/working-with-email-addresses-in-postgresql
+
+// psql index
+CREATE UNIQUE INDEX idx_lower_unique
+   ON your_table (lower(the_column));

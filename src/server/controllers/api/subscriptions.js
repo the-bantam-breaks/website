@@ -1,22 +1,53 @@
-// const TYPES = ['SMS', 'EMAIL'];
+import {
+    EmailSubscriptions// ,
+    // SmsSubscriptions
+} from './pg-database/models';
+import {
+    isValidEmail,
+    isValidPhone
+} from '../util';
 
 export const subscriptions = {
     api: {
 
         create: {
             email: () => async (ctx) => {
-                const { query } = ctx;
+                const { email } = ctx.request.body;
 
-                console.log('new email subscription VALUE------>\n', JSON.stringify(query, null, 2));
+                if (!isValidEmail(email)) {
+                    ctx.status = 400;
+                    ctx.body = 'The subscription email is not valid';
+                    return;
+                }
+
+                let subscription = {};
+
+                try {
+                    subscription = await EmailSubscriptions.createSubscription({
+                        email
+                    });
+                } catch (e) {
+                    ctx.status = 500;
+                    ctx.body = 'Email subscription failed';
+                    return;
+                }
+
+                if (subscription) {
+                    EmailSubscriptions.sendVerificationEmail(subscription);
+                }
 
                 ctx.body = {
-                    message: `email subscription has been added`
+                    message: `email subscription ${subscription.id} has been added`
                 };
             },
             sms: () => async (ctx) => {
-                const { query } = ctx;
+                const { phone } = ctx.request.body;
 
-                console.log('new sms subscription VALUE------>\n', JSON.stringify(query, null, 2));
+                if (!isValidPhone(phone)) {
+                    ctx.status = 400;
+                    ctx.body = 'The subscription phone # is not valid';
+                    return;
+                }
 
                 ctx.body = {
                     message: `sms subscription has been added`

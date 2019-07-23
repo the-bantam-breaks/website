@@ -1,4 +1,4 @@
-import { PhoneNumberUtil, PhoneNumberFormat as PNF } from 'google-libphonenumber';
+import { PhoneNumberUtil } from 'google-libphonenumber';
 
 const PHONE_UTIL = PhoneNumberUtil.getInstance();
 

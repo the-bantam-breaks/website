@@ -22,12 +22,12 @@ export const routes = (app) => {
         // APIs
 
         // Subscriptions
-        route.get('/api/subscrition/confirm/email', subscriptions.api.confirm.email()),
-        route.get('/api/subscrition/confrim/sms', subscriptions.api.confirm.sms()),
+        route.get('/api/subscription/confirm/email', subscriptions.api.confirm.email()),
+        route.get('/api/subscription/confirm/sms', subscriptions.api.confirm.sms()),
         route.post('/api/subscribe/email', subscriptions.api.create.email()),
         route.post('/api/subscribe/sms', subscriptions.api.create.sms()),
-        route.delete('/api/subscribe/email', subscriptions.api.delete.email()),
-        route.delete('/api/subscribe/sms', subscriptions.api.delete.sms()),
+        route.get('/api/unsubscribe/email', subscriptions.api.delete.email()),
+        route.get('/api/unsubscribe/sms', subscriptions.api.delete.sms()),
 
         // Booking Contact Form
         route.post('/api/booking_inquiry', bookingInquiry.api.new()),
