@@ -3,6 +3,11 @@ sudo: required
 services:
   - docker
 
+branches:
+  only:
+  - master
+  - develop
+
 install:
   - docker --version
   - uname -m
