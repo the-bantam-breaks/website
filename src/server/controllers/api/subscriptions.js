@@ -33,7 +33,7 @@ export const subscriptions = {
                 }
 
                 if (subscription) {
-                    EmailSubscriptions.sendVerificationEmail(subscription);
+                    EmailSubscriptions.sendConfirmationRequestEmail(subscription);
                 }
 
                 ctx.body = {
@@ -57,9 +57,27 @@ export const subscriptions = {
 
         confirm: {
             email: () => async (ctx) => {
-                const { query } = ctx;
+                const { query: { email, token } } = ctx;
 
-                console.log('email subscription confirmation VALUE------>\n', JSON.stringify(query, null, 2));
+                let subscription = {};
+
+                try {
+                    subscription = await EmailSubscriptions.activateWithEmailAndHash({
+                        email,
+                        hash: token
+                    });
+                    if (!subscription.active) {
+                        ctx.status = 500;
+                        ctx.body = 'Email confirmation failed';
+                        return;
+                    }
+                } catch (e) {
+                    ctx.status = 500;
+                    ctx.body = 'Email confirmation failed';
+                    return;
+                }
+
+                EmailSubscriptions.sendVerificationEmail(subscription);
 
                 ctx.body = {
                     message: `email subscription has been confirmed`
@@ -78,12 +96,21 @@ export const subscriptions = {
 
         delete: {
             email: () => async (ctx) => {
-                const { query } = ctx;
+                const { query: { email, token } } = ctx;
 
-                console.log('email subscription deletion VALUE------>\n', JSON.stringify(query, null, 2));
+                try {
+                    await EmailSubscriptions.deleteWithEmailAndHash({
+                        email,
+                        hash: token
+                    });
+                } catch (e) {
+                    ctx.status = 500;
+                    ctx.body = 'Email unsubscribe failed';
+                    return;
+                }
 
                 ctx.body = {
-                    message: `email subscription has been removed`
+                    message: `email has been successfully unsubscribed`
                 };
             },
             sms: () => async (ctx) => {
