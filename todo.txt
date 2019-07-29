@@ -1,8 +1,12 @@
 EMAIL conf flow:
 
-1 - Find with email and token to activate.
-2 - Thank you screen
-3 - Sorry Screen for unsubscribers
+1 - Thank you screen
+2 - Sorry Screen for unsubscribers
+
+SMS flow
+1 - send SMS with Amazon SNS
+2 - verify that unsubscribe link can work just like email
+
 
 https://mherman.org/blog/building-a-restful-api-with-koa-and-postgres/
 https://tylermcginnis.com/react-router-server-rendering/
