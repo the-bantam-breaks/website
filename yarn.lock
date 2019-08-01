@@ -1222,10 +1222,10 @@ auto-bind@^2.0.0:
   dependencies:
     "@types/react" "^16.8.12"
 
-autolinker@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/autolinker/-/autolinker-3.1.0.tgz#b067a5038a429677a646b69f8d9eb389df197967"
-  integrity sha512-FLPmzHwLqTUZlTwXTGSM1wOcu5TrsZcOc6YPq/Kdpzp+CBNPjUzKfPvHnFx+xuPZEerY1hRY96ISAm4S1A6MTw==
+autolinker@3.11.0:
+  version "3.11.0"
+  resolved "https://registry.npmjs.org/autolinker/-/autolinker-3.11.0.tgz#209c4632550eed32285058eaac51f1382dae023a"
+  integrity sha512-VMTEjE3jeBK5MinTZiuVE07O4wMVmXhpzmc5sCc8cap6exsVzjmQJgtH8NqHsFru58ujUieBA9Dmwiz+E5KWEA==
   dependencies:
     tslib "^1.9.3"
 
