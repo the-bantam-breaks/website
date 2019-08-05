@@ -1,4 +1,6 @@
 export * from './amazon-mail';
+export * from './aws-sdk-config';
+export * from './amazon-sms';
 export * from './email-templates';
 export * from './generate-token';
 export { getRandom } from './get-random';

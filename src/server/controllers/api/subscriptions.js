@@ -3,6 +3,7 @@ import {
     // SmsSubscriptions
 } from './pg-database/models';
 import {
+    // isPhoneOptedOut,
     isValidEmail,
     isValidPhone
 } from '../util';
@@ -48,6 +49,9 @@ export const subscriptions = {
                     ctx.body = 'The subscription phone # is not valid';
                     return;
                 }
+
+                // TODO
+                // const isOptedOut = await isPhoneOptedOut({ phoneNumber: phone });
 
                 ctx.body = {
                     message: `sms subscription has been added`
