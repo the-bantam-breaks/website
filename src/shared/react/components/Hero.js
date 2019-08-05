@@ -72,11 +72,11 @@ const HeroBackdrop = styled.section`
 
 export const Hero = (props) => {
     const { hero } = useAppData('appImages') || {};
-    const { className, heading, subHeading } = props;
+    const { className, heading, showForm, subHeading } = props;
 
     return (
       <HeroBackdrop className={className}>
-          <SubscriptionForm />
+          {showForm && (<SubscriptionForm />)}
           <img className="hero"
                alt={'The Bantam Breaks'}
                src={hero} />
@@ -96,10 +96,12 @@ export const Hero = (props) => {
 Hero.propTypes = {
     className: PropTypes.string,
     heading: PropTypes.string,
-    subHeading: PropTypes.string
+    subHeading: PropTypes.string,
+    showForm: PropTypes.bool
 };
 
 Hero.defaultProps = {
     heading: 'The Red EP',
+    showForm: true,
     subHeading: 'Coming September 1st, 2019'
 };

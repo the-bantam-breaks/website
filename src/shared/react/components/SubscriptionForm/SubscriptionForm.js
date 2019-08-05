@@ -59,7 +59,9 @@ const InputsWrap = styled.div`
     }
 `;
 
+// TODO - remove display: none if we figure out doing sms
 const SwitchWrap = styled.div`
+    display: none;
     padding-top: 7px;
     width: auto;
     @media (max-width: ${BREAKPOINTS.MOBILE}) {

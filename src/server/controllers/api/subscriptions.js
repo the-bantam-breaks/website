@@ -83,14 +83,11 @@ export const subscriptions = {
 
                 EmailSubscriptions.sendVerificationEmail(subscription);
 
-                ctx.body = {
-                    message: `email subscription has been confirmed`
-                };
+                ctx.redirect('/subscription/thanks');
             },
+            // TODO
             sms: () => async (ctx) => {
-                const { query } = ctx;
-
-                console.log('sms subscription confirmation VALUE------>\n', JSON.stringify(query, null, 2));
+                // const { query } = ctx;
 
                 ctx.body = {
                     message: `sms subscription has been confirmed`
@@ -113,9 +110,7 @@ export const subscriptions = {
                     return;
                 }
 
-                ctx.body = {
-                    message: `email has been successfully unsubscribed`
-                };
+                ctx.redirect('/subscription/goodbye');
             },
             sms: () => async (ctx) => {
                 const { query } = ctx;
