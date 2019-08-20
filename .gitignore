@@ -41,3 +41,6 @@ public/
 
 # dotenv environment variables file
 .env
+
+pgsetup.txt
+.pgpass

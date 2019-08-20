@@ -15,7 +15,6 @@ const ButtonishButton = styled.button`
     border-radius: 25px;
     text-decoration: none;
     text-align: center;
-    border: none;
     cursor: pointer;
     background-color: ${({ look }) => COLORS.ACTIONS[`${look}`]};
     color: ${({ look }) => COLORS.ACTIONS[`${look}_TEXT`]};
@@ -42,7 +41,7 @@ ActionButton.propTypes = {
     onClick: PropTypes.func,
     // formenctype: PropTypes.oneOf(['text/plain', 'multipart/form-data', 'application/x-www-form-urlencoded']),
     // formmethod: PropTypes.oneOf(['GET', 'POST']),
-    look: PropTypes.oneOf(['DISABLED', 'PRIMARY', 'SECONDARY']),
+    look: PropTypes.oneOf(['DISABLED', 'PRIMARY', 'SECONDARY', 'TERTIARY']),
     type: PropTypes.oneOf(['button', 'reset', 'submit'])
 };
 

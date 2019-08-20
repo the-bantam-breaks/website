@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useAppData } from '../context/';
+import { SubscriptionForm } from './SubscriptionForm';
 import { BREAKPOINTS, Logo } from './Atoms';
+
+const HERO_ASPECT_RATIO = 1080 / 1920;
 
 const OffscreenH = styled.h1`
     position: absolute;
@@ -41,11 +44,12 @@ const HeroText = styled.div`
 const HeroBackdrop = styled.section`
     position: relative;
     width: 100vw;
-    min-height: 100px;
+    height: calc((100vw * ${HERO_ASPECT_RATIO}));
     background-color: #f30;
     overflow: hidden;
     background-color: #000;
     background-opacity: .5;
+    border-bottom: 1px solid #FFFFFF;
 
     img.hero {
         width: 100%;
@@ -68,10 +72,11 @@ const HeroBackdrop = styled.section`
 
 export const Hero = (props) => {
     const { hero } = useAppData('appImages') || {};
-    const { className, heading, subHeading } = props;
+    const { className, heading, showForm, subHeading } = props;
 
     return (
       <HeroBackdrop className={className}>
+          {showForm && (<SubscriptionForm />)}
           <img className="hero"
                alt={'The Bantam Breaks'}
                src={hero} />
@@ -91,10 +96,12 @@ export const Hero = (props) => {
 Hero.propTypes = {
     className: PropTypes.string,
     heading: PropTypes.string,
-    subHeading: PropTypes.string
+    subHeading: PropTypes.string,
+    showForm: PropTypes.bool
 };
 
 Hero.defaultProps = {
     heading: 'The Red EP',
+    showForm: true,
     subHeading: 'Coming September 1st, 2019'
 };

@@ -13,3 +13,4 @@ export { ScrollTo } from './ScrollTo';
 export { SectionHeading } from './SectionHeading';
 export { default as SocialMediaLink } from './SocialMediaLink';
 export * from './text';
+export * from './util';
