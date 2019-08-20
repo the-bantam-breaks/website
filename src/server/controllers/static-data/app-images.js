@@ -21,11 +21,11 @@ const HERO_IMAGES = [
 ];
 
 export const appImages = () => ({
-    hero: `${HERO_DIR}${getRandom(HERO_IMAGES)}`,
+    hero: `/${HERO_DIR}${getRandom(HERO_IMAGES)}`,
     logo: {
-        clear_chicken: `${LOGO_DIR}${LOGOS.clear_chicken}`,
-        text_logo_dark: `${LOGO_DIR}${LOGOS.text_logo_dark}`,
-        text_logo_light: `${LOGO_DIR}${LOGOS.text_logo_light}`,
-        white_chicken: `${LOGO_DIR}${LOGOS.white_chicken}`
+        clear_chicken: `/${LOGO_DIR}${LOGOS.clear_chicken}`,
+        text_logo_dark: `/${LOGO_DIR}${LOGOS.text_logo_dark}`,
+        text_logo_light: `/${LOGO_DIR}${LOGOS.text_logo_light}`,
+        white_chicken: `/${LOGO_DIR}${LOGOS.white_chicken}`
     }
 });

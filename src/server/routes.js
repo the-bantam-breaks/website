@@ -19,9 +19,17 @@ export const routes = (app) => {
         mount('/js', serve(path.join(staticRoute, 'js/'))),
         mount('/fonts', serve(path.join(staticRoute, 'fonts/'))),
 
-        // API
-        route.post('/api/subscriptions', subscriptions.api.new()),
-        route.delete('/api/subscriptions', subscriptions.api.delete()),
+        // APIs
+
+        // Subscriptions
+        route.get('/api/subscription/confirm/email', subscriptions.api.confirm.email()),
+        route.get('/api/subscription/confirm/sms', subscriptions.api.confirm.sms()),
+        route.post('/api/subscribe/email', subscriptions.api.create.email()),
+        route.post('/api/subscribe/sms', subscriptions.api.create.sms()),
+        route.get('/api/unsubscribe/email', subscriptions.api.delete.email()),
+        route.get('/api/unsubscribe/sms', subscriptions.api.delete.sms()),
+
+        // Booking Contact Form
         route.post('/api/booking_inquiry', bookingInquiry.api.new()),
 
         // Web

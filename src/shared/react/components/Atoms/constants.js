@@ -19,7 +19,10 @@ export const COLORS = {
         DISABLED_TEXT: '#FFFFFF',
         SECONDARY: '#FFFFFF',
         SECONDARY_BORDER: '#000000',
-        SECONDARY_TEXT: '#000000'
+        SECONDARY_TEXT: '#000000',
+        TERTIARY: 'transparent',
+        TERTIARY_BORDER: '#FFFFFF',
+        TERTIARY_TEXT: '#FFFFFF'
     },
     TEXT: {
         TERTIARY: TERTIARY_TEXT_COLOR
@@ -39,7 +42,10 @@ export const COLORS = {
         ERROR_BORDER: '#ff0000',
         SUCCESS_BACKGROUND: '#DDFFDD',
         SUCCESS_BORDER: '#CCCCCC',
-        SUCCESS_TEXT: '#000000'
+        SUCCESS_TEXT: '#000000',
+        TERTIARY: 'transparent',
+        TERTIARY_BORDER: '#FFFFFF',
+        TERTIARY_TEXT: '#FFFFFF'
     },
     PAGE: {
         BORDER: '#e5e5e5'
@@ -47,5 +53,6 @@ export const COLORS = {
 };
 
 export const BREAKPOINTS = {
-    MOBILE: '768px'
+    MOBILE: '768px',
+    NAV: '950px'
 };

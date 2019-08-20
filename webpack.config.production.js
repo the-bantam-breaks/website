@@ -59,7 +59,12 @@ const serverConfig = {
             "ENV_INSTAGRAM_TOKEN": JSON.stringify(process.env.ENV_INSTAGRAM_TOKEN),
             "ENV_BOOOKING_SLACK_WEBHOOK_URL": JSON.stringify(process.env.ENV_BOOOKING_SLACK_WEBHOOK_URL),
             "ENV_BOOOKING_MAIL_ACCOUNT": JSON.stringify(process.env.ENV_BOOOKING_MAIL_ACCOUNT),
-            "ENV_BOOOKING_MAIL_PASSWORD": JSON.stringify(process.env.ENV_BOOOKING_MAIL_PASWORD)
+            "ENV_BOOOKING_MAIL_PASSWORD": JSON.stringify(process.env.ENV_BOOOKING_MAIL_PASWORD),
+            "ENV_PG_USER": JSON.stringify(process.env.ENV_PG_USER),
+            "ENV_PG_HOST": JSON.stringify(process.env.ENV_PG_HOST),
+            "ENV_PG_PASSWORD": JSON.stringify(process.env.ENV_PG_PASSWORD),
+            "ENV_PG_DATABASE": JSON.stringify(process.env.ENV_PG_DATABASE),
+            "ENV_PG_PORT": JSON.stringify(process.env.ENV_PG_PORT)
         }
     })
   ]
