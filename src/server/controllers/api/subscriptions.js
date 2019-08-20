@@ -54,7 +54,7 @@ export const subscriptions = {
                 // const isOptedOut = await isPhoneOptedOut({ phoneNumber: phone });
 
                 ctx.body = {
-                    message: `sms subscription has been added`
+                    message: 'sms subscription has been added'
                 };
             }
         },
@@ -90,7 +90,7 @@ export const subscriptions = {
                 // const { query } = ctx;
 
                 ctx.body = {
-                    message: `sms subscription has been confirmed`
+                    message: 'sms subscription has been confirmed'
                 };
             }
         },
@@ -118,7 +118,7 @@ export const subscriptions = {
                 console.log('sms subscription deletion VALUE------>\n', JSON.stringify(query, null, 2));
 
                 ctx.body = {
-                    message: `sms subscription has been removed`
+                    message: 'sms subscription has been removed'
                 };
             }
         }

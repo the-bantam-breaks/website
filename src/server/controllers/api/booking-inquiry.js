@@ -69,7 +69,7 @@ export const bookingInquiry = {
                 : sendEmailMessageWithGmail({ email, message, name });
 
             ctx.body = {
-                message: `Booking inquiry received.`
+                message: 'Booking inquiry received.'
             };
         }
     }

@@ -9,7 +9,7 @@ import {
 } from './util';
 
 const mailSubject = () =>
-    `The Bantam Breaks: Thank you for subscribing!`;
+    'The Bantam Breaks: Thank you for subscribing!';
 
 const sendVerifcationThanksMessageWithAmazon = async ({ email, hash }) => {
     const amazonMailOptions = {
