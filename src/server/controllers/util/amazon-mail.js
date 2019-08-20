@@ -1,12 +1,10 @@
 import AWS from 'aws-sdk';
 import nodemailer from 'nodemailer';
 
+import { AWS_CONFIG } from './aws-sdk-config';
+
 // configure AWS SDK
-AWS.config.update({
-    region: process.env.ENV_AWS_REGION || 'us-east-1',
-    accessKeyId: process.env.ENV_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.ENV_AWS_SECRET_ACCESS_KEY
-});
+AWS.config.update(AWS_CONFIG);
 
 // create Nodemailer SES transporter
 const AMAZON_SES_TRANSPORTER = nodemailer.createTransport({

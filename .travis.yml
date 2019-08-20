@@ -13,6 +13,13 @@ install:
   - uname -m
   - pip install --user awscli
   - docker network create bantam
+  - docker run -d --rm
+      --network bantam
+      --name postgres
+      -e POSTGRES_USER=${ENV_PG_USER}
+      -e POSTGRES_DB=${ENV_PG_DATABASE}
+      -e POSTGRES_PASSWORD=${ENV_PG_PASSWORD}
+      postgres:11
 
 script:
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
@@ -33,6 +40,11 @@ script:
       -e ENV_BOOOKING_SLACK_WEBHOOK_URL=${ENV_BOOOKING_SLACK_WEBHOOK_URL}
       -e ENV_BOOOKING_MAIL_ACCOUNT=${ENV_BOOOKING_MAIL_ACCOUNT}
       -e ENV_BOOOKING_MAIL_PASSWORD=${ENV_BOOOKING_MAIL_PASSWORD}
+      -e ENV_PG_USER=${ENV_PG_USER}
+      -e ENV_PG_HOST=${ENV_PG_HOST}
+      -e ENV_PG_PASSWORD=${ENV_PG_PASSWORD}
+      -e ENV_PG_DATABASE=${ENV_PG_DATABASE}
+      -e ENV_PG_PORT=${ENV_PG_PORT}
       -p 3000:3000
       breaks-website:latest
   - sleep $SLEEP_TIME

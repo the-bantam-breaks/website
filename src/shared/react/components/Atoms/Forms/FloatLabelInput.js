@@ -142,7 +142,7 @@ class FloatLabelInput extends Component {
                     {label}
                 </FloatLabel>
                 {showError && (
-                    <ErrorMessage>
+                    <ErrorMessage className={'error-msg'}>
                         {error}
                     </ErrorMessage>
                 )}

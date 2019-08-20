@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import 'whatwg-fetch';
-import { ActionButton, BREAKPOINTS, COLORS, FlexRowGrid, FloatLabelInput } from '../Atoms';
+import { ActionButton, BREAKPOINTS, COLORS, EMAIL_REGEX, FlexRowGrid, FloatLabelInput } from '../Atoms';
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DEFAULT_FORM_STATE = {
     name: {
         value: ''

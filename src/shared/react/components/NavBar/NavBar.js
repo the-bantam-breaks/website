@@ -21,7 +21,7 @@ const BreaksNav = styled.nav`
     width: 100vw;
     padding: .5rem 1rem;
     z-index: 3;
-    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+    @media (max-width: ${BREAKPOINTS.NAV}) {
         padding: .2rem 0;
     }
 `;
@@ -34,7 +34,7 @@ const NavAnchor = styled.a`
     font-size: 1.15rem;
     font-weight: 500;
 
-    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+    @media (max-width: ${BREAKPOINTS.NAV}) {
         font-size: .70rem;
     }
 `;
@@ -49,7 +49,7 @@ const SocialBadge = styled.img`
     max-width: 30px;
     max-height: 30px;
 
-    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+    @media (max-width: ${BREAKPOINTS.NAV}) {
         max-width: 20px;
         max-height: 20px;
     }
@@ -58,7 +58,7 @@ const SocialBadge = styled.img`
 const SiteLinks = styled.div`
     display: inline;
 
-    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+    @media (max-width: ${BREAKPOINTS.NAV}) {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -77,7 +77,7 @@ const StoreActionLink = styled(ActionLink)`
     padding: .33rem .75rem;
     vertical-align: top;
 
-    @media (max-width: ${BREAKPOINTS.MOBILE}) {
+    @media (max-width: ${BREAKPOINTS.NAV}) {
         padding: .2rem .4rem;
     }
 `;
