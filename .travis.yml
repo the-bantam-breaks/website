@@ -54,7 +54,6 @@ script:
     if [[ "$STATUSCODE" != 200 ]]; then
       echo "Test HTTP request to website container failed!  Returned $STATUSCODE"
       docker logs website
-#      exit 1
     fi
   - docker tag breaks-website:latest 796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website:latest
   - docker tag breaks-website:latest 796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website:${TRAVIS_BUILD_NUMBER}
