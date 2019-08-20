@@ -13,6 +13,13 @@ install:
   - uname -m
   - pip install --user awscli
   - docker network create bantam
+  - docker run -d --rm
+      --network bantam
+      --name postgres
+      -e POSTGRES_USER=${ENV_PG_USER}
+      -e POSTGRES_DB=${ENV_PG_DATABASE}
+      -e POSTGRES_PASSWORD=${ENV_PG_PASSWORD}
+      postgres:11
 
 script:
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
