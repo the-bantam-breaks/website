@@ -22,6 +22,26 @@
                 ],
                 "secrets": [
                     {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:ENV_PG_HOST-tZ0S5f",
+                        "name": "ENV_PG_HOST"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:ENV_PG_PORT-os9fnP",
+                        "name": "ENV_PG_PORT"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:ENV_PG_DATABASE-p9oK5z",
+                        "name": "ENV_PG_DATABASE"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:ENV_PG_USER-GS1MKc",
+                        "name": "ENV_PG_USER"
+                    },
+                    {
+                        "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:ENV_PG_PASSWORD-DEO4Gg",
+                        "name": "ENV_PG_PASSWORD"
+                    },
+                    {
                         "valueFrom": "arn:aws:secretsmanager:us-east-1:796520576045:secret:bantam-insta-user-id-Q9kEc8",
                         "name": "ENV_INSTAGRAM_USER_ID"
                     },
