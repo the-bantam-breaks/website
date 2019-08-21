@@ -11,19 +11,21 @@ export const InstaGrid = (props) => {
     }
 
     const { data = [] } = instagramData;
-
-    const images = data.map(({
-        caption: { text: caption },
-        comments: { count: commentCount },
+    const images = (data || []).map(({
+        caption,
+        comments,
         link,
-        likes: { count: likeCount },
+        likes,
         images: {
             standard_resolution: { url: src }
         }
     }, index) => {
+        const captionText = caption ? caption.text : '';
+        const commentCount = comments ? comments.count : null;
+        const likeCount = likes ? likes.count : null;
         return (
             <InstaPic key={`feed_pic_${index}`}
-                      caption={caption}
+                      caption={captionText}
                       commentCount={commentCount}
                       likeCount={likeCount}
                       link={link}
