@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY docker/start.sh start.sh
 RUN yarn install && \
     apt-get update -y -qq && \
-    apt-get -y -qq install netcat && \
+    apt-get -y -qq install netcat postgresql && \
     apt-get clean
 
 # Used for healthcheck

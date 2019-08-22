@@ -5,8 +5,15 @@
 # ENV_PG_PASSWORD
 # ENV_PG_DATABASE
 # ENV_PG_PORT
-source ../../../../.env
-PGPASSFILE=../../../../.pgpass
+#source ../../../../.env
+#PGPASSFILE=../../../../.pgpass
+
+# env vars used by psql
+export PGHOST="$ENV_PG_HOST"
+export PGPORT="$ENV_PG_PORT"
+export PGUSER="$ENV_PG_USER"
+export PGPASSWORD="$ENV_PG_PASSWORD"
+export PGDATABASE="$ENV_PG_DATABASE"
 
 CREATE_DB=../sql/create-db.sql
 
