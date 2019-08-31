@@ -34,7 +34,7 @@
     "nodemon": "1.19.1",
     "pg": "7.12.1",
     "prop-types": "15.7.2",
-    "query-string": "6.8.2",
+    "query-string": "6.8.3",
     "react": "16.9.0",
     "react-card-flip": "0.8.1",
     "react-dom": "16.9.0",
