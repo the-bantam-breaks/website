@@ -8,7 +8,7 @@ export const subscriptions = {
             console.log('new subscription VALUE------>\n', JSON.stringify(query, null, 2));
 
             ctx.body = {
-                message: `subscription has been added`
+                message: 'subscription has been added'
             };
         },
 
@@ -18,7 +18,7 @@ export const subscriptions = {
             console.log('delete subscription VALUE------>\n', JSON.stringify(query, null, 2));
 
             ctx.body = {
-                message: `subscription has been deleted`
+                message: 'subscription has been deleted'
             };
         }
     }

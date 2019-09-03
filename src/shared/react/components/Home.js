@@ -36,7 +36,7 @@ class Home extends Component {
         }
         return (
             <AppDataProvider value={appData}>
-                <Hero />
+                <Hero subHeading="Listen Now!" subHeadingLink="https://open.spotify.com/album/4LS7atij47xKeMUHAjV0nm" />
                 <NavBar />
                 <AlbumGrid />
                 <LiveShows />
