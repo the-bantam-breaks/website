@@ -56,7 +56,7 @@ export const EpkBio = () => {
                 <h5>Contact</h5>
                 <div>
                     thebantambreaks@gmail.com<br />
-                    <a href="tel:404-907-3161">{`(404)-907-3161`}</a>
+                    <a href="tel:404-907-3161">{'(404)-907-3161'}</a>
                 </div>
                 <br />
                 <a
