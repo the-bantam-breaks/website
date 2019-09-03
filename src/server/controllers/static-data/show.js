@@ -205,6 +205,21 @@ const SHOW_DATA = [{
     state: 'GA'
 },
 {
+    date: '2019-09-09T21:00:00-05:00',
+    venueName: 'Decatur FM Radio Interview',
+    venueUrl: 'https://www.decaturfm.com/',
+    cover: 'free - listen online',
+    city: 'Decatur',
+    state: 'GA'
+},
+{
+    date: '2019-10-04T20:00:00-05:00',
+    venueName: 'Tin Roof Cantina',
+    venueUrl: 'http://tinroofcantina.com/',
+    city: 'Atlanta',
+    state: 'GA'
+},
+{
     date: '2019-10-12T12:00:00-05:00',
     venueName: 'Oakhurst Porchfest (details T.B.D.)',
     venueUrl: 'https://www.oakhurstporchfest.org',

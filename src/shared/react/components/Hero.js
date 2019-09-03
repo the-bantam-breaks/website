@@ -72,7 +72,7 @@ const HeroBackdrop = styled.section`
 
 export const Hero = (props) => {
     const { hero } = useAppData('appImages') || {};
-    const { className, heading, showForm, subHeading } = props;
+    const { className, heading, showForm, subHeading, subHeadingLink } = props;
 
     return (
       <HeroBackdrop className={className}>
@@ -86,7 +86,17 @@ export const Hero = (props) => {
               <OffscreenH>{'The Bantam Breaks'}</OffscreenH>
               <Logo width={'30vw'} color='light' />
               <HeroH>{heading}</HeroH>
-              <HeroSubH>{subHeading}</HeroSubH>
+              <HeroSubH>
+                  {
+                      subHeadingLink
+                          ? (
+                              <a href={subHeadingLink}>
+                                  {subHeading}
+                              </a>
+                          )
+                          : subHeading
+                  }
+              </HeroSubH>
           </HeroText>
           </div>
       </HeroBackdrop>
@@ -97,11 +107,13 @@ Hero.propTypes = {
     className: PropTypes.string,
     heading: PropTypes.string,
     subHeading: PropTypes.string,
-    showForm: PropTypes.bool
+    showForm: PropTypes.bool,
+    subHeadingLink: PropTypes.string
 };
 
 Hero.defaultProps = {
     heading: 'The Red EP',
     showForm: true,
-    subHeading: 'Coming September 1st, 2019'
+    subHeading: '',
+    subHeadingLink: undefined
 };
