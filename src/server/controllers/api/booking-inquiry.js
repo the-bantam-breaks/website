@@ -1,11 +1,11 @@
 import {
+    isValidEmail,
     sendToGmail,
     sendSesMail,
     sendSlackBookingMessage
 } from '../util';
 
 const BREAKS_GMAIL_ADDRESS = process.env.ENV_BOOOKING_MAIL_ACCOUNT;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const htmlMailMessage = ({ name, email, message }) =>
     `<p>From: ${name}</p><p>Email: ${email}</p><div>${message}</div>`;
@@ -57,8 +57,8 @@ export const bookingInquiry = {
         new: () => async (ctx) => {
             const { email, message, name } = ctx.request.body;
 
-            if (!EMAIL_REGEX.test(email)) {
-                ctx.status = 500;
+            if (!isValidEmail(email)) {
+                ctx.status = 400;
                 ctx.body = 'There was a problem sending email to the address you provided';
                 return;
             }
