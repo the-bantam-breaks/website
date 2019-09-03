@@ -211,7 +211,7 @@ const SHOW_DATA = [{
     cover: 'free - listen online',
     city: 'Decatur',
     state: 'GA'
-},,
+},
 {
     date: '2019-10-04T20:00:00-05:00',
     venueName: 'Tin Roof Cantina',
