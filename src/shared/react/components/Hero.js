@@ -81,7 +81,11 @@ export const Hero = (props) => {
               <OffscreenH>{'The Bantam Breaks'}</OffscreenH>
               <Logo width={'30vw'} color='light' />
               <HeroH>{heading}</HeroH>
-              <HeroSubH>{subHeading}</HeroSubH>
+              <HeroSubH>
+                  <a href="https://open.spotify.com/album/4LS7atij47xKeMUHAjV0nm">
+                      {subHeading}
+                  </a>
+              </HeroSubH>
           </HeroText>
           </div>
       </HeroBackdrop>
@@ -96,5 +100,5 @@ Hero.propTypes = {
 
 Hero.defaultProps = {
     heading: 'The Red EP',
-    subHeading: 'Coming September 1st, 2019'
+    subHeading: 'Listen Now!'
 };
