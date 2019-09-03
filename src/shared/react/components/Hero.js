@@ -68,7 +68,7 @@ const HeroBackdrop = styled.section`
 
 export const Hero = (props) => {
     const { hero } = useAppData('appImages') || {};
-    const { className, heading, subHeading } = props;
+    const { className, heading, subHeading, subHeadingLink } = props;
 
     return (
       <HeroBackdrop className={className}>
@@ -82,9 +82,15 @@ export const Hero = (props) => {
               <Logo width={'30vw'} color='light' />
               <HeroH>{heading}</HeroH>
               <HeroSubH>
-                  <a href="https://open.spotify.com/album/4LS7atij47xKeMUHAjV0nm">
-                      {subHeading}
-                  </a>
+                  {
+                      subHeadingLink
+                          ? (
+                              <a href={subHeadingLink}>
+                                  {subHeading}
+                              </a>
+                          )
+                          : subHeading
+                  }
               </HeroSubH>
           </HeroText>
           </div>
@@ -95,10 +101,12 @@ export const Hero = (props) => {
 Hero.propTypes = {
     className: PropTypes.string,
     heading: PropTypes.string,
-    subHeading: PropTypes.string
+    subHeading: PropTypes.string,
+    subHeadingLink: PropTypes.string
 };
 
 Hero.defaultProps = {
     heading: 'The Red EP',
-    subHeading: 'Listen Now!'
+    subHeading: '',
+    subHeadingLink: undefined
 };
