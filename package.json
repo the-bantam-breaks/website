@@ -21,7 +21,7 @@
     "aws-sdk": "2.514.0",
     "eslint-plugin-promise": "4.2.1",
     "express": "4.17.1",
-    "google-libphonenumber": "3.2.3",
+    "google-libphonenumber": "3.2.5",
     "isomorphic-fetch": "2.2.1",
     "koa": "2.8.1",
     "koa-bodyparser": "4.2.1",
