@@ -220,8 +220,8 @@ const SHOW_DATA = [{
     state: 'GA'
 },
 {
-    date: '2019-10-12T12:00:00-05:00',
-    venueName: 'Oakhurst Porchfest (details T.B.D.)',
+    date: '2019-10-12T13:00:00-05:00',
+    venueName: 'Oakhurst Porchfest (2-3pm @ 113 N 4th Ave.)',
     venueUrl: 'https://www.oakhurstporchfest.org',
     city: 'Decatur',
     cover: 'free',
