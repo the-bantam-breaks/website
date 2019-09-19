@@ -5,7 +5,7 @@ export const PG_POOL = new Pool({
     host: process.env.ENV_PG_HOST,
     database: process.env.ENV_PG_DATABASE,
     password: process.env.ENV_PG_PASSWORD,
-    post: process.env.ENV_PG_PORT
+    port: process.env.ENV_PG_PORT
 });
 
 export const drainPool = async () => {
