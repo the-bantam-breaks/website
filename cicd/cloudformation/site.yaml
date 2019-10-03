@@ -31,6 +31,27 @@ Parameters:
     Type: String
     Default: HTTP
 
+  AllowSourceCidr:
+    Type: String
+    Default: 10.0.0.0/8
+
+  EcsAmi:
+    Description: AMI ID
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id
+
+  KeyName:
+    Type: String
+    Default: gs-macbook
+
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.medium
+    ConstraintDescription: must be a valid EC2 instance type.
+
 Resources:
 # ACM cert
 # DNS?
@@ -129,7 +150,17 @@ Resources:
                   - 'kms:Decrypt'
                 Resource: '*'
 
-# EC2 IAM/instance profile
+  EC2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VpcId
+      GroupDescription: !Sub "${Lifecycle} Security Group for EC2"
+      SecurityGroupIngress:
+        - CidrIp: !Ref AllowSourceCidr
+          IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+
   EC2Role:
     Type: AWS::IAM::Role
     Properties:
@@ -166,7 +197,6 @@ Resources:
       Path: /
       Roles: [!Ref 'EC2Role']
 
-# ECS sec group
   ServiceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     DependsOn: LoadBalancerSecurityGroup
@@ -179,16 +209,52 @@ Resources:
           ToPort: 8080
           SourceSecurityGroupId: !Ref LoadBalancerSecurityGroup
 
-# EC2 sec group
-# postgres sec group
-
-# ecs cluster
-
 # ec2 instances
 ## LaunchConfiguration
 ## AutoScaleGroup
+  LaunchConfiguration:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      ImageId: !Ref EcsAmi
+      SecurityGroups:
+        - !Ref EC2SecurityGroup
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      UserData:
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            mkdir -p /var/lib/ecs/data
+            cat <<-EOF >> /etc/ecs/ecs.config
+            ECS_CLUSTER=${Lifecycle}
+            ECS_BACKEND_HOST=
+            ECS_AVAILABLE_LOGGING_DRIVERS=["splunk","awslogs"]
+            ECS_LOGLEVEL=info
+            ECS_DATADIR=/data
+            EOF
+
+  AutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      LaunchConfigurationName: !Ref LaunchConfiguration
+      MinSize: 1
+      MaxSize: 4
+      VPCZoneIdentifier:
+        - !Ref Subnet1
+        - !Ref Subnet2
+
+# ecs cluster
+  ECSCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Ref Lifecycle
+
 
 # task definition
 # ecs service
+
 # postgres db?
 ## postgres as container?
+# postgres sec group
+
