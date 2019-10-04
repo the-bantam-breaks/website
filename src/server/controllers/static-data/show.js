@@ -134,7 +134,7 @@ const SHOW_DATA = [{
     venueUrl: 'http://amici-cafe.com/milledgeville.html',
     city: 'Milledgeville',
     state: 'GA',
-    time: '10pm',
+    time: '10pm'
 },
 {
     date: '2018-03-23',
