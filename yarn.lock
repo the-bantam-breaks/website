@@ -874,17 +874,17 @@
   dependencies:
     vary "^1.1.2"
 
-"@slack/types@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@slack/types/-/types-1.0.0.tgz#1dc7a63b293c4911e474197585c3feda012df17a"
-  integrity sha512-IktC4uD/CHfLQcSitKSmjmRu4a6+Nf/KzfS6dTgUlDzENhh26l8aESKAuIpvYD5VOOE6NxDDIAdPJOXBvUGxlg==
+"@slack/types@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/@slack/types/-/types-1.2.0.tgz#edad17244ccc335afb31c1089a0a86ae480373f5"
+  integrity sha512-XsksAErF2CN9jqNzKrm3tVkGke0wT6xsIdw80h9PIKaYJzmpt5soweaFGbV3j74VuwIOOq4P5sHjrSZaP0Du0w==
 
-"@slack/webhook@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/@slack/webhook/-/webhook-5.0.0.tgz#0044a3940afc16cbc607c71acdffddb9e9d4f161"
-  integrity sha512-cDj3kz3x9z9271xPNzlwb90DpKTYybG2OWPJHigJL8FegR80rzQyD0v4bGuStGGkHbAYDKE2BMpJambR55hnSg==
+"@slack/webhook@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/@slack/webhook/-/webhook-5.0.2.tgz#822f7f930291ad2600db1ce8c39254260dc4d2fe"
+  integrity sha512-Ns35+KC//EWu+g+Bzp5m18V7qsCBdqAdvV4FJi2ng8+jto4rH2Bv2vUMmMioRn9LIiZ38LPsX/InrFjaO5XwGA==
   dependencies:
-    "@slack/types" "^1.0.0"
+    "@slack/types" "^1.1.0"
     "@types/node" ">=8.9.0"
     axios "^0.18.0"
 
