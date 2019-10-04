@@ -239,7 +239,7 @@ const decoratedShowData = (shows = []) => {
             month: momentDate.format('MMM'),
             year: momentDate.format('YYYY'),
             weekday: momentDate.format('ddd'),
-            time: momentDate.format('ha'),
+            time: momentDate.format('LT'),
             ...restOfShow
         }
     });
