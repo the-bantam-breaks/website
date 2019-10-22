@@ -1,23 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: The Bantam Breaks site
+Description: Deploy the bantam breaks site
 
 Parameters:
   Lifecycle:
-    Description: dev or prod
     Type: String
-
-  VpcId:
-    Description: ID of VPC
-    Type: AWS::EC2::VPC::Id
-    Default: vpc-00fb6a970908dbccc
-
-  Subnet1:
-    Type: AWS::EC2::Subnet::Id
-    Default: subnet-061440f11d3652bf1
-
-  Subnet2:
-    Type: AWS::EC2::Subnet::Id
-    Default: subnet-049c13661f6dbb09f
+    Default: dev
 
   ListenerPort:
     Type: Number
@@ -25,78 +12,45 @@ Parameters:
 
   ContainerPort:
     Type: Number
-    Default: 8080
+    Default: 3000
 
   ContainerProtocol:
     Type: String
     Default: HTTP
 
-  AllowSourceCidr:
-    Type: String
-    Default: 10.0.0.0/8
+  ContainerCpu:
+    Type: Number
+    Default: 256
 
-  EcsAmi:
-    Description: AMI ID
-    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
-    Default: /aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id
+  ContainerMemory:
+    Type: Number
+    Default: 1024
 
-  KeyName:
+  ImagePath:
     Type: String
-    Default: gs-macbook
+    Default: 796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website
 
-  InstanceType:
+  ImageTag:
     Type: String
-    Default: t2.micro
-    AllowedValues:
-      - t2.micro
-      - t2.medium
-    ConstraintDescription: must be a valid EC2 instance type.
+    Default: latest
 
 Resources:
-# ACM cert
-# DNS?
-  LoadBalancerSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: !Sub "${Lifecycle} load balancer SG"
-      VpcId: !Ref VpcId
-      SecurityGroupIngress:
-        - CidrIp: 0.0.0.0/0
-          IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-
-  LoadBalancer:
-    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
-    DependsOn: LoadBalancerSecurityGroup
-    Properties:
-      Type: application
-      Name: !Sub "${Lifecycle}-alb"
-      Scheme: internet-facing
-      SecurityGroups:
-        - !Ref LoadBalancerSecurityGroup
-      Subnets:
-        - !Ref Subnet1
-        - !Ref Subnet2
-
   Listener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
-      LoadBalancerArn: !Ref LoadBalancer
+      LoadBalancerArn: !ImportValue BBLoadBalancerArn
       Port: !Ref ListenerPort
       Protocol: !Ref ContainerProtocol
       DefaultActions:
         - TargetGroupArn: !Ref TargetGroup
           Type: 'forward'
 
-# target group
   TargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      Name: !Sub "${Lifecycle}"
       Port: !Ref ContainerPort
       Protocol: !Ref ContainerProtocol
-      VpcId: !Ref VpcId
+      VpcId: !ImportValue BBVpcId
       TargetType: ip
       HealthCheckProtocol: !Ref ContainerProtocol
       HealthCheckPort: !Ref ContainerPort
@@ -105,11 +59,17 @@ Resources:
       HealthCheckTimeoutSeconds: 5
       HealthCheckIntervalSeconds: 20
 
-# ECS IAM
+  # TODO routing rule for ALB
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/ecs/${Lifecycle}-website"
+
   ECSExecutionRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Sub "${Lifecycle}-ecs-role"
+      RoleName: "ecs-role"
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
@@ -148,113 +108,94 @@ Resources:
                   - 'ssm:GetParameter'
                   - 'secretsmanager:GetSecretValue'
                   - 'kms:Decrypt'
+
+                  # ecr shit
+                  - 'ecr:GetAuthorizationToken'
+                  - 'ecr:BatchGetImage'
+                  - 'ecr:GetDownloadUrlForLayer'
+
+                  # ecs shit
+                  - 'ecs:CreateCluster'
+                  - 'ecs:DeregisterContainerInstance'
+                  - 'ecs:DiscoverPollEndpoint'
+                  - 'ecs:Poll'
+                  - 'ecs:RegisterContainerInstance'
+                  - 'ecs:StartTelemetrySession'
+                  - 'ecs:Submit*'
+
+                  # send logs to cloudwatch shit
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
                 Resource: '*'
 
-  EC2SecurityGroup:
-    Type: AWS::EC2::SecurityGroup
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
     Properties:
-      VpcId: !Ref VpcId
-      GroupDescription: !Sub "${Lifecycle} Security Group for EC2"
-      SecurityGroupIngress:
-        - CidrIp: !Ref AllowSourceCidr
-          IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
+      Family: !Ref Lifecycle
+      NetworkMode: awsvpc
+      RequiresCompatibilities: [EC2]
+      TaskRoleArn: !Ref ECSExecutionRole
+      ExecutionRoleArn: !Ref ECSExecutionRole
+      ContainerDefinitions:
+        - Name: !Sub "${Lifecycle}-site"
+          Cpu: !Ref ContainerCpu
+          Memory: !Ref ContainerMemory
+          Image: !Sub "${ImagePath}:${ImageTag}"
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-region: !Ref AWS::Region
+              awslogs-group: !Ref LogGroup
+              awslogs-stream-prefix: ecs
+          # TODO all secrets here
+          Environment:
+            - Name: ENV_AWS_REGION
+              Value: !Ref AWS::Region
+            - Name: ENV_PG_DATABASE
+              Value: !Sub "${Lifecycle}_breaks_db"
+          Secrets:
+            - Name: ENV_INSTAGRAM_USER_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-insta-user-id"
+            - Name: ENV_INSTAGRAM_TOKEN
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-insta-token"
+            - Name: ENV_BOOOKING_SLACK_WEBHOOK_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-slack-webhook-url"
+            - Name: ENV_BOOOKING_MAIL_ACCOUNT
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-booking-email-account"
+            - Name: ENV_AWS_ACCESS_KEY_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-aws-access-key"
+            - Name: ENV_AWS_SECRET_ACCESS_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-aws-secret-access-key"
+            - Name: ENV_PG_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/ENV_PG_PASSWORD"
+            - Name: ENV_PG_PORT
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/ENV_PG_PORT"
+            - Name: ENV_PG_USER
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/ENV_PG_USER"
+            - Name: ENV_PG_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/ENV_PG_HOST"
 
-  EC2Role:
-    Type: AWS::IAM::Role
+  Service:
+    Type: AWS::ECS::Service
     Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-        - Effect: Allow
-          Principal:
-            Service: [ec2.amazonaws.com]
-          Action: ['sts:AssumeRole']
-      Path: /
-      Policies:
-      - PolicyName: ecs-service
-        PolicyDocument:
-          Statement:
-          - Effect: Allow
-            Action:
-              - 'ecs:CreateCluster'
-              - 'ecs:DeregisterContainerInstance'
-              - 'ecs:DiscoverPollEndpoint'
-              - 'ecs:Poll'
-              - 'ecs:RegisterContainerInstance'
-              - 'ecs:StartTelemetrySession'
-              - 'ecs:Submit*'
-              - 'logs:CreateLogStream'
-              - 'logs:PutLogEvents'
-              - 'ecr:GetAuthorizationToken'
-              - 'ecr:BatchGetImage'
-              - 'ecr:GetDownloadUrlForLayer'
-            Resource: '*'
-
-  EC2InstanceProfile:
-    Type: AWS::IAM::InstanceProfile
-    Properties:
-      Path: /
-      Roles: [!Ref 'EC2Role']
-
-  ServiceSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    DependsOn: LoadBalancerSecurityGroup
-    Properties:
-      GroupDescription: website container traffic
-      VpcId: !Ref VpcId
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 8080
-          ToPort: 8080
-          SourceSecurityGroupId: !Ref LoadBalancerSecurityGroup
-
-# ec2 instances
-## LaunchConfiguration
-## AutoScaleGroup
-  LaunchConfiguration:
-    Type: AWS::AutoScaling::LaunchConfiguration
-    Properties:
-      ImageId: !Ref EcsAmi
-      SecurityGroups:
-        - !Ref EC2SecurityGroup
-      InstanceType: !Ref InstanceType
-      KeyName: !Ref KeyName
-      IamInstanceProfile: !Ref EC2InstanceProfile
-      UserData:
-        Fn::Base64:
-          !Sub |
-            #!/bin/bash -xe
-            mkdir -p /var/lib/ecs/data
-            cat <<-EOF >> /etc/ecs/ecs.config
-            ECS_CLUSTER=${Lifecycle}
-            ECS_BACKEND_HOST=
-            ECS_AVAILABLE_LOGGING_DRIVERS=["splunk","awslogs"]
-            ECS_LOGLEVEL=info
-            ECS_DATADIR=/data
-            EOF
-
-  AutoScalingGroup:
-    Type: AWS::AutoScaling::AutoScalingGroup
-    Properties:
-      LaunchConfigurationName: !Ref LaunchConfiguration
-      MinSize: 1
-      MaxSize: 4
-      VPCZoneIdentifier:
-        - !Ref Subnet1
-        - !Ref Subnet2
-
-# ecs cluster
-  ECSCluster:
-    Type: AWS::ECS::Cluster
-    Properties:
-      ClusterName: !Ref Lifecycle
-
-
-# task definition
-# ecs service
-
-# postgres db?
-## postgres as container?
-# postgres sec group
-
+      ServiceName: !Sub "${Lifecycle}-site"
+      Cluster: !ImportValue BBEcsCluster
+      LaunchType: EC2
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 50
+      DesiredCount: 2
+      LoadBalancers:
+        - ContainerName: !Sub "${Lifecycle}-site"
+          ContainerPort: !Ref ContainerPort
+          TargetGroupArn: !Ref TargetGroup
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          SecurityGroups:
+            - !ImportValue BBServiceSecurityGroupId
+          Subnets:
+            - !ImportValue BBPrivateSubnet1
+            - !ImportValue BBPrivateSubnet2
+      TaskDefinition: !Ref TaskDefinition

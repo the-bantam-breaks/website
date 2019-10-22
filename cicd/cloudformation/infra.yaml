@@ -1,22 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: The Bantam Breaks site
+Description: The Bantam Breaks Website Infrastructure
 
 Parameters:
   Lifecycle:
     Description: dev or prod
     Type: String
-
-  ListenerPort:
-    Type: Number
-    Default: 443
-
-  ContainerPort:
-    Type: Number
-    Default: 8080
-
-  ContainerProtocol:
-    Type: String
-    Default: HTTP
 
   AllowSourceCidr:
     Type: String
@@ -37,19 +25,14 @@ Parameters:
 
   InstanceType:
     Type: String
-    Default: t2.micro
+    Default: t2.small
     AllowedValues:
       - t2.micro
+      - t2.small
       - t2.medium
     ConstraintDescription: must be a valid EC2 instance type.
 
 Resources:
-# 1 pub, 1 priv subnet per AZ
-# NGW in each AZ pub subnet
-# NGW 0.0.0.0/0 route to IGW
-# priv subnet 0.0.0.0/0 route to NGW
-# instances in priv subnets
-# EIP allocations for NGWs
   Vpc:
     Type: AWS::EC2::VPC
     Properties:
@@ -216,84 +199,12 @@ Resources:
     DependsOn: LoadBalancerSecurityGroup
     Properties:
       Type: application
-#      Name: !Sub "alb"
       Scheme: internet-facing
       SecurityGroups:
         - !Ref LoadBalancerSecurityGroup
       Subnets:
         - !Ref PublicSubnet1
         - !Ref PublicSubnet2
-
-  Listener:
-    Type: AWS::ElasticLoadBalancingV2::Listener
-    Properties:
-      LoadBalancerArn: !Ref LoadBalancer
-      Port: !Ref ListenerPort
-      Protocol: !Ref ContainerProtocol
-      DefaultActions:
-        - TargetGroupArn: !Ref TargetGroup
-          Type: 'forward'
-
-# target group
-  TargetGroup:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      #Name: !Sub "${Lifecycle}"
-      Port: !Ref ContainerPort
-      Protocol: !Ref ContainerProtocol
-      VpcId: !Ref Vpc
-      TargetType: ip
-      HealthCheckProtocol: !Ref ContainerProtocol
-      HealthCheckPort: !Ref ContainerPort
-      HealthyThresholdCount: 3
-      UnhealthyThresholdCount: 3
-      HealthCheckTimeoutSeconds: 5
-      HealthCheckIntervalSeconds: 20
-
-# ECS IAM
-  ECSExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: "ecs-role"
-      AssumeRolePolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: [ecs-tasks.amazonaws.com]
-            Action: ['sts:AssumeRole']
-      Path: /
-      Policies:
-        # TODO: break these down in to multiple policies and protect
-        #       production secrets using ARN patterns.
-        - PolicyName: ecs-service
-          PolicyDocument:
-            Statement:
-              - Effect: Allow
-                Action:
-                  # Rules which allow ECS to attach network interfaces to instances
-                  # on your behalf in order for awsvpc networking mode to work right
-                  - 'ec2:AttachNetworkInterface'
-                  - 'ec2:CreateNetworkInterface'
-                  - 'ec2:CreateNetworkInterfacePermission'
-                  - 'ec2:DeleteNetworkInterface'
-                  - 'ec2:DeleteNetworkInterfacePermission'
-                  - 'ec2:Describe*'
-                  - 'ec2:DetachNetworkInterface'
-
-                  # Rules which allow ECS to update load balancers on your behalf
-                  # with the information sabout how to send traffic to your containers
-                  - 'elasticloadbalancing:DeregisterInstancesFromLoadBalancer'
-                  - 'elasticloadbalancing:DeregisterTargets'
-                  - 'elasticloadbalancing:Describe*'
-                  - 'elasticloadbalancing:RegisterInstancesWithLoadBalancer'
-                  - 'elasticloadbalancing:RegisterTargets'
-
-                  # Support "secrets" section of the task definition
-                  - 'ssm:GetParameters'
-                  - 'ssm:GetParameter'
-                  - 'secretsmanager:GetSecretValue'
-                  - 'kms:Decrypt'
-                Resource: '*'
 
   EC2SecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -354,9 +265,6 @@ Resources:
           ToPort: 8080
           SourceSecurityGroupId: !Ref LoadBalancerSecurityGroup
 
-# ec2 instances
-## LaunchConfiguration
-## AutoScaleGroup
   LaunchConfiguration:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
@@ -389,17 +297,43 @@ Resources:
         - !Ref PrivateSubnet1
         - !Ref PrivateSubnet2
 
-# ecs cluster
-#  ECSCluster:
-#    Type: AWS::ECS::Cluster
-#    Properties:
-#      ClusterName: !Ref Lifecycle
-
-
-# task definition
-# ecs service
-
 # postgres db?
 ## postgres as container?
 # postgres sec group
 
+Outputs:
+  PrivateSubnet1:
+    Description: Private Subnet AZ1
+    Value: !Ref PrivateSubnet1
+    Export:
+      Name: BBPrivateSubnet1
+
+  PrivateSubnet2:
+    Description: Private Subnet AZ2
+    Value: !Ref PrivateSubnet2
+    Export:
+      Name: BBPrivateSubnet2
+
+  EcsCluster:
+    Description: Name of ECS Cluster
+    Value: !Ref EcsCluster
+    Export:
+      Name: BBEcsCluster
+
+  ServiceSecurityGroupId:
+    Description: ID of security group for ECS services
+    Value: !GetAtt ServiceSecurityGroup.GroupId
+    Export:
+      Name: BBServiceSecurityGroupId
+
+  LoadBalancerArn:
+    Description: ARN of Bantam Breaks site load balancer
+    Value: !Ref LoadBalancer
+    Export:
+      Name: BBLoadBalancerArn
+
+  VpcId:
+    Description: ID of VPC
+    Value: !Ref Vpc
+    Export:
+      Name: BBVpcId
