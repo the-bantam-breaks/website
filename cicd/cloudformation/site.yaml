@@ -10,6 +10,13 @@ Parameters:
     Type: Number
     Default: 443
 
+  ListenerProtocol:
+    Type: String
+    Default: HTTPS
+    AllowedValues:
+      - HTTP
+      - HTTPS
+
   ContainerPort:
     Type: Number
     Default: 3000
@@ -34,16 +41,45 @@ Parameters:
     Type: String
     Default: latest
 
+  DnsDomain:
+    Type: String
+    Default: thebantambreaks.com
+    AllowedValues:
+      - thebantambreaks.com
+      - bantambreaks.com
+
+  DomainName:
+    Type: String
+    Default: test.thebantambreaks.com
+
 Resources:
+  DnsRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Type: CNAME
+      TTL: 900
+      HostedZoneName: !Sub "${DnsDomain}."
+      Name: !Sub "${DomainName}."
+      ResourceRecords:
+        - !ImportValue BBLoadBalancerCname
+
+  SslCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref DomainName
+      ValidationMethod: DNS
+
   Listener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
       LoadBalancerArn: !ImportValue BBLoadBalancerArn
       Port: !Ref ListenerPort
-      Protocol: !Ref ContainerProtocol
+      Protocol: !Ref ListenerProtocol
       DefaultActions:
         - TargetGroupArn: !Ref TargetGroup
           Type: 'forward'
+      Certificates:
+        - CertificateArn: !Ref SslCertificate
 
   TargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
@@ -58,6 +94,16 @@ Resources:
       UnhealthyThresholdCount: 3
       HealthCheckTimeoutSeconds: 5
       HealthCheckIntervalSeconds: 20
+
+  ContainerSecurityIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      Description: Allow load balancer to connect to containers
+      FromPort: !Ref ContainerPort
+      ToPort: !Ref ContainerPort
+      IpProtocol: tcp
+      GroupId: !ImportValue BBServiceSecurityGroupId
+      SourceSecurityGroupId: !ImportValue BBLoadBalancerSecurityGroupId
 
   # TODO routing rule for ALB
 

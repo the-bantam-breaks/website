@@ -181,8 +181,6 @@ Resources:
     Properties:
       Domain: vpc
 
-# ACM cert
-# DNS?
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -326,11 +324,23 @@ Outputs:
     Export:
       Name: BBServiceSecurityGroupId
 
+  LoadBalancerSecurityGroupId:
+    Description: ID of security group of load balancer
+    Value: !GetAtt LoadBalancerSecurityGroup.GroupId
+    Export:
+      Name: BBLoadBalancerSecurityGroupId
+
   LoadBalancerArn:
     Description: ARN of Bantam Breaks site load balancer
     Value: !Ref LoadBalancer
     Export:
       Name: BBLoadBalancerArn
+
+  LoadBalancerCname:
+    Description: CNAME record of load balancer
+    Value: !GetAtt LoadBalancer.DNSName
+    Export:
+      Name: BBLoadBalancerCname
 
   VpcId:
     Description: ID of VPC
