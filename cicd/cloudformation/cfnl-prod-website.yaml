@@ -1,0 +1,12 @@
+stackname: prod-breaks-site
+profilename: personal
+region: us-east-1
+templatelocal: site.yaml
+parametersfilepath: prod-params.json
+capabilitynamediam: true
+deletecreatefailures: true
+uses3template: false
+nolog: true
+verbose: true
+waittime: 5
+maxwaits: 360
