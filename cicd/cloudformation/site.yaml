@@ -90,7 +90,7 @@ Resources:
       TargetType: ip
       HealthCheckProtocol: !Ref ContainerProtocol
       HealthCheckPort: !Ref ContainerPort
-      HealthyThresholdCount: 3
+      HealthyThresholdCount: 1
       UnhealthyThresholdCount: 3
       HealthCheckTimeoutSeconds: 5
       HealthCheckIntervalSeconds: 20

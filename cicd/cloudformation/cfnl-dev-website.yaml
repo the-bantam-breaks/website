@@ -1,5 +1,5 @@
 stackname: dev-breaks-site
-profilename: default
+profilename: personal
 region: us-east-1
 templatelocal: site.yaml
 parametersfilepath: dev-params.json
