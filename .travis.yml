@@ -53,7 +53,7 @@ after_success:
         aws cloudformation update-stack --stack-name dev-breaks-site \
           --template-body file://site.yaml \
           --capabilities CAPABILITY_NAMED_IAM \
-          --parameters "ParameterKey=Lifecycle,ParameterValue=dev ParameterKey=ImageTag,ParameterValue=${TRAVIS_BUILD_NUMBER}"
+          --parameters ParameterKey=Lifecycle,ParameterValue=dev ParameterKey=ImageTag,ParameterValue=${TRAVIS_BUILD_NUMBER}
       elif [[ "$TRAVIS_BRANCH" = "master" ]]; then
         ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER website
       elif [[ "$TRAVIS_BRANCH" = "develop" ]]; then
