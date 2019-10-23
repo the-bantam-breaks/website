@@ -7,8 +7,6 @@ install:
   - docker --version
   - uname -m
   - pip install --user awscli
-  - echo -e "[default]\nregion = us-east-1" > ~/.aws/config
-  - echo -e "[default]\naws_access_key_id = ${AWS_ACCESS_KEY_ID}\naws_secret_access_key = ${AWS_SECRET_ACCESS_KEY} > ~/.aws/credentials"
   - docker network create bantam
 
 script:
@@ -52,7 +50,10 @@ after_success:
     if [[ "$TRAVIS_PULL_REQUEST" ]]; then
       if [[ "$TRAVIS_BRANCH" = "new-infra" ]]; then
         cd cicd/cloudformation
-        ./cfnl -f cfnl-dev-website.yaml -u
+        aws cloudformation update-stack --stack-name dev-breaks-site \
+          --template-body file://site.yaml \
+          --capabilities CAPABILITY_NAMED_IAM \
+          --parameters "ParameterKey=Lifecycle,ParameterValue=dev ParameterKey=ImageTag,ParameterValue=${TRAVIS_BUILD_NUMBER}"
       elif [[ "$TRAVIS_BRANCH" = "master" ]]; then
         ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER website
       elif [[ "$TRAVIS_BRANCH" = "develop" ]]; then
