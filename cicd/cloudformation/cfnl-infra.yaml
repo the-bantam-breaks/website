@@ -1,5 +1,5 @@
 stackname: breaks-site-infra
-profilename: personal
+profilename: default
 region: us-east-1
 templatelocal: infra.yaml
 parametersfilepath: infra-params.json

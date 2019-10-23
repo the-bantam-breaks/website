@@ -48,7 +48,10 @@ after_success:
   - echo "Build Successful!"
   - |
     if [[ "$TRAVIS_PULL_REQUEST" ]]; then
-      if [[ "$TRAVIS_BRANCH" = "master" ]]; then
+      if [[ "$TRAVIS_BRANCH" = "new-infra" ]]; then
+        cd cicd/cloudformation
+        ./cfnl -f cfnl-dev-website.yaml -u
+      elif [[ "$TRAVIS_BRANCH" = "master" ]]; then
         ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER website
       elif [[ "$TRAVIS_BRANCH" = "develop" ]]; then
         ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER staging-website
