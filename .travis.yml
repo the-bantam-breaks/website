@@ -3,10 +3,10 @@ sudo: required
 services:
   - docker
 
-#branches:
-#  only:
-#  - develop
-#  - master
+branches:
+  only:
+  - develop
+  - master
 
 install:
   - docker --version
