@@ -1277,10 +1277,10 @@ autolinker@3.1.0:
   dependencies:
     tslib "^1.9.3"
 
-aws-sdk@2.543.0:
-  version "2.543.0"
-  resolved "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.543.0.tgz#08b69a6fab9b3ab08e329888d06a8c4ee583f26d"
-  integrity sha512-ABHsA4W7LLYnTBCgtbTt0NF7+66nMCtdcJuAn30+RGzF0bOw3lCguqzootFrMlIOXklddQFJ9kKTXd+p/+uCVQ==
+aws-sdk@2.596.0:
+  version "2.596.0"
+  resolved "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.596.0.tgz#1a4af0609e174a50ffb8ed8981981e6d77a614fb"
+  integrity sha512-Bp+gyqhLw8tK4sgM1v1PDSw26H1mSXs6yhQInmGzDKqXJor6UyUb9JskFv0zC/bA84XizlshN1BBIgINqk6pNg==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
