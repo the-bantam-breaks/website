@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import { ActionButton, BREAKPOINTS, COLORS, FlexRowGrid, FloatLabelInput } from '../Atoms';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
