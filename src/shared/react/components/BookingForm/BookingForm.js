@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import { ActionButton, BREAKPOINTS, COLORS, EMAIL_REGEX, FlexRowGrid, FloatLabelInput } from '../Atoms';
 
 const DEFAULT_FORM_STATE = {
