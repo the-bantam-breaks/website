@@ -18,7 +18,7 @@
     "@koa/cors": "3.0.0",
     "@slack/webhook": "5.0.2",
     "autolinker": "3.11.1",
-    "aws-sdk": "2.603.0",
+    "aws-sdk": "2.639.0",
     "eslint-plugin-promise": "4.2.1",
     "express": "4.17.1",
     "isomorphic-fetch": "2.2.1",
