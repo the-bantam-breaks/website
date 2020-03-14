@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { AppDataProvider } from '../../context';
 import { BREAKPOINTS, CenteredDiv, SectionHeading } from '../Atoms';
 import { Hero } from '../Hero';
-import { NavBar } from '../NavBar';
 import { Footer } from '../Footer';
 
 const PrivacySection = styled.section`
