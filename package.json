@@ -19,6 +19,7 @@
     "@slack/webhook": "5.0.3",
     "autolinker": "3.13.0",
     "aws-sdk": "2.639.0",
+    "core-js": "3",
     "eslint-plugin-promise": "4.2.1",
     "express": "4.17.1",
     "isomorphic-fetch": "2.2.1",
