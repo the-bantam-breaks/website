@@ -16,7 +16,7 @@ import {
     getUpcomingShows,
     youtubeEmbeddedVideo
 } from './static-data';
-import { instagram } from './instagram';
+// import { instagram } from './instagram';
 
 const getStyleTags = (children) => {
     const sheet = new ServerStyleSheet();
@@ -58,7 +58,7 @@ export const web = {
             appImages: appImages(),
             archivedShows: getShowsArchive(),
             bandMembers: bandMembers(),
-            instagramData: await instagram.feed(),
+            // instagramData: await instagram.feed(),
             upcomingShows: getUpcomingShows(),
             youtubeEmbeddedVideo: youtubeEmbeddedVideo()
         };

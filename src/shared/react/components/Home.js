@@ -4,7 +4,7 @@ import { AlbumGrid } from './AlbumGrid';
 import { BookingForm } from './BookingForm';
 import { Hero } from './Hero';
 import { Footer } from './Footer';
-import { InstaGrid } from './InstaGrid';
+// import { InstaGrid } from './InstaGrid';
 import { NavBar } from './NavBar';
 import { LiveShows } from './LiveShows';
 import { BandGrid } from './BandGrid';
@@ -40,7 +40,6 @@ class Home extends Component {
                 <NavBar />
                 <AlbumGrid />
                 <LiveShows />
-                <InstaGrid />
                 <VideoSection />
                 <BandGrid />
                 <BookingForm />
