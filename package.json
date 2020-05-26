@@ -43,7 +43,7 @@
     "request": "2.88.2",
     "serialize-javascript": "3.0.0",
     "strip-indent": "3.0.0",
-    "styled-components": "5.0.1",
+    "styled-components": "5.1.1",
     "throttle-debounce": "2.1.0",
     "webpack-node-externals": "1.7.2",
     "whatwg-fetch": "2.0.4"
