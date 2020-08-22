@@ -13,7 +13,7 @@
     "start": "webpack -w --config webpack.config.development.js & nodemon server.js"
   },
   "dependencies": {
-    "@babel/runtime": "7.8.7",
+    "@babel/runtime": "7.11.2",
     "@hapi/boom": "9.1.0",
     "@koa/cors": "3.0.0",
     "@slack/webhook": "5.0.3",
@@ -49,12 +49,12 @@
     "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
-    "@babel/core": "7.8.7",
-    "@babel/plugin-transform-runtime": "7.8.3",
-    "@babel/polyfill": "7.8.7",
-    "@babel/preset-env": "7.8.7",
-    "@babel/preset-react": "7.8.3",
-    "babel-loader": "8.0.6",
+    "@babel/core": "7.11.4",
+    "@babel/plugin-transform-runtime": "7.11.0",
+    "@babel/polyfill": "7.10.4",
+    "@babel/preset-env": "7.11.0",
+    "@babel/preset-react": "7.10.4",
+    "babel-loader": "8.1.0",
     "babel-plugin-styled-components": "1.10.7",
     "dotenv-webpack": "1.7.0",
     "eslint": "6.8.0",
