@@ -82,16 +82,6 @@ const StoreActionLink = styled(ActionLink)`
     }
 `;
 
-// removed until we get instagram working
-/*
- * <ActionLink
- * href={'#photos'}
- * title="Photos"
- * look={this.secondaryOrPrimary('#photos')}>
- * Photos
- * </ActionLink>
-*/
-
 class Nav extends Component {
     constructor (props) {
         super(props);
