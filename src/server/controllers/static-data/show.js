@@ -241,7 +241,7 @@ const SHOW_DATA = [{
     time: '9pm'
 },
 {
-    date: '2019-10-04T20:00:00',
+    date: '2019-10-04',
     venueName: 'Tin Roof Cantina',
     venueUrl: 'http://tinroofcantina.com/',
     city: 'Atlanta',
