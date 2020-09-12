@@ -241,7 +241,7 @@ const SHOW_DATA = [{
     time: '9pm'
 },
 {
-    date: '2019-10-04',
+    date: '2019-10-04T20:00:00',
     venueName: 'Tin Roof Cantina',
     venueUrl: 'http://tinroofcantina.com/',
     city: 'Atlanta',
@@ -258,27 +258,29 @@ const SHOW_DATA = [{
     time: '2pm'
 },
 {
-    date: '2020-10-15',
+    date: '2020-10-15T20:30:00',
     venueName: 'Amplify Streaming Series - Live from Waller\'s Coffee',
     venueUrl: 'https://www.facebook.com/amplifymycommunity/',
     city: 'Decatur',
     cover: 'free',
     state: 'GA',
-    time: '8:30pm-9:30pm'
+    time: '8:30pm - 9:30pm'
 }];
+
+const DATE_FORMAT = 'YYYY-MM-DDThh:mm:ss';
 
 const decoratedShowData = (shows = []) => {
     return shows.map((show) => {
         const { date, time, ...restOfShow } = show;
-        const isArchived = moment().isAfter(moment(date, 'YYYY-MM-DD'));
-        const momentDate = moment(date, 'YYYY-MM-DD');
+        const isArchived = moment().isAfter(moment(date, DATE_FORMAT));
+        const momentDate = moment(date, DATE_FORMAT);
         return {
             isArchived,
             day: momentDate.format('Do'),
             month: momentDate.format('MMM'),
             year: momentDate.format('YYYY'),
             weekday: momentDate.format('ddd'),
-            time: momentDate.format('LT'),
+            ...time ? { time } : { time: momentDate.format('LT') },
             ...restOfShow
         }
     });
