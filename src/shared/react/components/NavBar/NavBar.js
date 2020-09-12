@@ -84,6 +84,9 @@ const StoreActionLink = styled(ActionLink)`
 
 // removed until we get instagram working
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3cc7f8e... fix comment (#197)
 /*
  * <ActionLink
  * href={'#photos'}
@@ -92,6 +95,7 @@ const StoreActionLink = styled(ActionLink)`
  * Photos
  * </ActionLink>
 */
+<<<<<<< HEAD
 =======
 {/* <ActionLink
 href={'#photos'}
@@ -100,6 +104,8 @@ look={this.secondaryOrPrimary('#photos')}>
 Photos
 </ActionLink> */}
 >>>>>>> 207edb6... Remove insta (#196)
+=======
+>>>>>>> 3cc7f8e... fix comment (#197)
 
 class Nav extends Component {
     constructor (props) {
