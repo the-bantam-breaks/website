@@ -27,7 +27,7 @@ const VideoSection = () => {
                 <SectionHeading>Videos</SectionHeading>
                 <VideoFrame
                     src={youtubeEmbeddedVideo.embedUrl}
-                    frameborder="0"
+                    frameBorder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen />
             </CenteredDiv>

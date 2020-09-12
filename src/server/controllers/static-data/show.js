@@ -261,8 +261,8 @@ const SHOW_DATA = [{
 const decoratedShowData = (shows = []) => {
     return shows.map((show) => {
         const { date, time, ...restOfShow } = show;
-        const isArchived = moment().isAfter(moment(date));
-        const momentDate = moment(date);
+        const isArchived = moment().isAfter(moment(date, 'YYYY-MM-DD'));
+        const momentDate = moment(date, 'YYYY-MM-DD');
         return {
             isArchived,
             day: momentDate.format('Do'),
