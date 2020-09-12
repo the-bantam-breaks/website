@@ -60,9 +60,9 @@ export const EpkBio = () => {
                 </div>
                 <br />
                 <a
-                    download="BantamBreaks_Stage_Plot.pdf"
+                    download="bantam_breaks_stage_plot.pdf"
                     title="The Bantam Breaks Stage Plot Diagram"
-                    href="images/bantam_breaks_stage_plot.pdf">
+                    href="img/pdf/bantam_breaks_stage_plot.pdf">
                   {'Stage Plot (PDF Download)'}
                 </a>
             </Center>
