@@ -256,6 +256,15 @@ const SHOW_DATA = [{
     cover: 'free',
     state: 'GA',
     time: '2pm'
+},
+{
+    date: '2020-10-15',
+    venueName: 'Amplify Streaming Series - Live from Waller\'s Coffee',
+    venueUrl: 'https://www.facebook.com/amplifymycommunity/',
+    city: 'Decatur',
+    cover: 'free',
+    state: 'GA',
+    time: '8:30pm-9:30pm'
 }];
 
 const decoratedShowData = (shows = []) => {
