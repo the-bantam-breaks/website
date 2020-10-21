@@ -258,7 +258,7 @@ const SHOW_DATA = [{
     time: '2pm'
 },
 {
-    date: '2020-10-15T20:30:00',
+    date: '2020-10-29T20:30:00',
     venueName: 'Amplify Streaming Series - Live from Waller\'s Coffee',
     venueUrl: 'https://www.facebook.com/amplifymycommunity/',
     city: 'Decatur',
