@@ -1,0 +1,248 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Deploy the bantam breaks site
+
+Parameters:
+  Lifecycle:
+    Type: String
+    Default: dev
+
+  ListenerPort:
+    Type: Number
+    Default: 443
+
+  ListenerProtocol:
+    Type: String
+    Default: HTTPS
+    AllowedValues:
+      - HTTP
+      - HTTPS
+
+  ContainerPort:
+    Type: Number
+    Default: 3000
+
+  ContainerProtocol:
+    Type: String
+    Default: HTTP
+
+  ContainerCpu:
+    Type: Number
+    Default: 256
+
+  ContainerMemory:
+    Type: Number
+    Default: 1024
+
+  ImagePath:
+    Type: String
+    Default: 796520576045.dkr.ecr.us-east-1.amazonaws.com/the-bantam-breaks/breaks-website
+
+  ImageTag:
+    Type: String
+    Default: latest
+
+  DnsDomain:
+    Type: String
+    Default: thebantambreaks.com
+    AllowedValues:
+      - thebantambreaks.com
+      - bantambreaks.com
+
+  DomainName:
+    Type: String
+    Default: test.thebantambreaks.com
+
+Resources:
+  DnsRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Type: CNAME
+      TTL: 900
+      HostedZoneName: !Sub "${DnsDomain}."
+      Name: !Sub "${DomainName}."
+      ResourceRecords:
+        - !ImportValue BBLoadBalancerCname
+
+  SslCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref DomainName
+      ValidationMethod: DNS
+
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !ImportValue BBLoadBalancerArn
+      Port: !Ref ListenerPort
+      Protocol: !Ref ListenerProtocol
+      DefaultActions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: 'forward'
+      Certificates:
+        - CertificateArn: !Ref SslCertificate
+
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Port: !Ref ContainerPort
+      Protocol: !Ref ContainerProtocol
+      VpcId: !ImportValue BBVpcId
+      TargetType: ip
+      HealthCheckProtocol: !Ref ContainerProtocol
+      HealthCheckPort: !Ref ContainerPort
+      HealthyThresholdCount: 2
+      UnhealthyThresholdCount: 5
+      HealthCheckTimeoutSeconds: 5
+      HealthCheckIntervalSeconds: 20
+
+  ContainerSecurityIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      Description: Allow load balancer to connect to containers
+      FromPort: !Ref ContainerPort
+      ToPort: !Ref ContainerPort
+      IpProtocol: tcp
+      GroupId: !ImportValue BBServiceSecurityGroupId
+      SourceSecurityGroupId: !ImportValue BBLoadBalancerSecurityGroupId
+
+  # TODO routing rule for ALB
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/ecs/${Lifecycle}-website"
+
+  ECSExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "ecs-role"
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [ecs-tasks.amazonaws.com]
+            Action: ['sts:AssumeRole']
+      Path: /
+      Policies:
+        # TODO: break these down in to multiple policies and protect
+        #       production secrets using ARN patterns.
+        - PolicyName: ecs-service
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  # Rules which allow ECS to attach network interfaces to instances
+                  # on your behalf in order for awsvpc networking mode to work right
+                  - 'ec2:AttachNetworkInterface'
+                  - 'ec2:CreateNetworkInterface'
+                  - 'ec2:CreateNetworkInterfacePermission'
+                  - 'ec2:DeleteNetworkInterface'
+                  - 'ec2:DeleteNetworkInterfacePermission'
+                  - 'ec2:Describe*'
+                  - 'ec2:DetachNetworkInterface'
+
+                  # Rules which allow ECS to update load balancers on your behalf
+                  # with the information sabout how to send traffic to your containers
+                  - 'elasticloadbalancing:DeregisterInstancesFromLoadBalancer'
+                  - 'elasticloadbalancing:DeregisterTargets'
+                  - 'elasticloadbalancing:Describe*'
+                  - 'elasticloadbalancing:RegisterInstancesWithLoadBalancer'
+                  - 'elasticloadbalancing:RegisterTargets'
+
+                  # Support "secrets" section of the task definition
+                  - 'ssm:GetParameters'
+                  - 'ssm:GetParameter'
+                  - 'secretsmanager:GetSecretValue'
+                  - 'kms:Decrypt'
+
+                  # ecr shit
+                  - 'ecr:GetAuthorizationToken'
+                  - 'ecr:BatchGetImage'
+                  - 'ecr:GetDownloadUrlForLayer'
+
+                  # ecs shit
+                  - 'ecs:CreateCluster'
+                  - 'ecs:DeregisterContainerInstance'
+                  - 'ecs:DiscoverPollEndpoint'
+                  - 'ecs:Poll'
+                  - 'ecs:RegisterContainerInstance'
+                  - 'ecs:StartTelemetrySession'
+                  - 'ecs:Submit*'
+
+                  # send logs to cloudwatch shit
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource: '*'
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Ref Lifecycle
+      NetworkMode: awsvpc
+      RequiresCompatibilities: [EC2]
+      TaskRoleArn: !Ref ECSExecutionRole
+      ExecutionRoleArn: !Ref ECSExecutionRole
+      ContainerDefinitions:
+        - Name: !Sub "${Lifecycle}-site"
+          Cpu: !Ref ContainerCpu
+          Memory: !Ref ContainerMemory
+          Image: !Sub "${ImagePath}:${ImageTag}"
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-region: !Ref AWS::Region
+              awslogs-group: !Ref LogGroup
+              awslogs-stream-prefix: ecs
+          # TODO all secrets here
+          Environment:
+            - Name: ENV_AWS_REGION
+              Value: !Ref AWS::Region
+            - Name: ENV_PG_DATABASE
+              Value: !Sub "${Lifecycle}_breaks_db"
+          Secrets:
+            - Name: ENV_INSTAGRAM_USER_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-insta-user-id"
+            - Name: ENV_INSTAGRAM_TOKEN
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-insta-token"
+            - Name: ENV_BOOOKING_SLACK_WEBHOOK_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-slack-webhook-url"
+            - Name: ENV_BOOOKING_MAIL_ACCOUNT
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-booking-email-account"
+            - Name: ENV_AWS_ACCESS_KEY_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-aws-access-key"
+            - Name: ENV_AWS_SECRET_ACCESS_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/bantam-aws-secret-access-key"
+            - Name: ENV_PG_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/ENV_PG_PASSWORD"
+            - Name: ENV_PG_PORT
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/ENV_PG_PORT"
+            - Name: ENV_PG_USER
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/ENV_PG_USER"
+            - Name: ENV_PG_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Lifecycle}/ENV_PG_HOST"
+
+  Service:
+    Type: AWS::ECS::Service
+    DependsOn: Listener
+    Properties:
+      ServiceName: !Sub "${Lifecycle}-site"
+      Cluster: !ImportValue BBEcsCluster
+      LaunchType: EC2
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 50
+      DesiredCount: 2
+      LoadBalancers:
+        - ContainerName: !Sub "${Lifecycle}-site"
+          ContainerPort: !Ref ContainerPort
+          TargetGroupArn: !Ref TargetGroup
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          SecurityGroups:
+            - !ImportValue BBServiceSecurityGroupId
+          Subnets:
+            - !ImportValue BBPrivateSubnet1
+            - !ImportValue BBPrivateSubnet2
+      TaskDefinition: !Ref TaskDefinition

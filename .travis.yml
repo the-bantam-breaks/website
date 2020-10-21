@@ -3,6 +3,11 @@ sudo: required
 services:
   - docker
 
+branches:
+  only:
+  - develop
+  - master
+
 install:
   - docker --version
   - uname -m
@@ -47,12 +52,20 @@ script:
 after_success:
   - echo "Build Successful!"
   - |
-    if [[ "$TRAVIS_PULL_REQUEST" ]]; then
-      if [[ "$TRAVIS_BRANCH" = "master" ]]; then
-        ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER website
-      elif [[ "$TRAVIS_BRANCH" = "develop" ]]; then
-        ./cicd/deploy.sh $TRAVIS_BUILD_NUMBER staging-website
-      fi
+    if [[ "$TRAVIS_BRANCH" = "master" ]]; then
+      cd cicd/cloudformation
+      aws cloudformation update-stack --stack-name prod-breaks-site \
+        --template-body file://site.yaml \
+        --capabilities CAPABILITY_NAMED_IAM \
+        --parameters ParameterKey=Lifecycle,ParameterValue=prod ParameterKey=ImageTag,ParameterValue=${TRAVIS_BUILD_NUMBER}
+      aws cloudformation wait stack-update-complete --stack-name prod-breaks-site
+    elif [[ "$TRAVIS_BRANCH" = "develop" ]]; then
+      cd cicd/cloudformation
+      aws cloudformation update-stack --stack-name dev-breaks-site \
+        --template-body file://site.yaml \
+        --capabilities CAPABILITY_NAMED_IAM \
+        --parameters ParameterKey=Lifecycle,ParameterValue=dev ParameterKey=ImageTag,ParameterValue=${TRAVIS_BUILD_NUMBER}
+      aws cloudformation wait stack-update-complete --stack-name dev-breaks-site
     else
       echo "Not deploying from $TRAVIS_BRANCH, we only deploy from develop or master"
     fi
