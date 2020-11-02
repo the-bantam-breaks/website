@@ -44,7 +44,7 @@
     "serialize-javascript": "5.0.1",
     "strip-indent": "3.0.0",
     "styled-components": "5.2.0",
-    "throttle-debounce": "2.3.0",
+    "throttle-debounce": "3.0.1",
     "webpack-node-externals": "2.5.2",
     "whatwg-fetch": "3.4.1"
   },
