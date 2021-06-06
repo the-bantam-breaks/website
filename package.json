@@ -58,7 +58,7 @@
     "babel-plugin-styled-components": "1.11.1",
     "dotenv-webpack": "2.0.0",
     "eslint": "7.8.1",
-    "eslint-config-standard": "14.1.1",
+    "eslint-config-standard": "16.0.3",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-react": "7.20.6",
